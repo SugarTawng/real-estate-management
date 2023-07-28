@@ -1,0 +1,21 @@
+{
+  "name": "lvtn",
+  "version": "1.0.0",
+  "description": "real estate management",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "genAPIDoc": "apidoc -i ./app/route/ -o ./public/docs/"
+  },
+  "keywords": [
+    "real estate",
+    "graduation essay"
+  ],
+  "author": "SugarTawng",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "apidoc": "^0.53.0"
+  }
+}
