@@ -48,7 +48,7 @@ module.exports = function (app) {
      * @apiPermission Super Admin, Admin, Normal User
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Get all account by Super Admin, Admin and Normal User
+     * @apiDescription Get all block (building apartment) by Super Admin, Admin and Normal User
      *
      * @apiParam {Number} page page which we want to get (N/A)
      * @apiParam {Number} items item per page (N/A)
@@ -83,7 +83,48 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/users', oUserCtrl.getAll);
+    app.get('/v1/auth/block', oUserCtrl.getAll);
+    /**
+     * @api {GET} /v1/auth/block/:id Get One
+     * @apiVersion 1.0.0
+     * @apiName Get One Block (Building Apartment)
+     * @apiGroup Block
+     * @apiPermission Every type of user role, guest.
+     * @apiHeader {String} access_token json web token to access to data
+     *
+     * @apiDescription Get one block (building apartment)
+     *
+     * @apiParam {string} id ID of block (building apartment), on params
+     *
+     * @apiExample Example usage:
+     * curl -i https://localhost:3001/v1/auth/block/2
+     *
+     * @apiSuccess {String} id the ID of project
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *          "data":{
+     *              "id": "2",
+     *              "loginName": "bioz",
+     *              "email": "ilovebioz@gmail.com",
+     *              "activated": "1",
+     *              ...
+     *          },
+     *          "result": "ok",
+     *          "message" ""
+     *     }
+     *
+     * @apiError invalid input data
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400 Bad Request
+     *     {
+     *       "result": "fail",
+     *       "message": "invalid input"
+     *     }
+     */
+    app.get('/v1/auth/users/:id', oUserCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/block/:id Update One
      * @apiVersion 1.0.0

@@ -86,6 +86,47 @@ module.exports = function (app) {
      */
     app.get('/v1/auth/users', oUserCtrl.getAll);
     /**
+     * @api {GET} /v1/auth/project/:id Get One
+     * @apiVersion 1.0.0
+     * @apiName Get One Zone
+     * @apiGroup Zone
+     * @apiPermission Every type of user role, guest.
+     * @apiHeader {String} access_token json web token to access to data
+     *
+     * @apiDescription Get one zone
+     *
+     * @apiParam {string} id ID of project, on params
+     *
+     * @apiExample Example usage:
+     * curl -i https://localhost:3001/v1/auth/zone/2
+     *
+     * @apiSuccess {String} id the ID of project
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *          "data":{
+     *              "id": "2",
+     *              "loginName": "bioz",
+     *              "email": "ilovebioz@gmail.com",
+     *              "activated": "1",
+     *              ...
+     *          },
+     *          "result": "ok",
+     *          "message" ""
+     *     }
+     *
+     * @apiError invalid input data
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400 Bad Request
+     *     {
+     *       "result": "fail",
+     *       "message": "invalid input"
+     *     }
+     */
+    app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
+    /**
      * @api {PUT} /v1/auth/zone/:id Update One
      * @apiVersion 1.0.0
      * @apiName Update Zone

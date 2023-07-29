@@ -95,7 +95,7 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Get One Account
      * @apiGroup Account
-     * @apiPermission Every type of account
+     * @apiPermission Every type of user role
      * @apiHeader {String} access_token json web token to access to data
      *
      * @apiDescription Get one account
@@ -105,7 +105,7 @@ module.exports = function (app) {
      * @apiExample Example usage:
      * curl -i https://localhost:3001/v1/auth/account/2
      *
-     * @apiSuccess {String} id the ID of group
+     * @apiSuccess {String} id the ID of account
      * @apiSuccess {String} loginName login name of user
      * @apiSuccess {String} displayName display name of user
      * @apiSuccess {String} email email of user

@@ -11,9 +11,7 @@
       <change beforePath="$PROJECT_DIR$/app/route/floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/floor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/route/highArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/highArea.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/route/landArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/landArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/message.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/route/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/whileBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/whileBoard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/route/zone.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/zone.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +92,7 @@
       <updated>1690275059628</updated>
       <workItem from="1690275061063" duration="364000" />
       <workItem from="1690275667228" duration="54936000" />
-      <workItem from="1690558074857" duration="10510000" />
+      <workItem from="1690558074857" duration="13764000" />
     </task>
     <servers />
   </component>

@@ -85,6 +85,47 @@ module.exports = function (app) {
      */
     app.get('/v1/auth/whiteBoard', oUserCtrl.getAll);
     /**
+     * @api {GET} /v1/auth/whiteBoard/:id Get One
+     * @apiVersion 1.0.0
+     * @apiName Get White Board
+     * @apiGroup whiteBoard
+     * @apiPermission Every type of user role, guest.
+     * @apiHeader {String} access_token json web token to access to data
+     *
+     * @apiDescription Get one white board
+     *
+     * @apiParam {string} id ID of white board, on params
+     *
+     * @apiExample Example usage:
+     * curl -i https://localhost:3001/v1/auth/whiteBoard/2
+     *
+     * @apiSuccess {String} id the ID of white board
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *          "data":{
+     *              "id": "2",
+     *              "loginName": "bioz",
+     *              "email": "ilovebioz@gmail.com",
+     *              "activated": "1",
+     *              ...
+     *          },
+     *          "result": "ok",
+     *          "message" ""
+     *     }
+     *
+     * @apiError invalid input data
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400 Bad Request
+     *     {
+     *       "result": "fail",
+     *       "message": "invalid input"
+     *     }
+     */
+    app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
+    /**
      * @api {PUT} /v1/auth/whiteBoard/:id Update One
      * @apiVersion 1.0.0
      * @apiName Update White Board

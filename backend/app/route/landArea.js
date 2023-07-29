@@ -48,7 +48,7 @@ module.exports = function (app) {
      */
     app.post('/v1/auth/landArea', oUserCtrl.createByAdmin);
     /**
-     * @api {GET} /v1/auth/account Get List
+     * @api {GET} /v1/auth/landArea Get List
      * @apiVersion 1.0.0
      * @apiName Get All Land Area
      * @apiGroup landArea
@@ -91,6 +91,47 @@ module.exports = function (app) {
      *     }
      */
     app.get('/v1/auth/landArea', oUserCtrl.getAll);
+    /**
+     * @api {GET} /v1/auth/landArea/:id Get One
+     * @apiVersion 1.0.0
+     * @apiName Get One Land Area
+     * @apiGroup landArea
+     * @apiPermission Every type of user role, guest.
+     * @apiHeader {String} access_token json web token to access to data
+     *
+     * @apiDescription Get one land area
+     *
+     * @apiParam {string} id ID of land area, on params
+     *
+     * @apiExample Example usage:
+     * curl -i https://localhost:3001/v1/auth/landArea/2
+     *
+     * @apiSuccess {String} id the ID of project
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *          "data":{
+     *              "id": "2",
+     *              "loginName": "bioz",
+     *              "email": "ilovebioz@gmail.com",
+     *              "activated": "1",
+     *              ...
+     *          },
+     *          "result": "ok",
+     *          "message" ""
+     *     }
+     *
+     * @apiError invalid input data
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400 Bad Request
+     *     {
+     *       "result": "fail",
+     *       "message": "invalid input"
+     *     }
+     */
+    app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/landArea/:id Update One
      * @apiVersion 1.0.0
