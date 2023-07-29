@@ -80,4 +80,40 @@ module.exports = function (app) {
      *     }
      */
     app.put('/v1/auth/whiteBoard/:id', oUserCtrl.update);
+    /**
+     * @api {DELETE} /v1/auth/whiteBoard/:id Delete One
+     * @apiVersion 1.0.0
+     * @apiName Delete A White Board
+     * @apiGroup whiteBoard
+     * @apiPermission Admin
+     * @apiHeader {String} access_token json web token to access to data
+     *
+     * @apiDescription Delete white board information by admin (manager). Contains internal notice information
+     *
+     * @apiParam {String} id ID of an white board
+     *
+     * @apiExample Example usage:
+     * curl -i  https://localhost:3001/v1/auth/whiteBoard/2
+     *
+     * @apiSuccess {String} id ID of a deleted white board
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *          "data":{
+     *              "id": "2"
+     *          },
+     *          "result":"ok",
+     *          "message":""
+     *     }
+     *
+     * @apiError invalid input data
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400 Bad Request
+     *     {
+     *       "result":"fail",
+     *       "message": "invalid input"
+     *     }
+     */
+    app.delete('/v1/auth/message/:id', oUserCtrl.delete);
 }
