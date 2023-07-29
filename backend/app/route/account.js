@@ -218,4 +218,47 @@ module.exports = function (app) {
      *     }
      */
     app.delete('/v1/auth/account/:id', oUserCtrl.delete);
+    /**
+     * @api {POST} /v1/login Login
+     * @apiVersion 1.0.0
+     * @apiName login
+     * @apiGroup Account
+     * @apiPermission Every one
+     *
+     * @apiDescription login and get access token
+     *
+     * @apiParam {string} loginName a int with length <= 10
+     * @apiParam {String} passWord a string with 4 < length < 64
+     *
+     * @apiExample Example usage:
+     * curl -i https://localhost:3001/v1/login
+     *
+     * @apiSuccess {object} data the user data with token
+     * @apiSuccess {String} result ok or fail
+     * @apiSuccess {String} message something from server
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "data":{
+     *          "token": "abc",
+     *          "id":2,
+     *          "loginName": "bioz",
+     *          "displayName": "bioz",
+     *          "email": ilovebioz@gmail.com
+     *       },
+     *       "result": "ok",
+     *       "message":""
+     *     }
+     *
+     * @apiError invalid input data
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "result": "fail",
+     *       "message": "invalid input"
+     *     }
+     */
+    app.post('/v1/login', oUserCtrl.login);
 }

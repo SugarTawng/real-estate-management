@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="">
+    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="done get one">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/route/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/block.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/block.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/floor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/highArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/highArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/landArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/landArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/zone.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/zone.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,8 +86,16 @@
       <updated>1690275059628</updated>
       <workItem from="1690275061063" duration="364000" />
       <workItem from="1690275667228" duration="54936000" />
-      <workItem from="1690558074857" duration="13764000" />
+      <workItem from="1690558074857" duration="16370000" />
     </task>
+    <task id="LOCAL-00001" summary="done get one">
+      <created>1690620170767</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1690620170768</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,5 +111,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="done get one" />
+    <option name="LAST_COMMIT_MESSAGE" value="done get one" />
   </component>
 </project>
