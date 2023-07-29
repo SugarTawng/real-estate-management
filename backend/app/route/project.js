@@ -43,23 +43,23 @@ module.exports = function (app) {
 
     app.get('/v1/auth/users/:id', oUserCtrl.getOne);
     /**
-     * @api {GET} /v1/auth/account Get List
+     * @api {GET} /v1/auth/project Get List
      * @apiVersion 1.0.0
-     * @apiName Get All Account
-     * @apiGroup Account
+     * @apiName Get All Project
+     * @apiGroup Project
      * @apiPermission Super Admin, Admin, Normal User
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Get all account by Super Admin, Admin and Normal User
+     * @apiDescription Get all project by Super Admin, Admin and Normal User
      *
-     * @apiParam {Number} page Page which we want to get (N/A)
-     * @apiParam {Number} items Item per page (N/A)
-     * @apiParam {String} sort Sort option the list by a field (N/A)
-     * @apiParam {String} filter filter the query data (N/A)
-     * @apiParam {String} q Text filter for data (N/A)
+     * @apiParam {Number} page page which we want to get (N/A)
+     * @apiParam {Number} items item per page (N/A)
+     * @apiParam {String} sort sort option the list by a field (N/A)
+     * @apiParam {String} filter the properties of object {id, name, v.v} filter the query data (N/A)
+     * @apiParam {String} q text filter for data (N/A)
      *
      * @apiExample Example usage:
-     * curl -i https://localhost:3001/v1/auth/account
+     * curl -i https://localhost:3001/v1/auth/project
      *
      * @apiSuccess {Object[]} data the list of data
      * @apiSuccess {Object} items {begin, end, total}

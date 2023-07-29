@@ -51,7 +51,7 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Get All Account
      * @apiGroup Account
-     * @apiPermission Super Admin, Admin, Normal User
+     * @apiPermission Super Admin, Admin, Update Yourself (Normal User)
      * @apiHeader {String} access_token json web token to access to data
      *
      * @apiDescription Get all account by Super Admin, Admin and Normal User
@@ -90,6 +90,52 @@ module.exports = function (app) {
      *     }
      */
     app.get('/v1/auth/users', oUserCtrl.getAll);
+    /**
+     * @api {GET} /v1/auth/users/:id Get One
+     * @apiVersion 1.0.0
+     * @apiName Get One Account
+     * @apiGroup Account
+     * @apiPermission Every type of account
+     * @apiHeader {String} access_token json web token to access to data
+     *
+     * @apiDescription Get one account
+     *
+     * @apiParam {string} id ID of account, on params
+     *
+     * @apiExample Example usage:
+     * curl -i https://localhost:3001/v1/auth/account/2
+     *
+     * @apiSuccess {String} id the ID of group
+     * @apiSuccess {String} loginName login name of user
+     * @apiSuccess {String} displayName display name of user
+     * @apiSuccess {String} email email of user
+     * @apiSuccess {String} firstName first name of user
+     * @apiSuccess {String} lastName last name of user
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *          "data":{
+     *              "id": "2",
+     *              "loginName": "bioz",
+     *              "email": "ilovebioz@gmail.com",
+     *              "activated": "1",
+     *              ...
+     *          },
+     *          "result": "ok",
+     *          "message" ""
+     *     }
+     *
+     * @apiError invalid input data
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400 Bad Request
+     *     {
+     *       "result": "fail",
+     *       "message": "invalid input"
+     *     }
+     */
+    app.get('/v1/auth/users/:id', oUserCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/account/:id Update One
      * @apiVersion 1.0.0

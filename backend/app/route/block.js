@@ -2,7 +2,7 @@ module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/block Create One
      * @apiVersion 1.0.0
-     * @apiName Create block (building apartment) By Admin
+     * @apiName Create Block (Building Apartment) By Admin
      * @apiGroup Block
      * @apiPermission Administrator
      * @apiHeader {String} access_token json web token to access to data
@@ -43,21 +43,21 @@ module.exports = function (app) {
     /**
      * @api {GET} /v1/auth/account Get List
      * @apiVersion 1.0.0
-     * @apiName Get All Account
-     * @apiGroup Account
+     * @apiName Get All Block (Building Apartment)
+     * @apiGroup Block
      * @apiPermission Super Admin, Admin, Normal User
      * @apiHeader {String} access_token json web token to access to data
      *
      * @apiDescription Get all account by Super Admin, Admin and Normal User
      *
-     * @apiParam {Number} page Page which we want to get (N/A)
-     * @apiParam {Number} items Item per page (N/A)
-     * @apiParam {String} sort Sort option the list by a field (N/A)
-     * @apiParam {String} filter filter the query data (N/A)
-     * @apiParam {String} q Text filter for data (N/A)
+     * @apiParam {Number} page page which we want to get (N/A)
+     * @apiParam {Number} items item per page (N/A)
+     * @apiParam {String} sort sort option the list by a field (N/A)
+     * @apiParam {String} filter the properties of object {id, name, v.v} filter the query data (N/A)
+     * @apiParam {String} q text filter for data (N/A)
      *
      * @apiExample Example usage:
-     * curl -i https://localhost:3001/v1/auth/account
+     * curl -i https://localhost:3001/v1/auth/block
      *
      * @apiSuccess {Object[]} data the list of data
      * @apiSuccess {Object} items {begin, end, total}
