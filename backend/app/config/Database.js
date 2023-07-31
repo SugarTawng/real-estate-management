@@ -4,15 +4,15 @@ let DBConnectorSetting = {
         port: '3306',
         username: 'root',
         password: '',
-        database: 'image_archive_vdc_v1',
+        database: 'luan',
         dialect: 'mysql'
     },
     mysql: {
-        host: 'db4free.net',
+        host: '217.21.74.51',
         port: '3306',
-        username: 'gemini',
-        password: '48429e5d',
-        database: 'image_archive',
+        username: 'u289965850_apartments',
+        password: '',
+        database: '',
         dialect: 'mysql'
     }
 };

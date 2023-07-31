@@ -4,11 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="done login">
+    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="account model is not done, project model is not done">
+      <change afterPath="$PROJECT_DIR$/app/controllers/ProjectCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/ProjectManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/Account.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/Project.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/block.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/block.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/docs/assets/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/docs/assets/main.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/Database.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/Database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/project.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/copy/copy-sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/copy/copy-sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/copy/copy.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/copy/copy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/fs/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/fs/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/move/move-sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/move/move-sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/move/move.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/move/move.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/remove/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/remove/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/remove/rimraf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,28 +42,32 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2T3cAFLQ91FIpcBzUrsw5vHa7Zn" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/admin/Desktop/LVTN/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/admin/Desktop/LVTN/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\admin\Desktop\LVTN\backend" />
@@ -90,6 +114,8 @@
       <workItem from="1690275667228" duration="54936000" />
       <workItem from="1690558074857" duration="24634000" />
       <workItem from="1690774331820" duration="4000" />
+      <workItem from="1690774357102" duration="49000" />
+      <workItem from="1690795289407" duration="10502000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>
@@ -105,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690622402413</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="edit permission">
+      <created>1690774396049</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1690774396049</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,8 +156,11 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="done get one" />
     <MESSAGE value="done login" />
-    <option name="LAST_COMMIT_MESSAGE" value="done login" />
+    <MESSAGE value="edit permission" />
+    <MESSAGE value="account model is not done, project model is not done" />
+    <option name="LAST_COMMIT_MESSAGE" value="account model is not done, project model is not done" />
   </component>
 </project>

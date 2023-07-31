@@ -37,11 +37,9 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/project', oUserCtrl.createByAdmin);
+    app.post('/v1/project', oUserCtrl.createByAdmin);
 
-    app.post('/v1/login', oUserCtrl.login);
-
-    app.get('/v1/auth/users/:id', oUserCtrl.getOne);
+    app.get('/v1/users/:id', oUserCtrl.getOne);
     /**
      * @api {GET} /v1/auth/project Get List
      * @apiVersion 1.0.0
