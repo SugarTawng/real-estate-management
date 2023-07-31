@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
 
-let User = MySequelize.define('user', {
+let Account = MySequelize.define('account', {
     Id: {
         type: Sequelize.BIGINT(20),
         autoIncrement: true,
@@ -42,7 +42,7 @@ let User = MySequelize.define('user', {
     },
     language: {
         type: Sequelize.CHAR(2),
-        allowNull: false
+        allowNull: true
     },
     type: {
         type: Sequelize.ENUM('anonymous', 'admin', 'super admin', 'normal user'),
@@ -58,7 +58,7 @@ let User = MySequelize.define('user', {
     },
     socialVerified: {
         type: Sequelize.STRING(256),
-        allowNull: false
+        allowNull: true
     },
     activated: {
         type: Sequelize.BOOLEAN,
@@ -74,16 +74,16 @@ let User = MySequelize.define('user', {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
-            model: this.User,
-            key: 'id'
+            model: this.Account,
+            key: 'Id'
         }
     },
     updatedBy: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
-            model: this.User,
-            key: 'id'
+            model: this.Account,
+            key: 'Id'
         }
     },
     createdAt: {
@@ -102,7 +102,7 @@ let User = MySequelize.define('user', {
     includeDeleted: true,
     paranoid: true,
     freezeTableName: true,
-    tableName: 'user'
+    tableName: 'account'
 });
 
-module.exports = User;
+module.exports = Account;

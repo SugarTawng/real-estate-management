@@ -5,30 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="account model is not done, project model is not done">
-      <change afterPath="$PROJECT_DIR$/app/controllers/ProjectCtrl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/manager/ProjectManager.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/Account.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/Project.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/Database.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/Database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/copy/copy-sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/copy/copy-sync.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/copy/copy.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/copy/copy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/fs/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/fs/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/move/move-sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/move/move-sync.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/move/move.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/move/move.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/remove/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/lib/remove/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/lib/remove/rimraf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/fs-extra/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/fs-extra/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Account.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +93,7 @@
       <workItem from="1690558074857" duration="24634000" />
       <workItem from="1690774331820" duration="4000" />
       <workItem from="1690774357102" duration="49000" />
-      <workItem from="1690795289407" duration="10502000" />
+      <workItem from="1690795289407" duration="12400000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>
@@ -138,7 +116,21 @@
       <option name="project" value="LOCAL" />
       <updated>1690774396049</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="account model is not done, project model is not done">
+      <created>1690814258354</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1690814258354</updated>
+    </task>
+    <task id="LOCAL-00005" summary="account model is not done, project model is not done">
+      <created>1690814438888</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1690814438888</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
