@@ -4,10 +4,10 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Create Block (Building Apartment) By Admin
      * @apiGroup Block
-     * @apiPermission Administrator
+     * @apiPermission Super Admin, Admin
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Create a block (building apartment) of zone by Admin
+     * @apiDescription Create a block (building apartment) of zone by Super Admin and Admin
      *
      * @apiParam {bigint} ZoneID Zone ID of block (building apartment) (unique integer)
      * @apiParam {int} numberOfFloor number of floor of block (building apartment)
@@ -89,10 +89,10 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Get One Block (Building Apartment)
      * @apiGroup Block
-     * @apiPermission Every type of user role, guest.
+     * @apiPermission Super Admin, Admin, Normal User, Guest.
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Get one block (building apartment)
+     * @apiDescription Get one block (building apartment) by Super Admin, Admin, Normal User, Guest.
      *
      * @apiParam {string} id ID of block (building apartment), on params
      *
@@ -170,10 +170,10 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Delete A Block
      * @apiGroup Block
-     * @apiPermission Admin
+     * @apiPermission Super Admin, Admin
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Delete block information by admin (manager)
+     * @apiDescription Delete block information by super admin (head of department) and admin (manager)
      *
      * @apiParam {String} id ID of an block
      *

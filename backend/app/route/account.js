@@ -2,9 +2,9 @@ module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/account Create One
      * @apiVersion 1.0.0
-     * @apiName Create Account By Admin
+     * @apiName Create Account By Super Admin and Admin
      * @apiGroup Account
-     * @apiPermission  Administrator
+     * @apiPermission  Super Admin, Admin, Superior
      * @apiHeader {String} access_token json web token to access to data
      *
      * @apiDescription Create an account of user by Admin
@@ -51,7 +51,7 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Get All Account
      * @apiGroup Account
-     * @apiPermission Super Admin, Admin, Update Yourself (Normal User)
+     * @apiPermission Super Admin, Admin and Normal User
      * @apiHeader {String} access_token json web token to access to data
      *
      * @apiDescription Get all account by Super Admin, Admin and Normal User
@@ -95,7 +95,7 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Get One Account
      * @apiGroup Account
-     * @apiPermission Every type of user role
+     * @apiPermission Super Admin, Admin, Normal User, Guest
      * @apiHeader {String} access_token json web token to access to data
      *
      * @apiDescription Get one account
@@ -141,10 +141,10 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Update Account
      * @apiGroup Account
-     * @apiPermission Admin, Update Yourself (Normal User) , Greater Rights
+     * @apiPermission Super Admin, Admin, Update Yourself (Normal User), Greater Rights
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Update account information by normal user (staff) and admin (manager)
+     * @apiDescription Update account information by super admin (head of department), admin (manager) and normal user (update yourself of staff)
      *
      * @apiParam {string} phone phone of user account (unique string with 10 <= length <= 12)
      * @apiParam {string} loginName loginName of user account (unique string with 6 <= length <= 256)
@@ -187,10 +187,10 @@ module.exports = function (app) {
      * @apiVersion 1.0.0
      * @apiName Delete An Account
      * @apiGroup Account
-     * @apiPermission Admin, Normal User, Greater Rights
+     * @apiPermission Super Admin, Admin
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Delete account information by normal user (staff) and admin (manager)
+     * @apiDescription Delete account information by Super Admin (head of apartment) and Admin (manager)
      *
      * @apiParam {String} id ID of an account
      *
