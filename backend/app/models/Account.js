@@ -102,7 +102,7 @@ let Account = MySequelize.define('account', {
     includeDeleted: true,
     paranoid: true,
     freezeTableName: true,
-    tableName: 'account'
+    tableName: 'tbl_account'
 });
 
 module.exports = Account;

@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
 const {NULL} = require("mysql/lib/protocol/constants/types");
+const Account = require('./Account');
 
 let Device = MySequelize.define('project', {
     Id: {
@@ -64,7 +65,7 @@ let Device = MySequelize.define('project', {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
-            model: User,
+            model: Account,
             key: 'id'
         }
     },
@@ -72,7 +73,7 @@ let Device = MySequelize.define('project', {
         type: Sequelize.BIGINT(10),
         allowNull: false,
         references: {
-            model: User,
+            model: Account,
             key: 'id'
         }
     },

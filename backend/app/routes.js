@@ -5,5 +5,6 @@ module.exports = function (app) {
     // require('./route/User')(app);
     // require('./route/Device')(app);
     // require('./route/Service')(app);
-    require('./route/project')(app);
+    // require('./route/project')(app);
+    require('./route/account')(app);
 };

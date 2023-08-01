@@ -11,8 +11,8 @@ let DBConnectorSetting = {
         host: '217.21.74.51',
         port: '3306',
         username: 'u289965850_apartments',
-        password: '',
-        database: '',
+        password: 'Bioz@090684',
+        database: 'u289965850_apartments',
         dialect: 'mysql'
     }
 };

@@ -21,7 +21,7 @@ module.exports = {
     port: process.env.NODE_PORT || 3000,
     url: APIROOT_URL,
     weburl: WEBROOT_URL,
-    jwtAuthKey: 'fdhjfdfuejfkjdhfaueyruesfhjs',
+    jwtAuthKey: 'Nl9ImlxOMUOn/NxGw+jqIqf84GRquYlnNMTXEwECMzHeKyoHDDsV2pfX4wpUYc2+',
     sockIOAuthKey: 'fhskjfenfnhpploemjase',
     paths:{
         public: '/public',

@@ -6,7 +6,7 @@ const Express = require('express');
 const BodyParser = require('body-parser');
 const MethodOverride = require('method-override');
 const Morgan = require('morgan');
-
+const cors = require('cors');
 // our components
 const Config = require('./app/config/Global');
 
@@ -35,10 +35,10 @@ App.use(BodyParser.urlencoded({
 // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 App.use(MethodOverride('X-HTTP-Method-Override'));
 
-App.all('/*', [require('./app/middlewares/AllowCrossDomain')]);
+App.use(cors());
 
 // Public Location
-App.use(Express.static(global.CLOUD_API.rootPath + Config.paths.public));
+// App.use(Express.static(global.CLOUD_API.rootPath + Config.paths.public));
 
 // Auth Middleware - This will check if the token is valid
 App.all('/v1/auth/*', [require('./app/middlewares/ValidateRequest')]);

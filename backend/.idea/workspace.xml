@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="account model is not done, project model is not done">
+      <change afterPath="$PROJECT_DIR$/app/controllers/AccountCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/AccountManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/Database.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/Database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/Global.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/Global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/middlewares/AllowCrossDomain.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/middlewares/AllowCrossDomain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/middlewares/ValidateRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/middlewares/ValidateRequest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Project.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Project.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/Restware.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/Restware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/admin/Desktop/LVTN/backend",
+    "last_opened_file_path": "C:/Users/admin/Desktop/Final-Project-IS207/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -75,8 +89,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.genAPIDoc" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.genAPIDoc" />
       </list>
     </recent_temporary>
   </component>
@@ -94,6 +108,7 @@
       <workItem from="1690774331820" duration="4000" />
       <workItem from="1690774357102" duration="49000" />
       <workItem from="1690795289407" duration="12400000" />
+      <workItem from="1690872985146" duration="19309000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>

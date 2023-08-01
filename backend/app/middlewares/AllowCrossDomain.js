@@ -11,10 +11,10 @@ module.exports = function (req, res, next) {
     res.header('Access-Control-Expose-Headers', 'Content-Length, X-Access-Token');
     res.header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, Content-Length, Content-Language, X-Requested-With, Range, Origin, X-Access-Token');
 
-    if (req.method === 'OPTIONS') {
+    if (req.method === 'OPTIONS') {const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
         return res.sendStatus(200);
     } else {
-        //const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
         if(global.CLOUD_API.Config.SERVER_MAINTENANCE && global.CLOUD_API.Config.SERVER_MAINTENANCE === true){
             let resData = {};
             resData.code = 50323;

@@ -109,7 +109,7 @@ const sendSuccessWebContent = function (res, data, iHttpCode) {
     return res.end(out);
 };
 
-const sendSuccessToken = function (res, token, user) {
+const sendSuccessToken = function (res, token, account) {
     if (!res) {
         return;
     }
@@ -118,11 +118,11 @@ const sendSuccessToken = function (res, token, user) {
     let data = {};
 
     data.token = token;
-    data.id = user.id;
-    data.loginName = user.loginName;
-    data.displayName = user.displayName;
-    data.email = user.email;
-    data.type = user.type;
+    data.id = account.dataValues.Id;
+    data.loginname = account.dataValues.loginname;
+    data.displayname = account.dataValues.displayname;
+    data.email = account.dataValues.email;
+    data.type = account.dataValues.type;
 
     out.data = data;
     out.message = '';

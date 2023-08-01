@@ -7,7 +7,7 @@ const JsonWebToken = require('jsonwebtoken');
 
 // our components
 const Config = require('../config/Global');
-const UserManager = require('../manager/UserManager');
+const UserManager = require('../manager/AccountManager');
 const Rest = require('../utils/Restware');
 
 module.exports = function (req, res, next) {
@@ -22,7 +22,7 @@ module.exports = function (req, res, next) {
                 if(error){
                     return Rest.sendError(res, 70, 'verify_token_fail', 400,  error);
                 }
-
+                console.log('decoded ',decoded);
                 UserManager.verifyUser(decoded.id, decoded.type, decoded.loginName, function (errorCode, errorMessage, httpCode, errorDescription, result) {
                     if (errorCode) {
                         return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
