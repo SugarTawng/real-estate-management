@@ -4,22 +4,87 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="account model is not done, project model is not done">
-      <change afterPath="$PROJECT_DIR$/app/controllers/AccountCtrl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/manager/AccountManager.js" afterDir="false" />
+    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="login and create">
+      <change afterPath="$PROJECT_DIR$/../node_modules/basic-auth/HISTORY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/basic-auth/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/basic-auth/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/basic-auth/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/basic-auth/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/cors/CONTRIBUTING.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/cors/HISTORY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/cors/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/cors/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/cors/lib/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/cors/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/.coveralls.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/.eslintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/.npmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/component.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/karma.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/node.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/src/browser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/src/debug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/src/inspector-log.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/debug/src/node.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/depd/History.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/depd/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/depd/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/depd/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/depd/lib/browser/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/depd/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/ee-first/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/ee-first/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/ee-first/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/ee-first/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/morgan/HISTORY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/morgan/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/morgan/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/morgan/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/morgan/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/ms/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/ms/license.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/ms/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/ms/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/object-assign/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/object-assign/license" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/object-assign/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/object-assign/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-finished/HISTORY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-finished/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-finished/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-finished/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-finished/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-headers/HISTORY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-headers/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-headers/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-headers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/on-headers/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/safe-buffer/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/safe-buffer/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/safe-buffer/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/safe-buffer/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/safe-buffer/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/vary/HISTORY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/vary/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/vary/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/vary/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../node_modules/vary/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/Database.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/Database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/Global.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/Global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middlewares/AllowCrossDomain.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/middlewares/AllowCrossDomain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/AccountCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/AccountCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/AccountManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/AccountManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/middlewares/ValidateRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/middlewares/ValidateRequest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Project.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/Constant.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/utils/Restware.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/Restware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +114,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/admin/Desktop/Final-Project-IS207/backend",
+    "last_opened_file_path": "C:/Users/admin/Desktop/s3lab_tpl_nodejs_mysql",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -108,7 +173,8 @@
       <workItem from="1690774331820" duration="4000" />
       <workItem from="1690774357102" duration="49000" />
       <workItem from="1690795289407" duration="12400000" />
-      <workItem from="1690872985146" duration="19309000" />
+      <workItem from="1690872985146" duration="19485000" />
+      <workItem from="1690942198547" duration="27341000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>
@@ -145,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690814438888</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="login and create">
+      <created>1690893789025</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1690893789025</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,6 +241,7 @@
     <MESSAGE value="done login" />
     <MESSAGE value="edit permission" />
     <MESSAGE value="account model is not done, project model is not done" />
-    <option name="LAST_COMMIT_MESSAGE" value="account model is not done, project model is not done" />
+    <MESSAGE value="login and create" />
+    <option name="LAST_COMMIT_MESSAGE" value="login and create" />
   </component>
 </project>

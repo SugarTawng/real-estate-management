@@ -287,14 +287,13 @@ module.exports = {
 
     verifyUser: function (accessUserId, accessUserType, accessLoginName, callback) {
         try {
-            console.log('access' ,accessUserId);
             if ( !( Pieces.VariableBaseTypeChecking(accessUserId,'string')
                     && Validator.isInt(accessUserId) )
                 && !Pieces.VariableBaseTypeChecking(accessUserId,'number') ){
                 return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
             }
 
-            if( !Pieces.VariableBaseTypeChecking(accessUserType,'number') ){
+            if( !Pieces.VariableBaseTypeChecking(accessUserType,'string') ){
                 return callback(1, 'invalid_user_type', 400, 'user type is incorrect', null);
             }
 
@@ -302,9 +301,11 @@ module.exports = {
                 return callback(1, 'invalid_user_username', 400, 'login name is incorrect', null);
             }
 
+            let where = {id: accessUserId, login_name:accessLoginName, type:accessUserType, activated: Constant.ACTIVATED.YES};
+            let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
 
-            let where = {id: accessUserId, loginName:accessLoginName, type:accessUserType, activated:Constant.ACTIVATED.YES};
-            let attributes = ['id', 'loginName','email','type', 'displayName', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy'];
+            console.log('adfafa',where);
+            console.log('atrr', attributes)
 
             Account.findOne({
                 where: where,
@@ -318,7 +319,7 @@ module.exports = {
                 }
             }).catch(function(error){
                 "use strict";
-                return callback(1, 'find_one_user_fail', 400, error, null);
+                return callback(2, 'find_one_user_fail', 400, error, null);
             });
         }catch(error){
             return callback(1, 'find_one_user_fail', 400, error, null);
@@ -335,9 +336,9 @@ module.exports = {
                 return callback(1, 'invalid_user_password', 422, 'password is not a string', null);
             }
 
-            let where = { loginname: loginName };
+            let where = { login_name: loginName };
 
-            let attributes = ['Id', 'loginname','password', 'activated', 'deleted', 'displayname', 'email', 'type'];
+            let attributes = ['Id', 'loginName','password', 'activated', 'deleted', 'display_name', 'email', 'type'];
 
             Account.findOne({
                 where: where,
@@ -372,12 +373,28 @@ module.exports = {
             // if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
             //     return callback(1, 'invalid_user_right', 403, 'you must be admin to do this process', null);
             // }
+            // console.log('accessID ',accessUserId);
+            // console.log('accessType ',accessUserType)
+            // console.log('accessLogin ',accessLoginName);
+            console.log('true or fale d n s c ',Pieces.ValidObjectEnum(userData.type, Constant.T));
 
             if ( !Pieces.VariableBaseTypeChecking(userData.loginName, 'string')
                 || !Validator.isAlphanumeric(userData.loginName)
                 || !Validator.isLowercase(userData.loginName)
                 || !Validator.isLength(userData.loginName, {min: 4, max: 128}) ) {
                 return callback(1, 'invalid_user_login_name', 400, 'login name should be alphanumeric, lowercase and length 4-128', null);
+            }
+
+            if ( !Pieces.VariableBaseTypeChecking(userData.firstName, 'string')
+                || !Validator.isAlphanumeric(userData.firstName)
+                || !Validator.isLength(userData.firstName, {min: 2, max: 64}) ) {
+                return callback(1, 'invalid_user_first_name', 400, 'first name should be alphanumeric, lowercase and length 2-64', null);
+            }
+
+            if ( !Pieces.VariableBaseTypeChecking(userData.lastName, 'string')
+                || !Validator.isAlphanumeric(userData.lastName)
+                || !Validator.isLength(userData.lastName, {min: 2, max: 64}) ) {
+                return callback(1, 'invalid_user_last_name', 400, 'last name should be alphanumeric, lowercase and length 2-64', null);
             }
 
             if ( !Pieces.VariableBaseTypeChecking(userData.password, 'string') ) {
@@ -389,11 +406,36 @@ module.exports = {
                 return callback(1, 'invalid_user_email', 400, 'email is incorrect format', null);
             }
 
+            if ( !Pieces.VariableBaseTypeChecking(userData.emailVerified, 'string')
+                || !Validator.isEmail(userData.emailVerified)
+                || userData.email === userData.emailVerified) {
+                return callback(1, 'invalid_user_email_verified', 400, 'email verified is incorrect format or email matches verified email', null);
+            }
+
+            if ( !Pieces.VariableBaseTypeChecking(userData.phone, 'string') || !Validator.isLength(userData.phone, {min: 4, max: 12})) {
+                return callback(1, 'invalid_user_phone', 400,'phone number should be alphanumeric and length 4-12', null);
+            }
+
+            if ( !Pieces.VariableBaseTypeChecking(userData.phoneVerified, 'string')
+                || !Validator.isLength(userData.phoneVerified, {min: 4, max: 12})
+                || userData.phone===userData.phoneVerified) {
+                return callback(1, 'invalid_user_phone_verified', 400,'phone verified number should be alphanumeric and length 4-12 or phone matches verified phone', null);
+            }
+
+
+
             let queryObj = {};
 
-            queryObj.loginName = userData.loginName;
+
+            queryObj.login_name = userData.loginName;
             queryObj.email = userData.email;
+            queryObj.phone = userData.phone;
+            queryObj.first_name = userData.firstName;
+            queryObj.last_name = userData.lastName;
+            queryObj.phone_verified = userData.phoneVerified;
+            queryObj.email_verified = userData.emailVerified;
             queryObj.password = BCrypt.hashSync(userData.password, 10);
+
 
             if(userData.activated === Constant.ACTIVATED.YES || userData.activated === Constant.ACTIVATED.NO){
                 queryObj.activated = userData.activated;
@@ -401,26 +443,36 @@ module.exports = {
                 queryObj.activated = Constant.ACTIVATED.YES;
             }
 
+            if(userData.deleted === Constant.DELETED.YES || userData.deleted === Constant.DELETED.NO){
+                queryObj.deleted = userData.deleted;
+            }else{
+                queryObj.deleted = Constant.DELETED.NO;
+            }
+
             if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
-                if(accessUserType <= userData.type){
+                if(Constant.USER_TYPE.indexOf(accessUserType)<=Constant.USER_TYPE.indexOf(userData.type)){
                     return callback(1, 'invalid_user_right', 403, 'you have no right to do this', null);
                 }
                 queryObj.type = userData.type;
+            }else{
+                return callback(1, 'invalid_user_type', 400,'user type should be string enum {super_admin, admin, normal_user, anonymous}', null);
             }
 
             if (Pieces.VariableBaseTypeChecking(userData.displayName, 'string')) {
-                queryObj.displayName = userData.displayName;
+                queryObj.display_name = userData.displayName;
             }else{
-                queryObj.displayName = userData.loginName;
+                queryObj.display_name = userData.loginName;
             }
 
-            queryObj.createdBy = accessUserId;
-            queryObj.updatedBy = accessUserId;
+            queryObj.created_by = accessUserId;
+            queryObj.updated_by = accessUserId;
+            console.log('deleted ',queryObj.deleted)
 
-            User.create(queryObj).then(result=>{
+            Account.create(queryObj).then(result=>{
                 "use strict";
                 return callback(null, null, 200, null, result);
             }).catch(function(error){
+                console.log('error ', error);
                 "use strict";
                 return callback(1, 'create_user_fail', 420, error, null);
             });

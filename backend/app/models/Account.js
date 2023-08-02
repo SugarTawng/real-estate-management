@@ -2,13 +2,13 @@ const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
 
 let Account = MySequelize.define('account', {
-    Id: {
+    id: {
         type: Sequelize.BIGINT(20),
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    socialId: {
+    social_id: {
         type: Sequelize.STRING(256),
         allowNull: true
     },
@@ -16,23 +16,24 @@ let Account = MySequelize.define('account', {
         type: Sequelize.STRING(12),
         allowNull: false
     },
-    loginName: {
+    login_name: {
         type: Sequelize.STRING(64),
-        allowNull: false
+        allowNull: true,
+        default: 'abc'
     },
     password: {
         type: Sequelize.STRING(64),
         allowNull: false
     },
-    firstName: {
+    first_name: {
         type: Sequelize.STRING(64),
         allowNull: false
     },
-    lastName: {
+    last_name: {
         type: Sequelize.STRING(64),
         allowNull: false
     },
-    displayName: {
+    display_name: {
         type: Sequelize.STRING(64),
         allowNull: false
     },
@@ -48,29 +49,29 @@ let Account = MySequelize.define('account', {
         type: Sequelize.ENUM('anonymous', 'admin', 'super admin', 'normal user'),
         allowNull: false
     },
-    phoneVerified: {
+    phone_verified: {
         type: Sequelize.STRING(12),
         allowNull: false
     },
-    emailVerified: {
+    email_verified: {
         type: Sequelize.STRING(64),
         allowNull: false
     },
-    socialVerified: {
+    social_verified: {
         type: Sequelize.STRING(256),
         allowNull: true
     },
     activated: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING(5),
         allowNull: false,
         default: false
     },
     deleted: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING(5),
         allowNull: false,
         default: false
     },
-    createdBy: {
+    created_by: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
@@ -78,7 +79,7 @@ let Account = MySequelize.define('account', {
             key: 'Id'
         }
     },
-    updatedBy: {
+    updated_by: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
@@ -86,11 +87,11 @@ let Account = MySequelize.define('account', {
             key: 'Id'
         }
     },
-    createdAt: {
+    created_at: {
         type: Sequelize.DATE,
         allowNull: true
     },
-    updatedAt: {
+    updated_at: {
         type: Sequelize.DATE,
         allowNull: true
     }
