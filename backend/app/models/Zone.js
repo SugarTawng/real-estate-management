@@ -1,30 +1,48 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
 const {NULL} = require("mysql/lib/protocol/constants/types");
+const Project = require('./Project');
 const Account = require('./Account');
 
-let Project = MySequelize.define('project', {
+let Zone = MySequelize.define('zone', {
     id: {
         type: Sequelize.BIGINT(20),
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    name: {
+    project_id: {
+        type: Sequelize.BIGINT(20),
+        allowNull: false,
+        references: {
+            model: Project,
+            key: 'id'
+        }
+    },
+    zone_name: {
         type: Sequelize.STRING(128),
         allowNull: false
     },
-    address: {
+
+    desc: {
         type: Sequelize.STRING(256),
+        allowNull: true
+    },
+    construction_area: {
+        type: Sequelize.FLOAT(3),
         allowNull: false
     },
-    phone: {
-        type: Sequelize.STRING(12),
+    total_area: {
+        type: Sequelize.FLOAT(3),
         allowNull: false
     },
-    email: {
-        type: Sequelize.STRING(64),
+    number_of_block: {
+        type: Sequelize.TINYINT,
         allowNull: false
+    },
+    number_of_unit_land:{
+      type: Sequelize.TINYINT,
+      allowNull: false
     },
     open_at: {
         type: Sequelize.DATE,
@@ -89,4 +107,4 @@ let Project = MySequelize.define('project', {
     tableName: 'tbl_project'
 });
 
-module.exports = Project;
+module.exports = Zone;

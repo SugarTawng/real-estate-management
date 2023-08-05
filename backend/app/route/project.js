@@ -1,3 +1,4 @@
+const ProjectCtrl = require('../controllers/ProjectCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/project Create One
@@ -37,9 +38,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/project', oUserCtrl.createByAdmin);
-
-    app.get('/v1/users/:id', oUserCtrl.getOne);
+    app.post('/v1/auth/project', ProjectCtrl.create);
     /**
      * @api {GET} /v1/auth/project Get List
      * @apiVersion 1.0.0
@@ -83,7 +82,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/project', oUserCtrl.getAll);
+    // app.get('/v1/auth/project', ProjectCtrl.getAll);
     /**
      * @api {GET} /v1/auth/project/:id Get One
      * @apiVersion 1.0.0
@@ -124,7 +123,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/users/:id', oUserCtrl.getOne);
+    // app.get('/v1/auth/users/:id', ProjectCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/project/:id Update One
      * @apiVersion 1.0.0
@@ -163,7 +162,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.put('/v1/auth/project/:id', oUserCtrl.update);
+    // app.put('/v1/auth/project/:id', ProjectCtrl.update);
     /**
      * @api {DELETE} /v1/auth/project/:id Delete One
      * @apiVersion 1.0.0
@@ -199,5 +198,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/project/:id', oUserCtrl.delete);
+    // app.delete('/v1/auth/project/:id', ProjectCtrl.delete);
 }

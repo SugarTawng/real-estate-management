@@ -16,8 +16,6 @@ module.exports = {
         let accessUserType = req.body.accessUserType || '';
         let accessLoginName = req.body.accessLoginName || '';
 
-
-
         let Data = req.body || '';
 
         AccountManager.createByAdmin(accessUserId, accessUserType, accessLoginName, Data, function (errorCode, errorMessage, httpCode, errorDescription, user) {
@@ -118,7 +116,10 @@ module.exports = {
                 return Rest.sendError( res, errorCode, errorMessage, httpCode, errorDescription );
             }
 
-            JsonWebToken.sign({ id: result.dataValues.Id, loginName: result.dataValues.loginname, displayName: result.dataValues.displayname, email: result.dataValues.email, type: result.dataValues.type }, Config.jwtAuthKey, { expiresIn: '25 days' }, function(error, token) {
+            console.log(result.dataValues.id, result.dataValues.login_name, result.dataValues.display_name, result.dataValues.email, result.dataValues.type)
+
+
+            JsonWebToken.sign({ id: result.dataValues.id, loginName: result.dataValues.login_name, displayName: result.dataValues.display_name, email: result.dataValues.email, type: result.dataValues.type }, Config.jwtAuthKey, { expiresIn: '25 days' }, function(error, token) {
                 if( error )
                 {
                     return Rest.sendError( res, 4000, 'create_token_fail', 400, error );

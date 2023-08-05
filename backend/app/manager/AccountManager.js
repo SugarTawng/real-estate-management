@@ -11,7 +11,6 @@ const Constant = require('../utils/Constant');
 const Pieces = require('../utils/Pieces');
 
 const Models = require('../models');
-// const User = Models.User;
 const Account = Models.Account;
 
 module.exports = {
@@ -287,6 +286,7 @@ module.exports = {
 
     verifyUser: function (accessUserId, accessUserType, accessLoginName, callback) {
         try {
+            console.log('accessUserID',accessUserId);
             if ( !( Pieces.VariableBaseTypeChecking(accessUserId,'string')
                     && Validator.isInt(accessUserId) )
                 && !Pieces.VariableBaseTypeChecking(accessUserId,'number') ){
@@ -303,9 +303,6 @@ module.exports = {
 
             let where = {id: accessUserId, login_name:accessLoginName, type:accessUserType, activated: Constant.ACTIVATED.YES};
             let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
-
-            console.log('adfafa',where);
-            console.log('atrr', attributes)
 
             Account.findOne({
                 where: where,
@@ -338,7 +335,9 @@ module.exports = {
 
             let where = { login_name: loginName };
 
-            let attributes = ['Id', 'loginName','password', 'activated', 'deleted', 'display_name', 'email', 'type'];
+            console.log(where)
+
+            let attributes = ['id', 'login_name','password', 'activated', 'deleted', 'display_name', 'email', 'type'];
 
             Account.findOne({
                 where: where,
@@ -370,14 +369,6 @@ module.exports = {
 
     createByAdmin: function(accessUserId, accessUserType, accessLoginName, userData, callback){
         try {
-            // if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
-            //     return callback(1, 'invalid_user_right', 403, 'you must be admin to do this process', null);
-            // }
-            // console.log('accessID ',accessUserId);
-            // console.log('accessType ',accessUserType)
-            // console.log('accessLogin ',accessLoginName);
-            console.log('true or fale d n s c ',Pieces.ValidObjectEnum(userData.type, Constant.T));
-
             if ( !Pieces.VariableBaseTypeChecking(userData.loginName, 'string')
                 || !Validator.isAlphanumeric(userData.loginName)
                 || !Validator.isLowercase(userData.loginName)
@@ -466,7 +457,6 @@ module.exports = {
 
             queryObj.created_by = accessUserId;
             queryObj.updated_by = accessUserId;
-            console.log('deleted ',queryObj.deleted)
 
             Account.create(queryObj).then(result=>{
                 "use strict";

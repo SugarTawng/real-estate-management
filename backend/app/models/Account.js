@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
 
+
 let Account = MySequelize.define('account', {
     id: {
         type: Sequelize.BIGINT(20),
@@ -89,11 +90,13 @@ let Account = MySequelize.define('account', {
     },
     created_at: {
         type: Sequelize.DATE,
-        allowNull: true
+        allowNull: true,
+        defaultValue: Sequelize.NOW
     },
     updated_at: {
         type: Sequelize.DATE,
-        allowNull: true
+        allowNull: true,
+        defaultValue: Sequelize.NOW
     }
 }, {
     underscored: true,

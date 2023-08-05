@@ -7,4 +7,5 @@ module.exports = function (app) {
     // require('./route/Service')(app);
     // require('./route/project')(app);
     require('./route/account')(app);
+    require('./route/project')(app);
 };

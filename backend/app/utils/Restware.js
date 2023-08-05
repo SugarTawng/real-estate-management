@@ -118,10 +118,9 @@ const sendSuccessToken = function (res, token, account) {
     let data = {};
 
     data.token = token;
-    data.id = account.dataValues.Id;
-    console.log(account);
-    data.loginname = account.dataValues.loginName;
-    data.displayname = account.dataValues.displayName;
+    data.id = account.dataValues.id;
+    data.login_name = account.dataValues.login_name;
+    data.display_name = account.dataValues.display_name;
     data.email = account.dataValues.email;
     data.type = account.dataValues.type;
 

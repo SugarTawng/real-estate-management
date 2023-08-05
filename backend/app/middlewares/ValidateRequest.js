@@ -18,14 +18,16 @@ module.exports = function (req, res, next) {
 
     if (token) {
         try {
+            console.log('token', token);
             JsonWebToken.verify(token, Config.jwtAuthKey, function(error, decoded) {
-                if(error){
-                    return Rest.sendError(res, 70, 'verify_token_fail', 400,  error);
+                if(error) {
+                    return Rest.sendError(res, 70, 'verify_token_fail', 400, error);
                 }
 
-                UserManager.verifyUser(decoded.id, decoded.type, decoded.loginName, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                console.log('decoded ',decoded);
+
+                UserManager.verifyUser(decoded.id, decoded.type, decoded.loginName, function (errorCode, errorMessage, httpCode, errorDescription) {
                     if (errorCode) {
-                        console.log('decoded id', decoded.Id);
                         return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                     }
                     if (req.method === 'GET') {
