@@ -86,7 +86,7 @@ let Block = MySequelize.define('block', {
     createdAt: false,
     includeDeleted: true,
     freezeTableName: true,
-    tableName: 'tbl_project'
+    tableName: 'tbl_block'
 });
 
 module.exports = Block;

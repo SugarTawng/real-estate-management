@@ -113,7 +113,7 @@ let LandArea = MySequelize.define('landArea', {
     createdAt: false,
     includeDeleted: true,
     freezeTableName: true,
-    tableName: 'tbl_project'
+    tableName: 'tbl_land_area'
 });
 
 module.exports = LandArea;

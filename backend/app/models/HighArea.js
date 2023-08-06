@@ -101,7 +101,7 @@ let HighArea = MySequelize.define('highArea', {
     createdAt: false,
     includeDeleted: true,
     freezeTableName: true,
-    tableName: 'tbl_project'
+    tableName: 'tbl_high_area'
 });
 
 module.exports = HighArea;

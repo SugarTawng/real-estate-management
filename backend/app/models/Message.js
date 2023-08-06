@@ -9,34 +9,17 @@ let Message = MySequelize.define('message', {
         allowNull: false,
         primaryKey: true
     },
-    block_id: {
-        type: Sequelize.BIGINT(20),
-        allowNull: false,
-        references: {
-            model: Block,
-            key: 'id'
-        }
-    },
-    number_of_room: {
-        type: Sequelize.TINYINT,
-        allowNull: false
-    },
-    public_area: {
-        type: Sequelize.FLOAT(3),
-        allowNull: false
-    },
-    total_area: {
-        type: Sequelize.FLOAT(3),
-        allowNull: false
-    },
-    progress: {
-        type: Sequelize.TINYINT(4),
-        allowNull: true,
-        default: 0
-    },
-    desc: {
+    title: {
         type: Sequelize.STRING(256),
-        allowNull: true
+        allowNull: false
+    },
+    content: {
+        type: Sequelize.STRING(4068),
+        allowNull: false
+    },
+    keyword: {
+        type: Sequelize.STRING(256),
+        allowNull: false
     },
     created_by: {
         type: Sequelize.BIGINT(20),
@@ -72,7 +55,7 @@ let Message = MySequelize.define('message', {
     createdAt: false,
     includeDeleted: true,
     freezeTableName: true,
-    tableName: 'tbl_project'
+    tableName: 'tbl_message'
 });
 
-module.exports = Floor;
+module.exports = Message;

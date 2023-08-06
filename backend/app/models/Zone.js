@@ -87,7 +87,7 @@ let Zone = MySequelize.define('zone', {
     createdAt: false,
     includeDeleted: true,
     freezeTableName: true,
-    tableName: 'tbl_project'
+    tableName: 'tbl_zone'
 });
 
 module.exports = Zone;

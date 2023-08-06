@@ -73,7 +73,7 @@ let Floor = MySequelize.define('floor', {
     createdAt: false,
     includeDeleted: true,
     freezeTableName: true,
-    tableName: 'tbl_project'
+    tableName: 'tbl_floor'
 });
 
 module.exports = Floor;
