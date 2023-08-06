@@ -1,3 +1,4 @@
+const ZoneCtrl = require('../controllers/ZoneCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/zone Create One
@@ -40,7 +41,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/zone', oUserCtrl.createByAdmin);
+    app.post('/v1/auth/zone', ZoneCtrl.create);
     /**
      * @api {GET} /v1/auth/zone Get List
      * @apiVersion 1.0.0
@@ -84,7 +85,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/users', oUserCtrl.getAll);
+    // app.get('/v1/auth/users', ZoneCtrl.getAll);
     /**
      * @api {GET} /v1/auth/project/:id Get One
      * @apiVersion 1.0.0
@@ -125,7 +126,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
+    // app.get('/v1/auth/zone/:id', ZoneCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/zone/:id Update One
      * @apiVersion 1.0.0
@@ -166,7 +167,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.put('/v1/auth/zone/:id', oUserCtrl.update);
+    // app.put('/v1/auth/zone/:id', ZoneCtrl.update);
     /**
      * @api {DELETE} /v1/auth/zone/:id Delete One
      * @apiVersion 1.0.0
@@ -202,5 +203,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/zone/:id', oUserCtrl.delete);
+    // app.delete('/v1/auth/zone/:id', ZoneCtrl.delete);
 }

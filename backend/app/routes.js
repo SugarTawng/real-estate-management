@@ -8,4 +8,5 @@ module.exports = function (app) {
     // require('./route/project')(app);
     require('./route/account')(app);
     require('./route/project')(app);
+    require('./route/zone')(app);
 };

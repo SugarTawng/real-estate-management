@@ -20,6 +20,18 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(2, 'invalid_project_name', 400, 'name is not alphanumeric and 4 - 128 characters', null);
         }
 
+        const construction_area = parseFloat(data.construction_area);
+        const total_area = parseFloat(data.total_area);
+
+        if ( !Pieces.VariableBaseTypeChecking(construction_area, 'number')) {
+            return callback(1, 'invalid_project_progress_email', 400, 'project progress is incorrect format', null);
+        }
+
+        if ( !Pieces.VariableBaseTypeChecking(total_area, 'number')
+            || !(project_progress >=0 && project_progress <=100)) {
+            return callback(1, 'invalid_project_progress_email', 400, 'project progress is incorrect format', null);
+        }
+
         if ( !Pieces.VariableBaseTypeChecking(data.address,'string')
             || !Validator.isAlphanumeric(data.address)
             || !Validator.isLength(data.address, {min: 0, max: 256})) {
@@ -36,7 +48,6 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             || !Validator.isEmail(data.email) ) {
             return callback(1, 'invalid_user_email', 400, 'email is incorrect format', null);
         }
-        const project_progress = parseInt(data.project_progress);
         // console.log('validator abc  ',!Validator.isLength(project_progress, {min: 0, max: 3}));
         // console.log('hihihi', !Pieces.VariableBaseTypeChecking(project_progress, 'Number'));
 

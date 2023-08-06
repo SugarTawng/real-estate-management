@@ -21,5 +21,5 @@ module.exports = {
                 return Rest.sendSuccessOne(res, resData, httpCode);
             }
         });
-    },
+    }
 }
