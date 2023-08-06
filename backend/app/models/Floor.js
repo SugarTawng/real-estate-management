@@ -1,33 +1,28 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
-const {NULL} = require("mysql/lib/protocol/constants/types");
-const Project = require('./Project');
+const Block = require('./Zone');
 const Account = require('./Account');
 
-let Zone = MySequelize.define('zone', {
+let Floor = MySequelize.define('floor', {
     id: {
         type: Sequelize.BIGINT(20),
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    project_id: {
+    block_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
-            model: Project,
+            model: Block,
             key: 'id'
         }
     },
-    zone_name: {
-        type: Sequelize.STRING(128),
+    number_of_room: {
+        type: Sequelize.TINYINT,
         allowNull: false
     },
-    desc: {
-        type: Sequelize.STRING(256),
-        allowNull: true
-    },
-    construction_area: {
+    public_area: {
         type: Sequelize.FLOAT(3),
         allowNull: false
     },
@@ -35,23 +30,14 @@ let Zone = MySequelize.define('zone', {
         type: Sequelize.FLOAT(3),
         allowNull: false
     },
-    number_of_block: {
-        type: Sequelize.TINYINT,
-        allowNull: false
-    },
-    number_of_unit_land:{
-      type: Sequelize.TINYINT,
-      allowNull: false
-    },
     progress: {
         type: Sequelize.TINYINT(4),
         allowNull: true,
         default: 0
     },
-    started_day: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
+    desc: {
+        type: Sequelize.STRING(256),
+        allowNull: true
     },
     created_by: {
         type: Sequelize.BIGINT(20),
@@ -90,4 +76,4 @@ let Zone = MySequelize.define('zone', {
     tableName: 'tbl_project'
 });
 
-module.exports = Zone;
+module.exports = Floor;

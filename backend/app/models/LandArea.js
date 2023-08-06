@@ -1,57 +1,80 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
-const {NULL} = require("mysql/lib/protocol/constants/types");
-const Project = require('./Project');
+const Zone = require('./Zone');
 const Account = require('./Account');
 
-let Zone = MySequelize.define('zone', {
+let LandArea = MySequelize.define('landArea', {
     id: {
         type: Sequelize.BIGINT(20),
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    project_id: {
+    zone_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
-            model: Project,
+            model: Zone,
             key: 'id'
         }
     },
-    zone_name: {
-        type: Sequelize.STRING(128),
-        allowNull: false
-    },
-    desc: {
+    land_direction: {
         type: Sequelize.STRING(256),
         allowNull: true
     },
-    construction_area: {
-        type: Sequelize.FLOAT(3),
+    is_front:{
+        type: Sequelize.STRING(5),
         allowNull: false
     },
+    lat: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+    },
+    long: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+    },
+    building_area:{
+        type: Sequelize.FLOAT,
+        allowNull: false
+    },
+    
     total_area: {
         type: Sequelize.FLOAT(3),
         allowNull: false
-    },
-    number_of_block: {
-        type: Sequelize.TINYINT,
-        allowNull: false
-    },
-    number_of_unit_land:{
-      type: Sequelize.TINYINT,
-      allowNull: false
     },
     progress: {
         type: Sequelize.TINYINT(4),
         allowNull: true,
         default: 0
     },
-    started_day: {
-        type: Sequelize.DATE,
+    number_of_wc: {
+        type: Sequelize.TINYINT,
+        allowNull: false
+    },
+    number_of_room: {
+        type: Sequelize.TINYINT,
+        allowNull: false
+    },
+    price: {
+        type: Sequelize.DOUBLE(3),
+        allowNull: false
+    },
+    owner: {
+        type: Sequelize.BIGINT(20),
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        references: {
+            model: Account,
+            key: 'id'
+        }
+    },
+    buy_status: {
+        type: Sequelize.STRING(9),
+        allowNull: false
+    },
+    desc: {
+        type: Sequelize.STRING(256),
+        allowNull: true
     },
     created_by: {
         type: Sequelize.BIGINT(20),
@@ -62,7 +85,7 @@ let Zone = MySequelize.define('zone', {
         }
     },
     updated_by: {
-        type: Sequelize.BIGINT(10),
+        type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
             model: Account,
@@ -90,4 +113,4 @@ let Zone = MySequelize.define('zone', {
     tableName: 'tbl_project'
 });
 
-module.exports = Zone;
+module.exports = LandArea;
