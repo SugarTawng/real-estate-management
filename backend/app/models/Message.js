@@ -1,40 +1,27 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
-const Zone = require('./Zone');
 const Account = require('./Account');
 
-let LandArea = MySequelize.define('landArea', {
+let Message = MySequelize.define('message', {
     id: {
         type: Sequelize.BIGINT(20),
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    zone_id: {
+    block_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
-            model: Zone,
+            model: Block,
             key: 'id'
         }
     },
-    land_direction: {
-        type: Sequelize.STRING(256),
-        allowNull: true
-    },
-    is_front:{
-        type: Sequelize.STRING(5),
+    number_of_room: {
+        type: Sequelize.TINYINT,
         allowNull: false
     },
-    lat: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-    },
-    long: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-    },
-    building_area:{
+    public_area: {
         type: Sequelize.FLOAT(3),
         allowNull: false
     },
@@ -46,34 +33,6 @@ let LandArea = MySequelize.define('landArea', {
         type: Sequelize.TINYINT(4),
         allowNull: true,
         default: 0
-    },
-    number_of_floor: {
-        type: Sequelize.TINYINT,
-        allowNull: false
-    },
-    number_of_room: {
-        type: Sequelize.TINYINT,
-        allowNull: false
-    },
-    number_of_wc: {
-        type: Sequelize.TINYINT,
-        allowNull: false
-    },
-    price: {
-        type: Sequelize.DOUBLE(3),
-        allowNull: false
-    },
-    owner: {
-        type: Sequelize.BIGINT(20),
-        allowNull: false,
-        references: {
-            model: Account,
-            key: 'id'
-        }
-    },
-    buy_status: {
-        type: Sequelize.STRING(9),
-        allowNull: false
     },
     desc: {
         type: Sequelize.STRING(256),
@@ -88,7 +47,7 @@ let LandArea = MySequelize.define('landArea', {
         }
     },
     updated_by: {
-        type: Sequelize.BIGINT(20),
+        type: Sequelize.BIGINT(10),
         allowNull: false,
         references: {
             model: Account,
@@ -116,4 +75,4 @@ let LandArea = MySequelize.define('landArea', {
     tableName: 'tbl_project'
 });
 
-module.exports = LandArea;
+module.exports = Floor;
