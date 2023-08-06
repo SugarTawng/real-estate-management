@@ -19,8 +19,7 @@ let Account = MySequelize.define('account', {
     },
     login_name: {
         type: Sequelize.STRING(64),
-        allowNull: true,
-        default: 'abc'
+        allowNull: false
     },
     password: {
         type: Sequelize.STRING(64),

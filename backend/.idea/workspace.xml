@@ -6,16 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="login and create">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Block.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Block.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Floor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/HighArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/HighArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/LandArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/LandArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Message.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/ProjectProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ProjectProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/WhiteBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/WhiteBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Zone.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Zone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Account.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +95,7 @@
       <workItem from="1690774357102" duration="49000" />
       <workItem from="1690795289407" duration="12400000" />
       <workItem from="1690872985146" duration="19485000" />
-      <workItem from="1690942198547" duration="84441000" />
+      <workItem from="1690942198547" duration="85090000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>
