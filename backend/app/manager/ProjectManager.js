@@ -14,8 +14,6 @@ const User = require('../models/User.js');
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
-
-
         if ( !Pieces.VariableBaseTypeChecking(data.name,'string')
             || !Validator.isAlphanumeric(data.name)
             || !Validator.isLength(data.name, {min: 0, max: 128})) {

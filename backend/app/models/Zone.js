@@ -19,7 +19,7 @@ let Zone = MySequelize.define('zone', {
             key: 'id'
         }
     },
-    zone_name: {
+    name: {
         type: Sequelize.STRING(128),
         allowNull: false
     },

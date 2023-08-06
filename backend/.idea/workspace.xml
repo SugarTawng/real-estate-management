@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="login and create">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/ZoneCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ZoneCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/ProjectManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ProjectManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/manager/ZoneManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ZoneManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/zone.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/zone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Zone.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Zone.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +97,7 @@
       <workItem from="1690774357102" duration="49000" />
       <workItem from="1690795289407" duration="12400000" />
       <workItem from="1690872985146" duration="19485000" />
-      <workItem from="1690942198547" duration="89085000" />
+      <workItem from="1690942198547" duration="103601000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>
