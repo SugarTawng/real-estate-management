@@ -1,4 +1,4 @@
-const ZoneManager = require('../manager/ZoneManager');
+const WhiteBoard = require('../manager/WhiteBoardManager');
 const Rest = require('../utils/Restware');
 
 module.exports = {
@@ -12,12 +12,12 @@ module.exports = {
 
         let data = req.body || '';
 
-        ZoneManager.create(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, zone) {
+        WhiteBoard.create(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, whiteBoard) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             } else {
                 let resData = {};
-                resData.id = zone.id;
+                resData.id = whiteBoard.id;
                 return Rest.sendSuccessOne(res, resData, httpCode);
             }
         });

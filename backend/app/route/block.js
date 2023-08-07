@@ -1,3 +1,4 @@
+const BlockCtrl = require('../controllers/BlockCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/block Create One
@@ -39,7 +40,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/block', oUserCtrl.createByAdmin);
+    app.post('/v1/auth/block', BlockCtrl.create);
     /**
      * @api {GET} /v1/auth/account Get List
      * @apiVersion 1.0.0
@@ -83,7 +84,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/block', oUserCtrl.getAll);
+    // app.get('/v1/auth/block', BlockCtrl.getAll);
     /**
      * @api {GET} /v1/auth/block/:id Get One
      * @apiVersion 1.0.0
@@ -124,7 +125,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/users/:id', oUserCtrl.getOne);
+    // app.get('/v1/auth/users/:id', BlockCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/block/:id Update One
      * @apiVersion 1.0.0
@@ -164,7 +165,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.put('/v1/auth/block/:id', oUserCtrl.update);
+    // app.put('/v1/auth/block/:id', BlockCtrl.update);
     /**
      * @api {DELETE} /v1/auth/block/:id Delete One
      * @apiVersion 1.0.0
@@ -200,5 +201,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/block/:id', oUserCtrl.delete);
+    // app.delete('/v1/auth/block/:id', BlockCtrl.delete);
 }

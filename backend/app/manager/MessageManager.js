@@ -9,7 +9,7 @@ const JsonWebToken = require('jsonwebtoken');
 const Constant = require('../utils/Constant');
 const Pieces = require('../utils/Pieces');
 const Config = require('../config/Global');
-const Zone = require('../models/Zone');
+const Message = require('../models/Message');
 const {NULL} = require("mysql/lib/protocol/constants/types");
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
@@ -80,7 +80,7 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         queryObj.created_by = accessUserId;
         queryObj.updated_by = accessUserId;
 
-        Zone.create(queryObj).then(Project=>{
+        Message.create(queryObj).then(Project=>{
             "use strict";
             return callback(null, null, 200, null, Project);
         }).catch(function(error){

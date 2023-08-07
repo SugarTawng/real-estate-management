@@ -1,3 +1,4 @@
+const HighArea = require('../controllers/HighAreaCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/highArea Create One
@@ -41,7 +42,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/highArea', oUserCtrl.createByAdmin);
+    app.post('/v1/auth/highArea', HighArea.create);
     /**
      * @api {GET} /v1/auth/highArea Get List
      * @apiVersion 1.0.0
@@ -85,7 +86,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/floor', oUserCtrl.getAll);
+    // app.get('/v1/auth/floor', HighArea.getAll);
     /**
      * @api {GET} /v1/auth/highArea/:id Get One
      * @apiVersion 1.0.0
@@ -126,7 +127,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
+    // app.get('/v1/auth/zone/:id', HighArea.getOne);
     /**
      * @api {PUT} /v1/auth/highArea/:id Update One
      * @apiVersion 1.0.0
@@ -169,7 +170,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.put('/v1/auth/highArea/:id', oUserCtrl.update);
+    // app.put('/v1/auth/highArea/:id', HighArea.update);
     /**
      * @api {DELETE} /v1/auth/highArea/:id Delete One
      * @apiVersion 1.0.0
@@ -205,5 +206,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/highArea/:id', oUserCtrl.delete);
+    // app.delete('/v1/auth/highArea/:id', HighArea.delete);
 }

@@ -5,8 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="login and create">
+      <change afterPath="$PROJECT_DIR$/app/controllers/BlockCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/FloorCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/HighAreaCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/LandAreaCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/MessageCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/WhiteBoardCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/BlockManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/FloorManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/HighAreaManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/LandAreaManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/MessageManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/WhiteBoardManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/ZoneCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ZoneCtrl.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/manager/ZoneManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ZoneManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/block.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/block.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/floor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/highArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/highArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/landArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/landArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/message.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/whileBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/whileBoard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +115,7 @@
       <workItem from="1690774357102" duration="49000" />
       <workItem from="1690795289407" duration="12400000" />
       <workItem from="1690872985146" duration="19485000" />
-      <workItem from="1690942198547" duration="116077000" />
+      <workItem from="1690942198547" duration="121968000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>

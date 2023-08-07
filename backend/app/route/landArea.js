@@ -1,3 +1,4 @@
+const LandArea = require('../controllers/LandAreaCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/landArea Create One
@@ -46,7 +47,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/landArea', oUserCtrl.createByAdmin);
+    app.post('/v1/auth/landArea', LandArea.create);
     /**
      * @api {GET} /v1/auth/landArea Get List
      * @apiVersion 1.0.0
@@ -90,7 +91,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/landArea', oUserCtrl.getAll);
+    // app.get('/v1/auth/landArea', LandArea.getAll);
     /**
      * @api {GET} /v1/auth/landArea/:id Get One
      * @apiVersion 1.0.0
@@ -131,7 +132,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
+    // app.get('/v1/auth/zone/:id', LandArea.getOne);
     /**
      * @api {PUT} /v1/auth/landArea/:id Update One
      * @apiVersion 1.0.0
@@ -179,7 +180,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.put('/v1/auth/landArea/:id', oUserCtrl.update);
+    // app.put('/v1/auth/landArea/:id', LandArea.update);
     /**
      * @api {DELETE} /v1/auth/landArea/:id Delete One
      * @apiVersion 1.0.0
@@ -215,5 +216,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/landArea/:id', oUserCtrl.delete);
+    // app.delete('/v1/auth/landArea/:id', LandArea.delete);
 }

@@ -1,3 +1,4 @@
+const WhiteBoard = require('../controllers/WhiteBoardCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/whiteBoard Create One
@@ -39,7 +40,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/whiteBoard', oUserCtrl.createByAdmin);
+    app.post('/v1/auth/whiteBoard', WhiteBoard.create);
     /**
      * @api {GET} /v1/auth/whiteBoard Get List
      * @apiVersion 1.0.0
@@ -83,7 +84,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/whiteBoard', oUserCtrl.getAll);
+    // app.get('/v1/auth/whiteBoard', oUserCtrl.getAll);
     /**
      * @api {GET} /v1/auth/whiteBoard/:id Get One
      * @apiVersion 1.0.0
@@ -124,7 +125,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
+    // app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/whiteBoard/:id Update One
      * @apiVersion 1.0.0
@@ -164,7 +165,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.put('/v1/auth/whiteBoard/:id', oUserCtrl.update);
+    // app.put('/v1/auth/whiteBoard/:id', oUserCtrl.update);
     /**
      * @api {DELETE} /v1/auth/whiteBoard/:id Delete One
      * @apiVersion 1.0.0
@@ -200,5 +201,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/message/:id', oUserCtrl.delete);
+    // app.delete('/v1/auth/message/:id', oUserCtrl.delete);
 }

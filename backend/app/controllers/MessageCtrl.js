@@ -1,4 +1,4 @@
-const ZoneManager = require('../manager/ZoneManager');
+const Message = require('../manager/MessageManager');
 const Rest = require('../utils/Restware');
 
 module.exports = {
@@ -12,12 +12,12 @@ module.exports = {
 
         let data = req.body || '';
 
-        ZoneManager.create(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, zone) {
+        Message.create(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, message) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             } else {
                 let resData = {};
-                resData.id = zone.id;
+                resData.id = message.id;
                 return Rest.sendSuccessOne(res, resData, httpCode);
             }
         });

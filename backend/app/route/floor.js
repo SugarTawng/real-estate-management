@@ -1,3 +1,4 @@
+const FloorCtrl = require('../controllers/FloorCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/floor Create One
@@ -38,7 +39,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/floor', oUserCtrl.createByAdmin);
+    app.post('/v1/auth/floor', FloorCtrl.create);
     /**
      * @api {GET} /v1/auth/floor Get List
      * @apiVersion 1.0.0
@@ -82,7 +83,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/floor', oUserCtrl.getAll);
+    // app.get('/v1/auth/floor', FloorCtrl.getAll);
     /**
      * @api {GET} /v1/auth/floor/:id Get One
      * @apiVersion 1.0.0
@@ -123,7 +124,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
+    // app.get('/v1/auth/zone/:id', FloorCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/floor/:id Update One
      * @apiVersion 1.0.0
@@ -162,7 +163,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.put('/v1/auth/floor/:id', oUserCtrl.update);
+    // app.put('/v1/auth/floor/:id', FloorCtrl.update);
     /**
      * @api {DELETE} /v1/auth/floor/:id Delete One
      * @apiVersion 1.0.0
@@ -198,5 +199,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/floor/:id', oUserCtrl.delete);
+    // app.delete('/v1/auth/floor/:id', FloorCtrl.delete);
 }
