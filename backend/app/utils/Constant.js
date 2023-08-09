@@ -11,6 +11,11 @@ const ACTIVATED = {
     YES: 'true'
 };
 
+const BLOCK_TYPE = {
+    NORMAL: 'normal',
+    LUXURY: 'luxury'
+}
+
 const SYSTEM = {
     NO: 0,
     YES: 1
@@ -26,7 +31,7 @@ module.exports = {
     ACTIVATED,
     USER_TYPE,
     SYSTEM,
-    T,
+    BLOCK_TYPE,
     THUMBNAIL_NAME_SUFFIX:'_thumb',
     CONTENT_TYPE_ENUM: ['*', 'bestProduct','video','advertiseText'],
     MAX_ASSET_SIZE_ALLOW: 1073741824,

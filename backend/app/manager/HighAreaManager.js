@@ -14,7 +14,6 @@ const {NULL} = require("mysql/lib/protocol/constants/types");
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
-
         if (parseInt(data.project_id) <= 0
             || Number.isNaN(parseInt(data.project_id))) {
             return callback(1, 'invalid_project_id', 400, 'project id is incorrect format', null);

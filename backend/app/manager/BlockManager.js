@@ -15,50 +15,37 @@ const {NULL} = require("mysql/lib/protocol/constants/types");
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
 
-        if (parseInt(data.project_id) <= 0
-            || Number.isNaN(parseInt(data.project_id))) {
-            return callback(1, 'invalid_project_id', 400, 'project id is incorrect format', null);
+        if (parseInt(data.zone_id) <= 0
+            || Number.isNaN(parseInt(data.zone_id))) {
+            return callback(1, 'invalid_zone_id', 400, 'zone id is incorrect format', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.name,'string')
-            || !Validator.isAlphanumeric(data.name)
-            || !Validator.isLength(data.name, {min: 1, max: 128})) {
-            return callback(2, 'invalid_project_name', 400, 'name is not alphanumeric and 4 - 128 characters', null);
+        if ( !Pieces.VariableBaseTypeChecking(data.number_of_floor,'string')
+            || !Validator.isAlphanumeric(data.number_of_floor)
+            || !Validator.isLength(data.number_of_floor, {min: 1, max: 128})
+            || !parseInt(data.number_of_floor)>0) {
+            return callback(2, 'invalid_number_of_floor', 400, 'number of floor is not numerical and greater than 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.desc,'string') && data.desc === NULL
-            || !Validator.isLength(data.desc, {min: 0, max: 256})) {
+        console.log('lat ',Number.isNaN(parseFloat(data.lat)))
+
+        if ( !Pieces.VariableBaseTypeChecking(data.lat,'string')
+            || !Validator.isLength(data.lat, {min: 1, max: 128})
+            || !(parseFloat(data.lat)>=-90 && parseFloat(data.lat)<=90)
+            || Number.isNaN(parseFloat(data.lat))){
+            return callback(2, 'invalid_lat', 400, 'lat is not numerical and greater than 0', null);
+        }
+
+        if ( !Pieces.VariableBaseTypeChecking(data.long,'string')
+            || !Validator.isLength(data.long, {min: 1, max: 128})
+            || !(parseFloat(data.long)>=-180 && parseFloat(data.long)<=180)
+            || Number.isNaN(parseFloat(data.long))){
+            return callback(2, 'invalid_long', 400, 'long is not numerical and greater than 0', null);
+        }
+
+        if ( !Pieces.VariableBaseTypeChecking(data.desc,'string')
+            || !Validator.isLength(data.desc, {min: 1, max: 256})) {
             return callback(2, 'invalid_desc', 400, 'desc is not 4 - 128 characters', null);
-        }
-
-        if ( !Pieces.VariableBaseTypeChecking(data.construction_area,'string')
-            || !Validator.isAlphanumeric(data.construction_area)
-            || !Validator.isLength(data.construction_area, {min: 1, max: 128})
-            || !parseFloat(data.construction_area)>0) {
-            return callback(2, 'invalid_construction_area', 400, 'construction area not numerical and greater than 0', null);
-        }
-
-        if ( !Pieces.VariableBaseTypeChecking(data.total_area,'string')
-            || !Validator.isAlphanumeric(data.total_area)
-            || !Validator.isLength(data.total_area, {min: 1, max: 128})
-            || !parseFloat(data.total_area)>0) {
-            return callback(2, 'invalid_total_area', 400, 'total area is not numerical and greater than 0', null);
-        }
-
-        console.log('chet tiec', );
-
-        if ( !Pieces.VariableBaseTypeChecking(data.number_of_block,'string')
-            || !Validator.isAlphanumeric(data.number_of_block)
-            || !Validator.isLength(data.number_of_block, {min: 1, max: 128})
-            || parseInt(data.number_of_block) < 0 || Number.isNaN(parseInt(data.number_of_block))) {
-            return callback(2, 'invalid_number_of_block', 400, 'number of block is not numerical and greater than or equal 0', null);
-        }
-
-        if ( !Pieces.VariableBaseTypeChecking(data.number_of_unit_land,'string')
-            || !Validator.isAlphanumeric(data.number_of_unit_land)
-            || !Validator.isLength(data.number_of_unit_land, {min: 1, max: 128})
-            || parseInt(data.number_of_unit_land) < 0 || Number.isNaN(parseInt(data.number_of_unit_land))) {
-            return callback(2, 'invalid_number_of_unit_land', 400, 'number of unit land is not numerical and greater than or equal 0', null);
         }
 
         if ( !Pieces.VariableBaseTypeChecking(parseInt(data.progress), 'number')
@@ -66,17 +53,26 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(1, 'invalid_progress', 400, 'progress is incorrect format', null);
         }
 
-
-
         let queryObj = {};
-        queryObj.project_id = data.project_id;
-        queryObj.name = data.name;
+        queryObj.zone_id = data.zone_id;
+        queryObj.number_of_floor = data.number_of_floor;
+        queryObj.lat = data.lat;
+        queryObj.long = data.long;
         queryObj.desc = data.desc;
-        queryObj.construction_area = data.construction_area;
-        queryObj.total_area = data.total_area;
-        queryObj.number_of_block = data.number_of_block;
-        queryObj.number_of_unit_land = data.number_of_unit_land;
         queryObj.progress = data.progress;
+
+        if(data.type === Constant.BLOCK_TYPE.NORMAL || data.type === Constant.BLOCK_TYPE.LUXURY){
+            queryObj.type = data.type;
+        }else{
+            queryObj.type = Constant.BLOCK_TYPE.NORMAL;
+        }
+
+        if(data.is_service === Constant.ACTIVATED.YES || data.is_service === Constant.ACTIVATED.NO){
+            queryObj.is_service = data.is_service;
+        }else{
+            queryObj.is_service = Constant.ACTIVATED.YES;
+        }
+
         queryObj.created_by = accessUserId;
         queryObj.updated_by = accessUserId;
 

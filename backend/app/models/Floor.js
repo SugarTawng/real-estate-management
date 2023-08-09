@@ -18,7 +18,7 @@ let Floor = MySequelize.define('floor', {
             key: 'id'
         }
     },
-    number_of_room: {
+    number_of_high_area: {
         type: Sequelize.TINYINT,
         allowNull: false
     },

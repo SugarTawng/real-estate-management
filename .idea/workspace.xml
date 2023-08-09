@@ -4,11 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="" />
+    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/manager/BlockManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/manager/BlockManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/manager/FloorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/manager/FloorManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/manager/HighAreaManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/manager/HighAreaManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/models/Floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/models/Floor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/utils/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/utils/Constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -23,7 +36,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/admin/Desktop/LVTN",
+    "last_opened_file_path": "C:/Users/admin/Desktop/LVTN/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,6 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1690275059628</updated>
       <workItem from="1690275061063" duration="581000" />
+      <workItem from="1691549291232" duration="14000" />
     </task>
     <servers />
   </component>
