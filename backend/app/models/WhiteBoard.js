@@ -34,9 +34,10 @@ let WhiteBoard = MySequelize.define('WhiteBoard', {
             key: 'id'
         }
     },
-    warn:{
-        type: Sequelize.STRING(5),
-        allowNull: false
+    priority:{
+        type: Sequelize.STRING(6),
+        allowNull: false,
+        defaultValue: 'low'
     },
     created_by: {
         type: Sequelize.BIGINT(20),

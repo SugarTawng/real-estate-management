@@ -11,6 +11,22 @@ const ACTIVATED = {
     YES: 'true'
 };
 
+const IS_FRONT = {
+    NO: 'false',
+    YES: 'true'
+};
+
+const WHITE_BOARD_MODE = {
+    NO: 'false',
+    YES: 'true'
+}
+
+const WHITE_BOARD_PRIORITY ={
+    HIGH: 'high',
+    NORMAL: 'normal',
+    LOW: 'low'
+}
+
 const BLOCK_TYPE = {
     NORMAL: 'normal',
     LUXURY: 'luxury'
@@ -23,8 +39,22 @@ const SYSTEM = {
 
 const USER_TYPE = ['anonymous', 'normal_user', 'admin', 'super_admin']
 
-const T = ['normal_user']
+const BUY_STATUS = {
+    BLOCK: 'block',
+    DEAL: 'deal',
+    NOT_BLOCK: 'not block'
+};
 
+const PROFILE_ROLE_JOB = {
+    SALE: 'sale',
+    ANOTHER: 'another'
+}
+
+const PROFILE_POSITION_JOB = {
+    STAFF: 'staff',
+    LEADER: 'leader',
+    MANAGER: 'manager'
+}
 
 module.exports = {
     DELETED,
@@ -32,6 +62,10 @@ module.exports = {
     USER_TYPE,
     SYSTEM,
     BLOCK_TYPE,
+    BUY_STATUS,
+    IS_FRONT,
+    WHITE_BOARD_MODE,
+    WHITE_BOARD_PRIORITY,
     THUMBNAIL_NAME_SUFFIX:'_thumb',
     CONTENT_TYPE_ENUM: ['*', 'bestProduct','video','advertiseText'],
     MAX_ASSET_SIZE_ALLOW: 1073741824,

@@ -20,11 +20,13 @@ let Profile = MySequelize.define('profile', {
     },
     role_job: {
         type: Sequelize.STRING(256),
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'sale'
     },
     position_job: {
         type: Sequelize.STRING(256),
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'staff'
     },
     experience_year: {
         type: Sequelize.TINYINT(4),

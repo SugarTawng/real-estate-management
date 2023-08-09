@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="login and create">
+      <change afterPath="$PROJECT_DIR$/app/controllers/ProfileCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/ProfileProjectCtrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/ProfileManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/manager/ProfileProjectManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/BlockManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/BlockManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/FloorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/FloorManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/manager/HighAreaManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/HighAreaManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Floor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/LandAreaManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/LandAreaManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/MessageManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/MessageManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/WhiteBoardManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/WhiteBoardManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/WhiteBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/WhiteBoard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/utils/Constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/Constant.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +25,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/node_modules/express/lib/router/layer.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/express/lib/router/route.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/validator/lib/isLength.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/validator/lib/util/assertString.js" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -31,25 +43,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/admin/Desktop/testing&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2022.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/admin/Desktop/LVTN/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\admin\Desktop\LVTN\backend" />
@@ -100,6 +111,7 @@
       <workItem from="1690795289407" duration="12400000" />
       <workItem from="1690872985146" duration="19485000" />
       <workItem from="1690942198547" duration="135568000" />
+      <workItem from="1691549303517" duration="27243000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>
