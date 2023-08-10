@@ -124,7 +124,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/zone/:id', FloorCtrl.getOne);
+    app.get('/v1/auth/floor/:id', FloorCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/floor/:id Update One
      * @apiVersion 1.0.0

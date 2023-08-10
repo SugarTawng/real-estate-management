@@ -92,7 +92,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
 
         let where = {};
-        let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
+        let attributes = ['id', 'block_id','number_of_high_area','public_area', 'total_area', 'progress', 'desc', 'created_by', 'updated_by', 'created_at', 'updated_at'];
 
         where = {id: id};
 
@@ -104,7 +104,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
         console.log('where is this ', where);
 
-        Block.findOne({
+        Floor.findOne({
             where: where,
             attributes: attributes
         }).then(result=>{

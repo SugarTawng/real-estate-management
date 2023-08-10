@@ -127,7 +127,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/zone/:id', HighArea.getOne);
+    app.get('/v1/auth/highArea/:id', HighArea.getOne);
     /**
      * @api {PUT} /v1/auth/highArea/:id Update One
      * @apiVersion 1.0.0

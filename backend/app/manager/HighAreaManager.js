@@ -133,7 +133,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
 
         let where = {};
-        let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
+        let attributes = ['id', 'floor_id','lat','long', 'high_area_direction', 'total_area', 'progress', 'number_of_wc', 'number_of_room', 'price', 'owner', 'buy_status', 'desc', 'created_by', 'updated_by', 'created_at', 'updated_at'];
 
         where = {id: id};
 
@@ -145,7 +145,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
         console.log('where is this ', where);
 
-        Block.findOne({
+        HighArea.findOne({
             where: where,
             attributes: attributes
         }).then(result=>{

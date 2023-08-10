@@ -155,7 +155,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
 
         let where = {};
-        let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
+        let attributes = ['id', 'zone_id', 'land_direction', 'is_front', 'lat','long', 'building_area','total_area', 'progress', 'number_of_floor', 'number_of_wc', 'number_of_room', 'price', 'owner', 'buy_status', 'desc', 'started_day', 'created_by', 'updated_by', 'created_at', 'updated_at'];
 
         where = {id: id};
 

@@ -1,6 +1,7 @@
 const HighAreaManager = require('../manager/HighAreaManager');
 const Rest = require('../utils/Restware');
 const ProjectManager = require("../manager/ProjectManager");
+const FloorManager = require("../manager/FloorManager");
 
 module.exports = {
 
@@ -37,5 +38,27 @@ module.exports = {
                 return Rest.sendSuccessOne(res, results, httpCode);
             }
         });
+    },
+    getOne: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+
+        let id = req.params.id || '';
+
+        if(id === 'statistic'){
+            HighAreaManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }else{
+            HighAreaManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }
     },
 }
