@@ -31,6 +31,7 @@ module.exports = {
         });
     },
 
+
     // notifySync:function (req, res) {
     //     const accessUserId = req.body.accessUserId || '';
     //     const accessUserType = req.body.accessUserType || '';
@@ -114,25 +115,27 @@ module.exports = {
     //         });
     //     }
     // },
-    //
-    // getAll: function (req, res) {
-    //     let accessUserId = req.query.accessUserId || '';
-    //     let accessUserType = req.query.accessUserType || '';
-    //     let accessLoginName = req.query.accessLoginName || '';
-    //
-    //     let queryContent = req.query || '';
-    //
-    //     ProjectManager.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
-    //         if (errorCode) {
-    //             return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
-    //         } else {
-    //             return Rest.sendSuccessOne(res, results, httpCode);
-    //         }
-    //     });
-    // },
-    //
-    // //////// DELETE
-    //
+
+    getAll: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+        let accessLoginName = req.query.accessLoginName || '';
+
+        let queryContent = req.query || '';
+
+        ProjectManager.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
+            if (errorCode) {
+                return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+            } else {
+                return Rest.sendSuccessOne(res, results, httpCode);
+            }
+        });
+    },
+
+
+
+    //////// DELETE
+
     // delete: function (req, res) {
     //     let accessUserId = req.body.accessUserId || '';
     //     let accessUserType = req.body.accessUserType || '';

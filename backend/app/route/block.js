@@ -84,7 +84,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/block', BlockCtrl.getAll);
+    app.get('/v1/auth/block', BlockCtrl.getAll);
     /**
      * @api {GET} /v1/auth/block/:id Get One
      * @apiVersion 1.0.0
@@ -125,7 +125,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/users/:id', BlockCtrl.getOne);
+    app.get('/v1/auth/block/:id', BlockCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/block/:id Update One
      * @apiVersion 1.0.0

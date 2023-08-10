@@ -21,5 +21,42 @@ module.exports = {
                 return Rest.sendSuccessOne(res, resData, httpCode);
             }
         });
-    }
+    },
+    getAll: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+        let accessLoginName = req.query.accessLoginName || '';
+
+        let queryContent = req.query || '';
+
+        BlockManager.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
+            if (errorCode) {
+                return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+            } else {
+                return Rest.sendSuccessOne(res, results, httpCode);
+            }
+        });
+    },
+    getOne: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+
+        let id = req.params.id || '';
+
+        if(id === 'statistic'){
+            BlockManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }else{
+            BlockManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }
+    },
 }

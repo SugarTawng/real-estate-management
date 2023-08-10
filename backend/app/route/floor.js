@@ -83,7 +83,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/floor', FloorCtrl.getAll);
+    app.get('/v1/auth/floor', FloorCtrl.getAll);
     /**
      * @api {GET} /v1/auth/floor/:id Get One
      * @apiVersion 1.0.0

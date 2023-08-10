@@ -1,5 +1,6 @@
 const HighAreaManager = require('../manager/HighAreaManager');
 const Rest = require('../utils/Restware');
+const ProjectManager = require("../manager/ProjectManager");
 
 module.exports = {
 
@@ -21,5 +22,20 @@ module.exports = {
                 return Rest.sendSuccessOne(res, resData, httpCode);
             }
         });
-    }
+    },
+    getAll: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+        let accessLoginName = req.query.accessLoginName || '';
+
+        let queryContent = req.query || '';
+
+        HighAreaManager.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
+            if (errorCode) {
+                return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+            } else {
+                return Rest.sendSuccessOne(res, results, httpCode);
+            }
+        });
+    },
 }

@@ -11,6 +11,7 @@ const Project = require('../models/Project');
 const Pieces = require('../utils/Pieces');
 const Config = require('../config/Global');
 const User = require('../models/User.js');
+const Block = require("../models/Block");
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
@@ -37,8 +38,6 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(1, 'invalid_user_email', 400, 'email is incorrect format', null);
         }
         const project_progress = parseInt(data.project_progress);
-        // console.log('validator abc  ',!Validator.isLength(project_progress, {min: 0, max: 3}));
-        // console.log('hihihi', !Pieces.VariableBaseTypeChecking(project_progress, 'Number'));
 
         if ( !Pieces.VariableBaseTypeChecking(project_progress, 'number')
             || !(project_progress >=0 && project_progress <=100)) {
@@ -259,82 +258,161 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
 //     }
 // };
 //
-// exports.getAll = function (accessUserId, accessUserType, accessUserName, queryContent, callback) {
-//     try {
-//         let where = {};
-//         let page = 1;
-//         let perPage = Constant.DEFAULT_PAGING_SIZE;
-//         let sort = [];
-//         //let attributes = [];
-//
-//
-//         if(accessUserType <= Constant.USER_TYPE.END_USER){
-//             where.createdBy = accessUserId;
-//             where.deleted = { $ne: Constant.DELETED.YES };
-//         }
-//
-//         this.parseFilter(accessUserId, accessUserType, where, queryContent.filter);
-//         if( Pieces.VariableBaseTypeChecking(queryContent.q, 'string') ){
-//             where.name = {[Sequelize.Op.like]: queryContent.q};
-//         }
-//
-//         if( (Pieces.VariableBaseTypeChecking(queryContent['page'], 'string') && Validator.isInt(queryContent['page']))
-//             || (Pieces.VariableBaseTypeChecking(queryContent['page'], 'number')) ){
-//             page = parseInt(queryContent['page']);
-//             if(page === 0){
-//                 page = 1;
-//             }
-//         }
-//
-//         if( (Pieces.VariableBaseTypeChecking(queryContent['perPage'], 'string') && Validator.isInt(queryContent['perPage']))
-//             || (Pieces.VariableBaseTypeChecking(queryContent['perPage'], 'number')) ){
-//             perPage = parseInt(queryContent['perPage']);
-//             if(perPage <= 0){
-//                 perPage = Constant.DEFAULT_PAGING_SIZE;
-//             }
-//         }
-//
-//         Pieces.splitAndAssignValueForSort(sort, queryContent['sort']);
-//         if(sort.length <= 0){
-//             sort.push(['updatedAt', 'DESC']);
-//         }
-//
-//         let offset = perPage * (page - 1);
-//         Project.findAndCountAll({
-//             where: where,
-//             //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
-//             limit: perPage,
-//             offset: offset,
-//             order: sort
-//         }).then((data) => {
-//             let pages = Math.ceil(data.count / perPage);
-//             let Projects = data.rows;
-//             let output = {
-//                 data: Projects,
-//                 pages: {
-//                     current: page,
-//                     prev: page - 1,
-//                     hasPrev: false,
-//                     next: (page + 1) > pages ? 0 : (page + 1),
-//                     hasNext: false,
-//                     total: pages
-//                 },
-//                 items: {
-//                     begin: ((page * perPage) - perPage) + 1,
-//                     end: page * perPage,
-//                     total: data.count
-//                 }
-//             };
-//             output.pages.hasNext = (output.pages.next !== 0);
-//             output.pages.hasPrev = (output.pages.prev !== 0);
-//             return callback(null, null, 200, null, output);
-//         }).catch(function (error) {
-//             return callback(2, 'find_count_all_Project_fail', 400, error, null);
-//         });
-//     }catch(error){
-//         return callback(2, 'get_all_Project_fail', 400, error, null);
-//     }
-// };
+
+exports.getOne = function(accessUserId, accessUserType, id, callback) {
+    try {
+        // console.log('hi, tui da o day :=', id);
+        if ( !( Pieces.VariableBaseTypeChecking(id,'string') && Validator.isInt(id) )
+            && !Pieces.VariableBaseTypeChecking(id,'number') ){
+            return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
+        }
+
+        // if ( (accessUserId !== id) && (accessUserType < Constant.USER_TYPE.MODERATOR) ) {
+        //     return callback(1, 'invalid_user_type', 403, null, null);
+        // }
+
+
+        let where = {};
+        let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
+
+        where = {id: id};
+
+        // if(accessUserId !== parseInt(id)) {
+        //     where = {id: id, type: { $lt: accessUserType} };
+        // }else{
+        //     where = {id: id};
+        // }
+
+        console.log('where is this ', where);
+
+        Block.findOne({
+            where: where,
+            attributes: attributes
+        }).then(result=>{
+            "use strict";
+            if(result){
+                return callback(null, null, 200, null, result);
+            }else{
+                return callback(1, 'invalid_account', 403, null, null);
+            }
+        });
+    }catch(error){
+        return callback(1, 'get_one_account_fail', 400, error, null);
+    }
+}
+
+exports.getAll = function (accessUserId, accessUserType, accessUserName, queryContent, callback) {
+    try {
+        let where = {};
+        let page = 1;
+        let perPage = Constant.DEFAULT_PAGING_SIZE;
+        let sort = [];
+        //let attributes = [];
+
+
+        // if(accessUserType <= Constant.USER_TYPE.){
+        //     where.createdBy = accessUserId;
+        //     where.deleted = { $ne: Constant.DELETED.YES };
+        // }
+
+        this.parseFilter(accessUserId, accessUserType, where, queryContent.filter);
+        if( Pieces.VariableBaseTypeChecking(queryContent.q, 'string') ){
+            where.name = {[Sequelize.Op.like]: queryContent.q};
+        }
+
+        if( (Pieces.VariableBaseTypeChecking(queryContent['page'], 'string') && Validator.isInt(queryContent['page']))
+            || (Pieces.VariableBaseTypeChecking(queryContent['page'], 'number')) ){
+            page = parseInt(queryContent['page']);
+            if(page === 0){
+                page = 1;
+            }
+        }
+
+        if( (Pieces.VariableBaseTypeChecking(queryContent['perPage'], 'string') && Validator.isInt(queryContent['perPage']))
+            || (Pieces.VariableBaseTypeChecking(queryContent['perPage'], 'number')) ){
+            perPage = parseInt(queryContent['perPage']);
+            if(perPage <= 0){
+                perPage = Constant.DEFAULT_PAGING_SIZE;
+            }
+        }
+
+        Pieces.splitAndAssignValueForSort(sort, queryContent['sort']);
+        if(sort.length <= 0){
+            sort.push(['updated_at', 'DESC']);
+        }
+
+        let offset = perPage * (page - 1);
+        Project.findAndCountAll({
+            where: where,
+            //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
+            limit: perPage,
+            offset: offset,
+            order: sort
+        }).then((data) => {
+            let pages = Math.ceil(data.count / perPage);
+            let Projects = data.rows;
+            let output = {
+                data: Projects,
+                pages: {
+                    current: page,
+                    prev: page - 1,
+                    hasPrev: false,
+                    next: (page + 1) > pages ? 0 : (page + 1),
+                    hasNext: false,
+                    total: pages
+                },
+                items: {
+                    begin: ((page * perPage) - perPage) + 1,
+                    end: page * perPage,
+                    total: data.count
+                }
+            };
+            output.pages.hasNext = (output.pages.next !== 0);
+            output.pages.hasPrev = (output.pages.prev !== 0);
+            return callback(null, null, 200, null, output);
+        }).catch(function (error) {
+            return callback(2, 'find_count_all_Project_fail', 400, error, null);
+        });
+    }catch(error){
+        console.log('this is the error', error);
+        return callback(2, 'get_all_Project_fail', 400, error, null);
+    }
+    // try {
+    //     if ( (Constant.USER_TYPE.indexOf(accessUserType) <= 1) ) {
+    //         return callback(8, 'invalid_right', 400, null, null);
+    //     }
+    //
+    //     let condition = {};
+    //     let userRightIdx = Constant.USER_TYPE.indexOf(accessUserType);
+    //     let lowerUserRightList=[];
+    //     if(userRightIdx > 0){
+    //         lowerUserRightList = Constant.USER_TYPE.slice(0, userRightIdx);
+    //     }
+    //
+    //     // let statusWithoutDel = Constant.STATUS_ENUM.slice(0, Constant.STATUS_ENUM.length);
+    //     // statusWithoutDel.splice(2,1);
+    //
+    //     condition.userRight = {$in: lowerUserRightList };
+    //
+    //     this.parseFilter(accessUserId, accessUserType, condition, queryContent.filter);
+    //     if( Pieces.VariableBaseTypeChecking(queryContent.q, 'string') ){
+    //         condition['$text'] = {$search: queryContent.q};
+    //     }
+    //
+    //     let options = {};
+    //     options.criteria = condition;
+    //     options.keys = {'password': 0, 'resetPasswordToken': 0};
+    //
+    //     Project.pagedFind(options, queryContent, function (error, results) {
+    //         if (error) {
+    //             return callback(8, 'finds_fail', 420, error, null);
+    //         }
+    //         return callback(null, null, 200, null, results);
+    //     });
+    // }catch(error){
+    //     return callback(8, 'gets_fail', 400, error, null);
+    // }
+};
 
 /*
 
@@ -878,6 +956,8 @@ exports.deletes = function (accessUserId, accessUserRight, idList, callback) {
     }
 };
 
+ */
+
 
 // --------- others ----------
 exports.parseFilter = function (accessUserId, accessUserRight, condition, filters) {
@@ -959,7 +1039,7 @@ exports.parseFilter = function (accessUserId, accessUserRight, condition, filter
                     continue;
                 }
 
-                if ( aDataFilter[i].key === 'updatedAt'
+                if ( aDataFilter[i].key === 'updated_at'
                     && ( (aDataFilter[i].operator === '=') || (aDataFilter[i].operator === '!=')
                         || (aDataFilter[i].operator === '<') || (aDataFilter[i].operator === '>')
                         || (aDataFilter[i].operator === '<=') || (aDataFilter[i].operator === '>=')
@@ -1006,5 +1086,3 @@ exports.parseFilter = function (accessUserId, accessUserRight, condition, filter
         return false;
     }
 };
-*/
-

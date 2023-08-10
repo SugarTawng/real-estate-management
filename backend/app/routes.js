@@ -2,11 +2,9 @@
  * Created by s3lab. on 1/13/2017.
  */
 module.exports = function (app) {
-    // require('./route/User')(app);
-    // require('./route/Device')(app);
-    // require('./route/Service')(app);
-    // require('./route/project')(app);
     require('./route/account')(app);
+    require('./route/profile')(app);
+    require('./route/profileProject')(app);
     require('./route/project')(app);
     require('./route/zone')(app);
     require('./route/block')(app);

@@ -11,32 +11,38 @@ const Constant = require('../utils/Constant');
 const Pieces = require('../utils/Pieces');
 
 const Models = require('../models');
+const Block = require("../models/Block");
 const Account = Models.Account;
 
 module.exports = {
 
     getOne: function(accessUserId, accessUserType, id, callback) {
         try {
+            // console.log('hi, tui da o day :=', id);
             if ( !( Pieces.VariableBaseTypeChecking(id,'string') && Validator.isInt(id) )
                 && !Pieces.VariableBaseTypeChecking(id,'number') ){
                 return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
             }
 
-            if ( (accessUserId !== id) && (accessUserType < Constant.USER_TYPE.MODERATOR) ) {
-                return callback(1, 'invalid_user_type', 403, null, null);
-            }
+            // if ( (accessUserId !== id) && (accessUserType < Constant.USER_TYPE.MODERATOR) ) {
+            //     return callback(1, 'invalid_user_type', 403, null, null);
+            // }
 
 
             let where = {};
-            let attributes = ['id', 'loginName','email','type', 'displayName', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy'];
+            let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
 
-            if(accessUserId !== parseInt(id)) {
-                where = {id: id, type: { $lt: accessUserType} };
-            }else{
-                where = {id: id};
-            }
+            where = {id: id};
 
-            User.findOne({
+            // if(accessUserId !== parseInt(id)) {
+            //     where = {id: id, type: { $lt: accessUserType} };
+            // }else{
+            //     where = {id: id};
+            // }
+
+            console.log('where is this ', where);
+
+            Account.findOne({
                 where: where,
                 attributes: attributes
             }).then(result=>{
@@ -60,12 +66,12 @@ module.exports = {
                 return callback(null, null, 200, null, final);
             }
 
-            User.count({
+            Account.count({
                 where:{},
             }).then(function(total){
                 "use strict";
                 final.total = total;
-                User.count({
+                Account.count({
                     where:{activated: 1},
                 }).then(function(activated){
                     final.activated = activated;
@@ -82,89 +88,168 @@ module.exports = {
             return callback(1, 'statistic_user_fail', 400, error, null);
         }
     },
-
-
-    getAll: function(accessUserId, accessUserType, query, callback){
+    getAll: function (accessUserId, accessUserType, accessUserName, queryContent, callback) {
         try {
-            if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
-                return callback(1, 'invalid_user_type', 400, null, null);
-            }
-
-            let where;
-            let cond1 = {};
+            let where = {};
             let page = 1;
             let perPage = Constant.DEFAULT_PAGING_SIZE;
             let sort = [];
-            let attributes = [];
+            //let attributes = [];
 
 
-            cond1.type = {$lt: accessUserType};
+            // if(accessUserType <= Constant.USER_TYPE.){
+            //     where.createdBy = accessUserId;
+            //     where.deleted = { $ne: Constant.DELETED.YES };
+            // }
 
-            this.parseFilter(accessUserId, accessUserType, cond1, query.filter);
-            if( Pieces.VariableBaseTypeChecking(query.q, 'string') ){
-                cond1.displayName = {[Sequelize.Op.like]: query.q};
+            this.parseFilter(accessUserId, accessUserType, where, queryContent.filter);
+            if (Pieces.VariableBaseTypeChecking(queryContent.q, 'string')) {
+                where.name = {[Sequelize.Op.like]: queryContent.q};
             }
 
-            where = {$or:[{id: accessUserId} ,cond1] };
-
-            if( (Pieces.VariableBaseTypeChecking(query['page'], 'string') && Validator.isInt(query['page']))
-                || (Pieces.VariableBaseTypeChecking(query['page'], 'number')) ){
-                page = parseInt(query['page']);
-                if(page === 0){
+            if ((Pieces.VariableBaseTypeChecking(queryContent['page'], 'string') && Validator.isInt(queryContent['page']))
+                || (Pieces.VariableBaseTypeChecking(queryContent['page'], 'number'))) {
+                page = parseInt(queryContent['page']);
+                if (page === 0) {
                     page = 1;
                 }
             }
 
-            if( (Pieces.VariableBaseTypeChecking(query['perPage'], 'string') && Validator.isInt(query['perPage']))
-                || (Pieces.VariableBaseTypeChecking(query['perPage'], 'number')) ){
-                perPage = parseInt(query['perPage']);
-                if(perPage <= 0){
+            if ((Pieces.VariableBaseTypeChecking(queryContent['perPage'], 'string') && Validator.isInt(queryContent['perPage']))
+                || (Pieces.VariableBaseTypeChecking(queryContent['perPage'], 'number'))) {
+                perPage = parseInt(queryContent['perPage']);
+                if (perPage <= 0) {
                     perPage = Constant.DEFAULT_PAGING_SIZE;
                 }
             }
 
-            Pieces.splitAndAssignValueForSort(sort, query['sort']);
-            if(sort.length <= 0){
-                sort.push(['updatedAt', 'DESC']);
+            Pieces.splitAndAssignValueForSort(sort, queryContent['sort']);
+            if (sort.length <= 0) {
+                sort.push(['updated_at', 'DESC']);
             }
 
             let offset = perPage * (page - 1);
-            User.findAndCountAll({
+            Account.findAndCountAll({
                 where: where,
+                //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
                 limit: perPage,
                 offset: offset,
                 order: sort
-            })
-                .then((data) => {
-                    let pages = Math.ceil(data.count / perPage);
-                    let accounts = data.rows;
-                    let output = {
-                        data: accounts,
-                        pages: {
-                            current: page,
-                            prev: page - 1,
-                            hasPrev: false,
-                            next: (page + 1) > pages ? 0 : (page + 1),
-                            hasNext: false,
-                            total: pages
-                        },
-                        items: {
-                            begin: ((page * perPage) - perPage) + 1,
-                            end: page * perPage,
-                            total: data.count
-                        }
-                    };
-                    output.pages.hasNext = (output.pages.next !== 0);
-                    output.pages.hasPrev = (output.pages.prev !== 0);
-                    return callback(null, null, 200, null, output);
-                }).catch(function (error) {
-                return callback(1, 'find_and_count_all_user_fail', 420, error, null);
+            }).then((data) => {
+                let pages = Math.ceil(data.count / perPage);
+                let Projects = data.rows;
+                let output = {
+                    data: Projects,
+                    pages: {
+                        current: page,
+                        prev: page - 1,
+                        hasPrev: false,
+                        next: (page + 1) > pages ? 0 : (page + 1),
+                        hasNext: false,
+                        total: pages
+                    },
+                    items: {
+                        begin: ((page * perPage) - perPage) + 1,
+                        end: page * perPage,
+                        total: data.count
+                    }
+                };
+                output.pages.hasNext = (output.pages.next !== 0);
+                output.pages.hasPrev = (output.pages.prev !== 0);
+                return callback(null, null, 200, null, output);
+            }).catch(function (error) {
+                console.log('this is the error', error);
+                return callback(2, 'find_count_all_Project_fail', 400, error, null);
             });
-        }catch(error){
-            return callback(1, 'get_all_user_fail', 400, error, null);
+        } catch (error) {
+            console.log('this is the error', error);
+            return callback(2, 'get_all_Project_fail', 400, error, null);
         }
     },
 
+
+    // getAll: function(accessUserId, accessUserType, query, callback){
+    //     try {
+    //         // if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
+    //         //     return callback(1, 'invalid_user_type', 400, null, null);
+    //         // }
+    //
+    //         let where;
+    //         let cond1 = {};
+    //         let page = 1;
+    //         let perPage = Constant.DEFAULT_PAGING_SIZE;
+    //         let sort = [];
+    //         let attributes = [];
+    //
+    //
+    //         cond1.type = {$lt: accessUserType};
+    //
+    //         this.parseFilter(accessUserId, accessUserType, cond1, query.filter);
+    //         if( Pieces.VariableBaseTypeChecking(query.q, 'string') ){
+    //             cond1.displayName = {[Sequelize.Op.like]: query.q};
+    //         }
+    //
+    //         where = {$or:[{id: accessUserId} ,cond1] };
+    //
+    //         if( (Pieces.VariableBaseTypeChecking(query['page'], 'string') && Validator.isInt(query['page']))
+    //             || (Pieces.VariableBaseTypeChecking(query['page'], 'number')) ){
+    //             page = parseInt(query['page']);
+    //             if(page === 0){
+    //                 page = 1;
+    //             }
+    //         }
+    //
+    //         if( (Pieces.VariableBaseTypeChecking(query['perPage'], 'string') && Validator.isInt(query['perPage']))
+    //             || (Pieces.VariableBaseTypeChecking(query['perPage'], 'number')) ){
+    //             perPage = parseInt(query['perPage']);
+    //             if(perPage <= 0){
+    //                 perPage = Constant.DEFAULT_PAGING_SIZE;
+    //             }
+    //         }
+    //
+    //         Pieces.splitAndAssignValueForSort(sort, query['sort']);
+    //         if(sort.length <= 0){
+    //             sort.push(['updatedAt', 'DESC']);
+    //         }
+    //
+    //         let offset = perPage * (page - 1);
+    //         Account.findAndCountAll({
+    //             where: where,
+    //             limit: perPage,
+    //             offset: offset,
+    //             order: sort
+    //         })
+    //             .then((data) => {
+    //                 let pages = Math.ceil(data.count / perPage);
+    //                 let accounts = data.rows;
+    //                 let output = {
+    //                     data: accounts,
+    //                     pages: {
+    //                         current: page,
+    //                         prev: page - 1,
+    //                         hasPrev: false,
+    //                         next: (page + 1) > pages ? 0 : (page + 1),
+    //                         hasNext: false,
+    //                         total: pages
+    //                     },
+    //                     items: {
+    //                         begin: ((page * perPage) - perPage) + 1,
+    //                         end: page * perPage,
+    //                         total: data.count
+    //                     }
+    //                 };
+    //                 output.pages.hasNext = (output.pages.next !== 0);
+    //                 output.pages.hasPrev = (output.pages.prev !== 0);
+    //                 return callback(null, null, 200, null, output);
+    //             }).catch(function (error) {
+    //                 console.log('this is the error  ',error)
+    //             return callback(1, 'find_and_count_all_user_fail', 420, error, null);
+    //         });
+    //     }catch(error){
+    //         return callback(1, 'get_all_user_fail', 400, error, null);
+    //     }
+    // },
+    //
 
     update: function (accessUserId, accessUserType, accessLoginName, userId, updateData, callback) {
         try {
@@ -616,4 +701,6 @@ module.exports = {
             return false;
         }
     }
+
 };
+

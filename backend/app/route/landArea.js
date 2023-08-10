@@ -91,7 +91,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/landArea', LandArea.getAll);
+    app.get('/v1/auth/landArea', LandArea.getAll);
     /**
      * @api {GET} /v1/auth/landArea/:id Get One
      * @apiVersion 1.0.0

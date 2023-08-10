@@ -84,7 +84,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/whiteBoard', oUserCtrl.getAll);
+    app.get('/v1/auth/whiteBoard', WhiteBoard.getAll);
     /**
      * @api {GET} /v1/auth/whiteBoard/:id Get One
      * @apiVersion 1.0.0

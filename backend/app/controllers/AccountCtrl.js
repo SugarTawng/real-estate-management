@@ -35,14 +35,14 @@ module.exports = {
         let id = req.params.id || '';
 
         if(id === 'statistic'){
-            UserManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+            AccountManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }
                 return Rest.sendSuccessOne(res, result, httpCode);
             })
         }else{
-            UserManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+            AccountManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }
@@ -54,9 +54,10 @@ module.exports = {
     getAll: function (req, res) {
         let accessUserId = req.query.accessUserId || '';
         let accessUserType = req.query.accessUserType || '';
+        let accessLoginName = req.query.accessLoginName || '';
         let query = req.query || '';
 
-        UserManager.getAll(accessUserId, accessUserType, query, function (errorCode, errorMessage, httpCode, errorDescription, results) {
+        AccountManager.getAll(accessUserId, accessUserType, accessLoginName, query, function (errorCode, errorMessage, httpCode, errorDescription, results) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             }

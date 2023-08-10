@@ -5,19 +5,14 @@ const Project = require('./Project');
 const Profile = require('./Profile');
 
 let ProfileProject = MySequelize.define('profileProject', {
-    id: {
-        type: Sequelize.BIGINT(20),
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
     project_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
             model: Project,
             key: 'id'
-        }
+        },
+        primaryKey: true
     },
     profile_id: {
         type: Sequelize.BIGINT(20),
@@ -25,7 +20,8 @@ let ProfileProject = MySequelize.define('profileProject', {
         references: {
             model: Profile,
             key: 'id'
-        }
+        },
+        primaryKey: true
     },
     created_by: {
         type: Sequelize.BIGINT(20),

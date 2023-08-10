@@ -11,6 +11,8 @@ const Pieces = require('../utils/Pieces');
 const Config = require('../config/Global');
 const Floor = require('../models/Floor');
 const {NULL} = require("mysql/lib/protocol/constants/types");
+const Project = require("../models/Project");
+const Block = require("../models/Block");
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
@@ -73,5 +75,287 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         console.log('HIHIHI TUI DA O DAY', error)
         return callback(1, 'create_Project_fail', 400, error, null);
 
+    }
+};
+
+exports.getOne = function(accessUserId, accessUserType, id, callback) {
+    try {
+        // console.log('hi, tui da o day :=', id);
+        if ( !( Pieces.VariableBaseTypeChecking(id,'string') && Validator.isInt(id) )
+            && !Pieces.VariableBaseTypeChecking(id,'number') ){
+            return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
+        }
+
+        // if ( (accessUserId !== id) && (accessUserType < Constant.USER_TYPE.MODERATOR) ) {
+        //     return callback(1, 'invalid_user_type', 403, null, null);
+        // }
+
+
+        let where = {};
+        let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
+
+        where = {id: id};
+
+        // if(accessUserId !== parseInt(id)) {
+        //     where = {id: id, type: { $lt: accessUserType} };
+        // }else{
+        //     where = {id: id};
+        // }
+
+        console.log('where is this ', where);
+
+        Block.findOne({
+            where: where,
+            attributes: attributes
+        }).then(result=>{
+            "use strict";
+            if(result){
+                return callback(null, null, 200, null, result);
+            }else{
+                return callback(1, 'invalid_account', 403, null, null);
+            }
+        });
+    }catch(error){
+        return callback(1, 'get_one_account_fail', 400, error, null);
+    }
+}
+
+exports.getStatistic = function(accessUserId, accessUserType, callback) {
+    try {
+        let final = {};
+        final = {activated: 0, total: 0};
+        if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
+            return callback(null, null, 200, null, final);
+        }
+
+        Block.count({
+            where:{},
+        }).then(function(total){
+            "use strict";
+            final.total = total;
+            Account.count({
+                where:{activated: 1},
+            }).then(function(activated){
+                final.activated = activated;
+                return callback(null, null, 200, null, final);
+            }).catch(function(error){
+                "use strict";
+                return callback(1, 'count_user_fail', 400, error, null);
+            });
+        }).catch(function(error){
+            "use strict";
+            return callback(1, 'count_user_fail', 400, error, null);
+        });
+    }catch(error){
+        return callback(1, 'statistic_user_fail', 400, error, null);
+    }
+}
+
+
+
+exports.getAll = function (accessUserId, accessUserType, accessUserName, queryContent, callback) {
+    try {
+        let where = {};
+        let page = 1;
+        let perPage = Constant.DEFAULT_PAGING_SIZE;
+        let sort = [];
+        //let attributes = [];
+
+
+        // if(accessUserType <= Constant.USER_TYPE.){
+        //     where.createdBy = accessUserId;
+        //     where.deleted = { $ne: Constant.DELETED.YES };
+        // }
+
+        this.parseFilter(accessUserId, accessUserType, where, queryContent.filter);
+        if (Pieces.VariableBaseTypeChecking(queryContent.q, 'string')) {
+            where.name = {[Sequelize.Op.like]: queryContent.q};
+        }
+
+        if ((Pieces.VariableBaseTypeChecking(queryContent['page'], 'string') && Validator.isInt(queryContent['page']))
+            || (Pieces.VariableBaseTypeChecking(queryContent['page'], 'number'))) {
+            page = parseInt(queryContent['page']);
+            if (page === 0) {
+                page = 1;
+            }
+        }
+
+        if ((Pieces.VariableBaseTypeChecking(queryContent['perPage'], 'string') && Validator.isInt(queryContent['perPage']))
+            || (Pieces.VariableBaseTypeChecking(queryContent['perPage'], 'number'))) {
+            perPage = parseInt(queryContent['perPage']);
+            if (perPage <= 0) {
+                perPage = Constant.DEFAULT_PAGING_SIZE;
+            }
+        }
+
+        Pieces.splitAndAssignValueForSort(sort, queryContent['sort']);
+        if (sort.length <= 0) {
+            sort.push(['updated_at', 'DESC']);
+        }
+
+        let offset = perPage * (page - 1);
+        Floor.findAndCountAll({
+            where: where,
+            //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
+            limit: perPage,
+            offset: offset,
+            order: sort
+        }).then((data) => {
+            let pages = Math.ceil(data.count / perPage);
+            let Projects = data.rows;
+            let output = {
+                data: Projects,
+                pages: {
+                    current: page,
+                    prev: page - 1,
+                    hasPrev: false,
+                    next: (page + 1) > pages ? 0 : (page + 1),
+                    hasNext: false,
+                    total: pages
+                },
+                items: {
+                    begin: ((page * perPage) - perPage) + 1,
+                    end: page * perPage,
+                    total: data.count
+                }
+            };
+            output.pages.hasNext = (output.pages.next !== 0);
+            output.pages.hasPrev = (output.pages.prev !== 0);
+            return callback(null, null, 200, null, output);
+        }).catch(function (error) {
+            return callback(2, 'find_count_all_Project_fail', 400, error, null);
+        });
+    } catch (error) {
+        console.log('this is the error', error);
+        return callback(2, 'get_all_Project_fail', 400, error, null);
+    }
+};
+
+
+// --------- others ----------
+exports.parseFilter = function (accessUserId, accessUserRight, condition, filters) {
+    try {
+        if ( !Pieces.VariableBaseTypeChecking(filters,'string')
+            || !Validator.isJSON(filters) ) {
+            return false;
+        }
+
+        let aDataFilter = Pieces.safelyParseJSON1(filters);
+        if( aDataFilter && (aDataFilter.length > 0) ){
+            for(let i = 0; i < aDataFilter.length; i++ ){
+                if ( !Pieces.VariableBaseTypeChecking(aDataFilter[i].key, 'string')
+                    || !Pieces.VariableBaseTypeChecking(aDataFilter[i].operator, 'string')
+                    || aDataFilter[i].value === null
+                    || aDataFilter[i].value === undefined ){
+                    continue;
+                }
+
+                if ( aDataFilter[i].key === 'deleted'
+                    && ( (aDataFilter[i].operator === '=') || (aDataFilter[i].operator === '!=') )
+                    && (aDataFilter[i].value === Constant.DELETED.YES || aDataFilter[i].value === Constant.DELETED.NO) ) {
+                    switch(aDataFilter[i].operator){
+                        case '=':
+                            condition[aDataFilter[i].key] = aDataFilter[i].value;
+                            break;
+                        case '!=':
+                            condition[aDataFilter[i].key] = {$ne: aDataFilter[i].value};
+                            break;
+                    }
+                    continue;
+                }
+
+                if ( aDataFilter[i].key === 'owner'
+                    && aDataFilter[i].operator === '='
+                    && aDataFilter[i].value === 'mine' ){
+                    condition['createdBy'] = accessUserId;
+                    continue;
+                }
+
+                if ( aDataFilter[i].key === 'createdAt'
+                    && ( (aDataFilter[i].operator === '=') || (aDataFilter[i].operator === '!=')
+                        || (aDataFilter[i].operator === '<') || (aDataFilter[i].operator === '>')
+                        || (aDataFilter[i].operator === '<=') || (aDataFilter[i].operator === '>=')
+                        || (aDataFilter[i].operator === 'in'))
+                ) {
+                    if( aDataFilter[i].operator !== 'in'
+                        && Pieces.VariableBaseTypeChecking(aDataFilter[i].value, 'string')
+                        && Validator.isISO8601(aDataFilter[i].value) ){
+                        switch(aDataFilter[i].operator){
+                            case '=':
+                                condition[aDataFilter[i].key] = {$eq: aDataFilter[i].value};
+                                break;
+                            case '!=':
+                                condition[aDataFilter[i].key] = {$ne: aDataFilter[i].value};
+                                break;
+                            case '>':
+                                condition[aDataFilter[i].key] = {$gt: aDataFilter[i].value};
+                                break;
+                            case '>=':
+                                condition[aDataFilter[i].key] = {$gte: aDataFilter[i].value};
+                                break;
+                            case '<':
+                                condition[aDataFilter[i].key] = {$lt: aDataFilter[i].value};
+                                break;
+                            case '<=':
+                                condition[aDataFilter[i].key] = {$lte: aDataFilter[i].value};
+                                break;
+                        }
+                    }else if(aDataFilter[i].operator === 'in'){
+                        if(aDataFilter[i].value.length === 2
+                            && Pieces.VariableBaseTypeChecking(aDataFilter[i].value[0], 'string')
+                            && Pieces.VariableBaseTypeChecking(aDataFilter[i].value[1], 'string')
+                            && Validator.isISO8601(aDataFilter[i].value[0])
+                            && Validator.isISO8601(aDataFilter[i].value[1]) ){
+                            condition[aDataFilter[i].key] = { $gte: aDataFilter[i].value[0], $lte: aDataFilter[i].value[1] };
+                        }
+                    }
+                    continue;
+                }
+
+                if ( aDataFilter[i].key === 'updated_at'
+                    && ( (aDataFilter[i].operator === '=') || (aDataFilter[i].operator === '!=')
+                        || (aDataFilter[i].operator === '<') || (aDataFilter[i].operator === '>')
+                        || (aDataFilter[i].operator === '<=') || (aDataFilter[i].operator === '>=')
+                        || (aDataFilter[i].operator === 'in') )
+                ) {
+                    if( aDataFilter[i].operator !== 'in'
+                        && Pieces.VariableBaseTypeChecking(aDataFilter[i].value, 'string')
+                        && Validator.isISO8601(aDataFilter[i].value) ){
+                        switch(aDataFilter[i].operator){
+                            case '=':
+                                condition[aDataFilter[i].key] = {$eq: aDataFilter[i].value};
+                                break;
+                            case '!=':
+                                condition[aDataFilter[i].key] = {$ne: aDataFilter[i].value};
+                                break;
+                            case '>':
+                                condition[aDataFilter[i].key] = {$gt: aDataFilter[i].value};
+                                break;
+                            case '>=':
+                                condition[aDataFilter[i].key] = {$gte: aDataFilter[i].value};
+                                break;
+                            case '<':
+                                condition[aDataFilter[i].key] = {$lt: aDataFilter[i].value};
+                                break;
+                            case '<=':
+                                condition[aDataFilter[i].key] = {$lte: aDataFilter[i].value};
+                                break;
+                        }
+                    }else if(aDataFilter[i].operator === 'in'){
+                        if(aDataFilter[i].value.length === 2
+                            && Pieces.VariableBaseTypeChecking(aDataFilter[i].value[0], 'string')
+                            && Pieces.VariableBaseTypeChecking(aDataFilter[i].value[1], 'string')
+                            && Validator.isISO8601(aDataFilter[i].value[0])
+                            && Validator.isISO8601(aDataFilter[i].value[1]) ){
+                            condition[aDataFilter[i].key] = { $gte: aDataFilter[i].value[0], $lte: aDataFilter[i].value[1] };
+                        }
+                    }
+                }
+            }
+        }else{
+            return false;
+        }
+    }catch (error){
+        return false;
     }
 };

@@ -85,7 +85,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/users', ZoneCtrl.getAll);
+    app.get('/v1/auth/zone', ZoneCtrl.getAll);
     /**
      * @api {GET} /v1/auth/project/:id Get One
      * @apiVersion 1.0.0

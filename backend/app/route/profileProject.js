@@ -1,24 +1,24 @@
-const Message = require('../controllers/MessageCtrl');
+const ProfileProjectCtrl = require('../controllers/ProfileProjectCtrl');
 module.exports = function (app) {
     /**
-     * @api {POST} /v1/auth/message Create One
+     * @api {POST} /v1/auth/project Create One
      * @apiVersion 1.0.0
-     * @apiName Create Message By Admin
-     * @apiGroup Message
-     * @apiPermission Administrator
+     * @apiName Create Project By Admin
+     * @apiGroup Project
+     * @apiPermission  Administrator
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Create a message by Admin. Contains public notice information
+     * @apiDescription Create a project by Admin
      *
-     * @apiParam {string} Title the name of message (with 6 <= length <= 256)
-     * @apiParam {string} Content the content of message (with 6 <= length <= 4068)
-     * @apiParam {string} Keyword the keyword of the message (with 6 <= length <= 256)
-     *
+     * @apiParam {string} name name of project (with 6 <= length <= 128)
+     * @apiParam {string} address address of project (with 6 <= length <= 256)
+     * @apiParam {string} phone phone of project  (with 11 <= length <= 12)
+     * @apiParam {string} email email is provided for one project (unique string with format email)
      *
      * @apiExample Example usage:
-     * curl -i https://localhost:3001/v1/auth/message
+     * curl -i https://localhost:3001/v1/auth/project
      *
-     * @apiSuccess {String} id the ID of created message
+     * @apiSuccess {String} id the ID of created project
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -38,16 +38,16 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/message', Message.create);
+    app.post('/v1/auth/profileProject', ProfileProjectCtrl.create);
     /**
-     * @api {GET} /v1/auth/message Get List
+     * @api {GET} /v1/auth/project Get List
      * @apiVersion 1.0.0
-     * @apiName Get All Message
-     * @apiGroup Message
+     * @apiName Get All Project
+     * @apiGroup Project
      * @apiPermission Super Admin, Admin, Normal User
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Get all message by Super Admin, Admin and Normal User
+     * @apiDescription Get all project by Super Admin, Admin and Normal User
      *
      * @apiParam {Number} page page which we want to get (N/A)
      * @apiParam {Number} items item per page (N/A)
@@ -56,7 +56,7 @@ module.exports = function (app) {
      * @apiParam {String} q text filter for data (N/A)
      *
      * @apiExample Example usage:
-     * curl -i https://localhost:3001/v1/auth/message
+     * curl -i https://localhost:3001/v1/auth/project
      *
      * @apiSuccess {Object[]} data the list of data
      * @apiSuccess {Object} items {begin, end, total}
@@ -82,23 +82,23 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/message', Message.getAll);
+    app.get('/v1/auth/profileProject', ProfileProjectCtrl.getAll);
     /**
-     * @api {GET} /v1/auth/message/:id Get One
+     * @api {GET} /v1/auth/project/:id Get One
      * @apiVersion 1.0.0
-     * @apiName Get One Message
-     * @apiGroup Message
+     * @apiName Get One Project
+     * @apiGroup Project
      * @apiPermission Every type of user role, guest.
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Get one message
+     * @apiDescription Get one project
      *
-     * @apiParam {string} id ID of message, on params
+     * @apiParam {string} id ID of project, on params
      *
      * @apiExample Example usage:
-     * curl -i https://localhost:3001/v1/auth/message/2
+     * curl -i https://localhost:3001/v1/auth/project/2
      *
-     * @apiSuccess {String} id the ID of message
+     * @apiSuccess {String} id the ID of project
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -123,25 +123,26 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/zone/:id', Message.getOne);
+    // app.get('/v1/auth/users/:id', ProfileProjectCtrl.getOne);
     /**
-     * @api {PUT} /v1/auth/message/:id Update One
+     * @api {PUT} /v1/auth/project/:id Update One
      * @apiVersion 1.0.0
-     * @apiName Update Message
-     * @apiGroup Message
+     * @apiName Update Project
+     * @apiGroup Project
      * @apiPermission Admin, Normal User
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Update message information by normal user (staff) and admin (manager). . Contains public notice information
+     * @apiDescription Update project information by normal user (staff) and admin (manager)
      *
-     * @apiParam {string} Title the name of message (with 6 <= length <= 256)
-     * @apiParam {string} Content the content of message (with 6 <= length <= 4068)
-     * @apiParam {string} Keyword the keyword of the message (with 6 <= length <= 256)
+     * @apiParam {string} name name of project (with 6 <= length <= 128)
+     * @apiParam {string} address address of project (with 6 <= length <= 256)
+     * @apiParam {string} phone phone of project  (with 11 <= length <= 12)
+     * @apiParam {string} email email is provided for one project (unique string with format email)
      *
      * @apiExample Example usage:
-     * curl -i https://localhost:3001/v1/auth/message/2
+     * curl -i https://localhost:3001/v1/auth/project/2
      *
-     * @apiSuccess {String} id the ID of updated message
+     * @apiSuccess {String} id the ID of updated project
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -161,23 +162,23 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.put('/v1/auth/message/:id', Message.update);
+    // app.put('/v1/auth/project/:id', ProfileProjectCtrl.update);
     /**
-     * @api {DELETE} /v1/auth/message/:id Delete One
+     * @api {DELETE} /v1/auth/project/:id Delete One
      * @apiVersion 1.0.0
-     * @apiName Delete A Message
-     * @apiGroup Message
+     * @apiName Delete An Project
+     * @apiGroup Project
      * @apiPermission Admin
      * @apiHeader {String} access_token json web token to access to data
      *
-     * @apiDescription Delete message information by admin (manager). Contains public notice information
+     * @apiDescription Delete a project information by admin (manager)
      *
-     * @apiParam {String} id ID of an message
+     * @apiParam {String} id ID of an Project
      *
      * @apiExample Example usage:
-     * curl -i  https://localhost:3001/v1/auth/message/2
+     * curl -i  https://localhost:3001/v1/auth/project/2
      *
-     * @apiSuccess {String} id ID of a deleted message
+     * @apiSuccess {String} id ID of a deleted project
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -197,5 +198,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.delete('/v1/auth/message/:id', Message.delete);
+    // app.delete('/v1/auth/project/:id', ProfileProjectCtrl.delete);
 }

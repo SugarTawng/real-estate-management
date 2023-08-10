@@ -90,7 +90,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/users', AccountCtrl.getAll);
+    app.get('/v1/auth/account', AccountCtrl.getAll);
     /**
      * @api {GET} /v1/auth/users/:id Get One
      * @apiVersion 1.0.0
@@ -136,7 +136,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/users/:id', AccountCtrl.getOne);
+    app.get('/v1/auth/account/:id', AccountCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/account/:id Update One
      * @apiVersion 1.0.0
