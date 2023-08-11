@@ -1,7 +1,5 @@
 const FloorManager = require('../manager/FloorManager');
 const Rest = require('../utils/Restware');
-const ProjectManager = require("../manager/ProjectManager");
-const BlockManager = require("../manager/BlockManager");
 
 module.exports = {
 
@@ -60,5 +58,19 @@ module.exports = {
                 return Rest.sendSuccessOne(res, result, httpCode);
             })
         }
+    },
+        delete: function (req, res) {
+        let accessUserId = req.body.accessUserId || '';
+        let accessUserType = req.body.accessUserType || '';
+        let id = req.params.id || '';
+
+            FloorManager.delete( accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription) {
+            if (errorCode) {
+                return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+            }
+            let resData = {};
+            resData.id = id;
+            return Rest.sendSuccessOne(res, resData, httpCode);
+        });
     },
 }

@@ -47,6 +47,11 @@ let Profile = MySequelize.define('profile', {
         allowNull: false,
         defaultValue: 0
     },
+    deleted:{
+        type: Sequelize.STRING(5),
+        allowNull: false,
+        defaultValue: 'false'
+    },
     created_by: {
         type: Sequelize.BIGINT(20),
         allowNull: false,

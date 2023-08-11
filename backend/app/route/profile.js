@@ -198,5 +198,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.delete('/v1/auth/project/:id', ProfileCtrl.delete);
+    app.delete('/v1/auth/profile/:id', ProfileCtrl.delete);
 }

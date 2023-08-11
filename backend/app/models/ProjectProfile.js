@@ -23,6 +23,11 @@ let ProfileProject = MySequelize.define('profileProject', {
         },
         primaryKey: true
     },
+    deleted:{
+        type: Sequelize.STRING(5),
+        allowNull: false,
+        defaultValue: 'false'
+    },
     created_by: {
         type: Sequelize.BIGINT(20),
         allowNull: false,

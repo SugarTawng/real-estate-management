@@ -337,23 +337,23 @@ module.exports = {
                 return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
             }
 
-            if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
-                return callback(1, 'invalid_user_right', 403, null);
-            }
+            // if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
+            //     return callback(1, 'invalid_user_right', 403, null);
+            // }
 
-            where = { id: id, type:{$lt: accessUserType}, system: Constant.SYSTEM.NO };
+            where = { id: id}; // , type:{$lt: accessUserType}, system: Constant.SYSTEM.NO
             queryObj = { deleted: Constant.DELETED.YES };
 
-            User.findOne({where:where}).then(account=>{
+            Account.findOne({where:where}).then(account=>{
                 "use strict";
                 if ( account && account.deleted === Constant.DELETED.YES ){
-                    User.destroy({where: where}).then(result => {
+                    Account.destroy({where: where}).then(result => {
                         return callback(null, null, 200, null);
                     }).catch(function(error){
                         return callback(1, 'remove_account_fail', 420, error);
                     });
                 }else {
-                    User.update(queryObj, {where: where}).then(result=>{
+                    Account.update(queryObj, {where: where}).then(result=>{
                         "use strict";
                         return callback(null, null, 200, null);
                     }).catch(function(error){

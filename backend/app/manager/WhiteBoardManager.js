@@ -11,6 +11,7 @@ const Pieces = require('../utils/Pieces');
 const Config = require('../config/Global');
 const WhiteBoard = require('../models/WhiteBoard');
 const {NULL} = require("mysql/lib/protocol/constants/types");
+const Block = require("../models/Block");
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
@@ -188,6 +189,47 @@ exports.getAll = function (accessUserId, accessUserType, accessUserName, queryCo
     }
 };
 
+exports.delete = function(accessUserId, accessUserType, id, callback) {
+    try {
+        let queryObj = {};
+        let where = {};
+
+        if ( !( Pieces.VariableBaseTypeChecking(id,'string') && Validator.isInt(id) )
+            && !Pieces.VariableBaseTypeChecking(id,'number') ){
+            return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
+        }
+
+        // if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
+        //     return callback(1, 'invalid_user_right', 403, null);
+        // }
+
+        where = { id: id}; // , type:{$lt: accessUserType}, system: Constant.SYSTEM.NO
+        queryObj = { deleted: Constant.DELETED.YES };
+
+        WhiteBoard.findOne({where:where}).then(account=>{
+            "use strict";
+            if ( account && account.deleted === Constant.DELETED.YES ){
+                WhiteBoard.destroy({where: where}).then(result => {
+                    return callback(null, null, 200, null);
+                }).catch(function(error){
+                    return callback(1, 'remove_account_fail', 420, error);
+                });
+            }else {
+                WhiteBoard.update(queryObj, {where: where}).then(result=>{
+                    "use strict";
+                    return callback(null, null, 200, null);
+                }).catch(function(error){
+                    return callback(1, 'update_account_fail', 420, error);
+                })
+            }
+        }).catch(function(error){
+            "use strict";
+            return callback(1, 'find_one_account_fail', 400, error, null);
+        });
+    }catch(error){
+        return callback(1, 'delete_account_fail', 400, error);
+    }
+}
 
 // --------- others ----------
 exports.parseFilter = function (accessUserId, accessUserRight, condition, filters) {

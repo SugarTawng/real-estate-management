@@ -201,5 +201,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.delete('/v1/auth/message/:id', oUserCtrl.delete);
+    app.delete('/v1/auth/whiteBoard/:id', WhiteBoard.delete);
 }

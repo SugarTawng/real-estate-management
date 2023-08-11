@@ -46,6 +46,11 @@ let Project = MySequelize.define('project', {
         allowNull: true,
         default: NULL
     },
+    deleted:{
+        type: Sequelize.STRING(5),
+        allowNull: false,
+        defaultValue: 'false'
+    },
     started_day: {
         type: Sequelize.DATE,
         allowNull: false,

@@ -203,5 +203,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.delete('/v1/auth/zone/:id', ZoneCtrl.delete);
+    app.delete('/v1/auth/zone/:id', ZoneCtrl.delete);
 }

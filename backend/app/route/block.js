@@ -201,5 +201,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.delete('/v1/auth/block/:id', BlockCtrl.delete);
+    app.delete('/v1/auth/block/:id', BlockCtrl.delete);
 }

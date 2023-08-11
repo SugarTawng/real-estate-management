@@ -79,6 +79,11 @@ let LandArea = MySequelize.define('landArea', {
         type: Sequelize.STRING(256),
         allowNull: true
     },
+    deleted:{
+        type: Sequelize.STRING(5),
+        allowNull: false,
+        defaultValue: 'false'
+    },
     created_by: {
         type: Sequelize.BIGINT(20),
         allowNull: false,

@@ -98,7 +98,7 @@ module.exports = {
         let accessUserType = req.body.accessUserType || '';
         let id = req.params.id || '';
 
-        UserManager.delete( accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription) {
+        AccountManager.delete( accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             }

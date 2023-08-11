@@ -132,7 +132,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/zone/:id', LandArea.getOne);
+    app.get('/v1/auth/landArea/:id', LandArea.getOne);
     /**
      * @api {PUT} /v1/auth/landArea/:id Update One
      * @apiVersion 1.0.0
@@ -216,5 +216,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.delete('/v1/auth/landArea/:id', LandArea.delete);
+    app.delete('/v1/auth/landArea/:id', LandArea.delete);
 }

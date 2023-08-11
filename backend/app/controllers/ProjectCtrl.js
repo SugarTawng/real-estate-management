@@ -131,6 +131,20 @@ module.exports = {
             })
         }
     },
+    delete: function (req, res) {
+        let accessUserId = req.body.accessUserId || '';
+        let accessUserType = req.body.accessUserType || '';
+        let id = req.params.id || '';
+
+        ProjectManager.delete( accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription) {
+            if (errorCode) {
+                return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+            }
+            let resData = {};
+            resData.id = id;
+            return Rest.sendSuccessOne(res, resData, httpCode);
+        });
+    },
 
     //////// DELETE
 

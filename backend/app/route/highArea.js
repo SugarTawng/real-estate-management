@@ -206,5 +206,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.delete('/v1/auth/highArea/:id', HighArea.delete);
+    app.delete('/v1/auth/highArea/:id', HighArea.delete);
 }

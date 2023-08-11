@@ -52,6 +52,11 @@ let Block = MySequelize.define('block', {
         allowNull: false,
         defaultValue: Sequelize.NOW
     },
+    deleted:{
+      type: Sequelize.STRING(5),
+      allowNull: false,
+      defaultValue: 'false'
+    },
     created_by: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
