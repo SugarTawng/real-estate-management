@@ -1,7 +1,5 @@
 const ZoneManager = require('../manager/ZoneManager');
 const Rest = require('../utils/Restware');
-const ProjectManager = require("../manager/ProjectManager");
-const WhiteBoard = require("../manager/WhiteBoardManager");
 
 module.exports = {
 
@@ -38,5 +36,27 @@ module.exports = {
                 return Rest.sendSuccessOne(res, results, httpCode);
             }
         });
+    },
+    getOne: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+
+        let id = req.params.id || '';
+
+        if(id === 'statistic'){
+            ZoneManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }else{
+            ZoneManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }
     },
 }

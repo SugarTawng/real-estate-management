@@ -1,6 +1,5 @@
-const Profile = require('../manager/ProfileManager');
+const ProfileManager = require('../manager/ProfileManager');
 const Rest = require('../utils/Restware');
-const Message = require("../manager/MessageManager");
 
 module.exports = {
 
@@ -11,7 +10,7 @@ module.exports = {
 
         let data = req.body || '';
 
-        Profile.create(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, profile) {
+        ProfileManager.create(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, profile) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             } else {
@@ -28,12 +27,34 @@ module.exports = {
 
         let queryContent = req.query || '';
 
-        Profile.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
+        ProfileManager.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             } else {
                 return Rest.sendSuccessOne(res, results, httpCode);
             }
         });
+    },
+    getOne: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+
+        let id = req.params.id || '';
+
+        if(id === 'statistic'){
+            ProfileManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }else{
+            ProfileManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }
     },
 }

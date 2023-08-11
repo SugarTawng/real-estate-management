@@ -1,6 +1,5 @@
-const Message = require('../manager/MessageManager');
+const MessageManager = require('../manager/MessageManager');
 const Rest = require('../utils/Restware');
-const ProjectManager = require("../manager/ProjectManager");
 
 module.exports = {
 
@@ -13,7 +12,7 @@ module.exports = {
 
         let data = req.body || '';
 
-        Message.create(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, message) {
+        MessageManager.create(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, message) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             } else {
@@ -30,12 +29,34 @@ module.exports = {
 
         let queryContent = req.query || '';
 
-        Message.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
+        MessageManager.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             } else {
                 return Rest.sendSuccessOne(res, results, httpCode);
             }
         });
+    },
+    getOne: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+
+        let id = req.params.id || '';
+
+        if(id === 'statistic'){
+            MessageManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }else{
+            MessageManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }
     },
 }

@@ -91,30 +91,7 @@ module.exports = {
     //     }
     // },
     //
-    //
-    // getOne: function (req, res) {
-    //     let accessUserId = req.query.accessUserId || '';
-    //     let accessUserType = req.query.accessUserType || '';
-    //
-    //     let id = req.params.id || '';
-    //
-    //     if(id === 'statistic'){
-    //         ProjectManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
-    //             if (errorCode) {
-    //                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
-    //             }
-    //             return Rest.sendSuccessOne(res, result, httpCode);
-    //         })
-    //     }else {
-    //         ProjectManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, device) {
-    //             if (errorCode) {
-    //                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
-    //             } else {
-    //                 return Rest.sendSuccessOne(res, device, httpCode);
-    //             }
-    //         });
-    //     }
-    // },
+
 
     getAll: function (req, res) {
         let accessUserId = req.query.accessUserId || '';
@@ -132,7 +109,28 @@ module.exports = {
         });
     },
 
+    getOne: function (req, res) {
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
 
+        let id = req.params.id || '';
+
+        if(id === 'statistic'){
+            ProjectManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }else{
+            ProjectManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, result, httpCode);
+            })
+        }
+    },
 
     //////// DELETE
 

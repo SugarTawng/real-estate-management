@@ -59,9 +59,9 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
 
         let where = {};
-        let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
+        let attributes = ['project_id', 'profile_id','created_by','updated_by', 'created_at', 'updated_at'];
 
-        where = {id: id};
+        where = {project_id: id};
 
         // if(accessUserId !== parseInt(id)) {
         //     where = {id: id, type: { $lt: accessUserType} };
@@ -71,7 +71,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
         console.log('where is this ', where);
 
-        Block.findOne({
+        ProfileProject.findOne({
             where: where,
             attributes: attributes
         }).then(result=>{

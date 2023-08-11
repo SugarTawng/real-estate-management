@@ -125,7 +125,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/zone/:id', oUserCtrl.getOne);
+    app.get('/v1/auth/whiteBoard/:id', WhiteBoard.getOne);
     /**
      * @api {PUT} /v1/auth/whiteBoard/:id Update One
      * @apiVersion 1.0.0

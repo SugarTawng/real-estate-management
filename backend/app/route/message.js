@@ -123,7 +123,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/zone/:id', Message.getOne);
+    app.get('/v1/auth/message/:id', Message.getOne);
     /**
      * @api {PUT} /v1/auth/message/:id Update One
      * @apiVersion 1.0.0

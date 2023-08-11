@@ -11,8 +11,6 @@ const Pieces = require('../utils/Pieces');
 const Config = require('../config/Global');
 const WhiteBoard = require('../models/WhiteBoard');
 const {NULL} = require("mysql/lib/protocol/constants/types");
-const Project = require("../models/Project");
-const Block = require("../models/Block");
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
@@ -84,7 +82,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
 
         let where = {};
-        let attributes = ['id', 'login_name','email','type', 'display_name', 'created_at', 'updated_at', 'created_by', 'updated_by'];
+        let attributes = ['id', 'title','content','keyword', 'public', 'project_id', 'priority', 'created_by', 'updated_by', 'created_at', 'updated_at'];
 
         where = {id: id};
 
@@ -96,7 +94,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
         console.log('where is this ', where);
 
-        Block.findOne({
+        WhiteBoard.findOne({
             where: where,
             attributes: attributes
         }).then(result=>{

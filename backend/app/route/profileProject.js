@@ -123,7 +123,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.get('/v1/auth/users/:id', ProfileProjectCtrl.getOne);
+    app.get('/v1/auth/profileProject/:id', ProfileProjectCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/project/:id Update One
      * @apiVersion 1.0.0
