@@ -28,26 +28,6 @@
       <change beforePath="$PROJECT_DIR$/app/manager/ProjectManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ProjectManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/manager/WhiteBoardManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/WhiteBoardManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/manager/ZoneManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ZoneManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Block.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Block.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Floor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/HighArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/HighArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/LandArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/LandArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Message.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Project.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/ProjectProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ProjectProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/WhiteBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/WhiteBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Zone.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Zone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/block.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/block.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/floor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/highArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/highArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/landArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/landArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/profileProject.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/profileProject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/whileBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/whileBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/route/zone.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/zone.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,24 +54,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/admin/Desktop/s3lab_tpl_nodejs_mysql",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/admin/Desktop/s3lab_tpl_nodejs_mysql&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2022.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\admin\Desktop\LVTN\backend" />
@@ -143,7 +123,8 @@
       <workItem from="1690872985146" duration="19485000" />
       <workItem from="1690942198547" duration="135568000" />
       <workItem from="1691549303517" duration="27947000" />
-      <workItem from="1691635817908" duration="48271000" />
+      <workItem from="1691635817908" duration="52868000" />
+      <workItem from="1691906200683" duration="14020000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>

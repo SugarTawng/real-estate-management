@@ -13,6 +13,7 @@ const Floor = require('../models/Floor');
 const {NULL} = require("mysql/lib/protocol/constants/types");
 const Project = require("../models/Project");
 const Block = require("../models/Block");
+const BCrypt = require("bcryptjs");
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
@@ -230,6 +231,84 @@ exports.getAll = function (accessUserId, accessUserType, accessUserName, queryCo
         return callback(2, 'get_all_Project_fail', 400, error, null);
     }
 };
+
+
+exports.update = function (accessUserId, accessUserType, accessLoginName, floorId, updateData, callback) {
+    try {
+        let queryObj = {};
+        let where = {};
+
+        if ( !( Pieces.VariableBaseTypeChecking(userId,'string')
+                && Validator.isInt(userId) )
+            && !Pieces.VariableBaseTypeChecking(userId,'number') ){
+            return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
+        }
+
+        // nếu mà người dùng không phải là chủ tài khoảng và người dùng cũng không phải là admin thì không cho vào
+        // if ( accessUserId !== parseInt(userId) && accessUserType < Constant.USER_TYPE.MODERATOR ) {
+        //     return callback(1, 'invalid_user_right', 403, null, null);
+        // }
+
+        queryObj.updater = accessUserId;
+
+        where.id = floorId;
+
+        if (!parseInt(updateData.block_id) <= 0
+            && !Number.isNaN(parseInt(updateData.block_id))) {
+            queryObj.block_id = updateData.block_id;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.number_of_high_area,'string')
+            && Validator.isAlphanumeric(updateData.number_of_high_area)
+            && Validator.isLength(updateData.number_of_high_area, {min: 1, max: 128})
+            && parseInt(updateData.number_of_high_area)>0) {
+            queryObj.number_of_high_area = updateData.number_of_high_area;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.public_area,'string')
+            && Validator.isAlphanumeric(updateData.public_area)
+            && Validator.isLength(updateData.public_area, {min: 1, max: 128})
+            && parseFloat(updateData.public_area)>0) {
+            queryObj.public_area = updateData.public_area;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.total_area,'string')
+            && Validator.isAlphanumeric(updateData.total_area)
+            && Validator.isLength(updateData.total_area, {min: 1, max: 128})
+            && parseFloat(updateData.total_area)>0) {
+            queryObj.total_area = updateData.total_area;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(parseInt(updateData.progress), 'number')
+            && (parseInt(updateData.progress) >=0 && parseInt(updateData.progress) <=100)) {
+            queryObj.progress = updateData.progress;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.desc,'string')
+            && Validator.isLength(updateData.desc, {min: 1, max: 256})) {
+            queryObj.desc = updateData.desc;
+        }
+
+        queryObj.updated_at = new Date();
+
+        Floor.update(
+            queryObj,
+            {where: where}).then(result=>{
+            "use strict";
+            if( (result !== null) && (result.length > 0) && (result[0] > 0) ){
+                return callback(null, null, 200, null, userId);
+            }else{
+                return callback(1, 'update_user_fail', 400, '', null);
+            }
+        }).catch(function(error){
+            "use strict";
+            return callback(1, 'update_user_fail', 420, error, null);
+        });
+    }catch(error){
+        return callback(1, 'update_user_fail', 400, error, null);
+    }
+}
+
 
 exports.delete = function(accessUserId, accessUserType, id, callback) {
     try {

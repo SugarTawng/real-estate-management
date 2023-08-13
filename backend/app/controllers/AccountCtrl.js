@@ -73,7 +73,7 @@ module.exports = {
 
         if( id === 'deletes' ){
             let ids = req.body.ids || '';
-            UserManager.deletes(accessUserId, accessUserType, ids, function (errorCode, errorMessage, httpCode, errorDescription) {
+            AccountManager.deletes(accessUserId, accessUserType, ids, function (errorCode, errorMessage, httpCode, errorDescription) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }
@@ -82,7 +82,7 @@ module.exports = {
         }else {
             let accessLoginName = req.body.accessLoginName || '';
             let data = req.body || '';
-            UserManager.update( accessUserId, accessUserType, accessLoginName, id, data, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+            AccountManager.update( accessUserId, accessUserType, accessLoginName, id, data, function (errorCode, errorMessage, httpCode, errorDescription, result) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }

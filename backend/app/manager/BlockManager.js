@@ -12,6 +12,7 @@ const Config = require('../config/Global');
 const Block = require('../models/Block');
 const {NULL} = require("mysql/lib/protocol/constants/types");
 const Project = require("../models/Project");
+const BCrypt = require("bcryptjs");
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {
@@ -240,6 +241,83 @@ exports.getAll = function (accessUserId, accessUserType, accessUserName, queryCo
         return callback(2, 'get_all_Project_fail', 400, error, null);
     }
 };
+
+exports.update = function (accessUserId, accessUserType, accessLoginName, blockId, updateData, callback) {
+    try {
+        let queryObj = {};
+        let where = {};
+
+        if ( !( Pieces.VariableBaseTypeChecking(blockId,'string')
+                && Validator.isInt(blockId) )
+            && !Pieces.VariableBaseTypeChecking(blockId,'number') ){
+            return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
+        }
+
+        // nếu mà người dùng không phải là chủ tài khoảng và người dùng cũng không phải là admin thì không cho vào
+        // if ( accessUserId !== parseInt(userId) && accessUserType < Constant.USER_TYPE.MODERATOR ) {
+        //     return callback(1, 'invalid_user_right', 403, null, null);
+        // }
+
+        queryObj.updater = accessUserId;
+
+        where.id = blockId;
+
+        if (!parseInt(updateData.zone_id) <= 0
+            && !Number.isNaN(parseInt(updateData.zone_id))) {
+            queryObj.zone_id = updateData.zone_id;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.number_of_floor,'string')
+            && Validator.isAlphanumeric(updateData.number_of_floor)
+            && Validator.isLength(updateData.number_of_floor, {min: 1, max: 128})
+            && parseInt(updateData.number_of_floor)>0) {
+            queryObj.number_of_floor = updateData.number_of_floor;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.lat,'string')
+            && Validator.isLength(updateData.lat, {min: 1, max: 128})
+            && (parseFloat(updateData.lat)>=-90 && parseFloat(updateData.lat)<=90)
+            &&  !Number.isNaN(parseFloat(updateData.lat))){
+            queryObj.lat = updateData.lat
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.long,'string')
+            && Validator.isLength(updateData.long, {min: 1, max: 128})
+            && (parseFloat(updateData.long)>=-180 && parseFloat(updateData.long)<=180)
+            && !Number.isNaN(parseFloat(updateData.long))){
+            queryObj.long = updateData.long;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.desc,'string')
+            && Validator.isLength(updateData.desc, {min: 1, max: 256})) {
+            queryObj.desc = updateData.desc;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(parseInt(updateData.progress), 'number')
+            && (parseInt(data.progress) >=0 && parseInt(updateData.progress) <=100)) {
+            queryObj.progress = updateData.progress;
+        }
+
+        queryObj.updated_at = new Date();
+
+        Block.update(
+            queryObj,
+            {where: where}).then(result=>{
+            "use strict";
+            if( (result !== null) && (result.length > 0) && (result[0] > 0) ){
+                return callback(null, null, 200, null, userId);
+            }else{
+                return callback(1, 'update_user_fail', 400, '', null);
+            }
+        }).catch(function(error){
+            "use strict";
+            return callback(1, 'update_user_fail', 420, error, null);
+        });
+    }catch(error){
+        return callback(1, 'update_user_fail', 400, error, null);
+    }
+}
+
 
 exports.delete = function(accessUserId, accessUserType, id, callback) {
     try {

@@ -59,6 +59,35 @@ module.exports = {
             })
         }
     },
+
+    update: function (req, res) {
+        let accessUserId = req.body.accessUserId || '';
+        let accessUserType = req.body.accessUserType || '';
+
+        let id = req.params.id || '';
+
+        if( id === 'deletes' ){
+            let ids = req.body.ids || '';
+            MessageManager.deletes(accessUserId, accessUserType, ids, function (errorCode, errorMessage, httpCode, errorDescription) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                return Rest.sendSuccessOne(res, null, httpCode);
+            });
+        }else {
+            let accessLoginName = req.body.accessLoginName || '';
+            let data = req.body || '';
+            MessageManager.update( accessUserId, accessUserType, accessLoginName, id, data, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+                if (errorCode) {
+                    return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+                }
+                let resData = {};
+                resData.id = result;
+                return Rest.sendSuccessOne(res, resData, httpCode);
+            });
+        }
+    },
+
     delete: function (req, res) {
         let accessUserId = req.body.accessUserId || '';
         let accessUserType = req.body.accessUserType || '';
