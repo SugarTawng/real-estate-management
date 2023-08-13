@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="login and create">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/AccountCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/AccountCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/BlockCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/BlockCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/FloorCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/FloorCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/HighAreaCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/HighAreaCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/LandAreaCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/LandAreaCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/MessageCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/MessageCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/ProfileCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ProfileCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/ProfileProjectCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ProfileProjectCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/ProjectCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ProjectCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/WhiteBoardCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/WhiteBoardCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/ZoneCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ZoneCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/AccountManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/AccountManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/BlockManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/BlockManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/FloorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/FloorManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/HighAreaManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/HighAreaManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/LandAreaManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/LandAreaManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/MessageManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/MessageManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/ProfileManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ProfileManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/ProfileProjectManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ProfileProjectManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/ProjectManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ProjectManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/WhiteBoardManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/WhiteBoardManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manager/ZoneManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/ZoneManager.js" afterDir="false" />
-    </list>
+    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="update block and floor" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -124,7 +100,7 @@
       <workItem from="1690942198547" duration="135568000" />
       <workItem from="1691549303517" duration="27947000" />
       <workItem from="1691635817908" duration="52868000" />
-      <workItem from="1691906200683" duration="14020000" />
+      <workItem from="1691906200683" duration="14362000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>
@@ -168,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690893789025</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update block and floor">
+      <created>1691923520094</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1691923520094</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +175,7 @@
     <MESSAGE value="edit permission" />
     <MESSAGE value="account model is not done, project model is not done" />
     <MESSAGE value="login and create" />
-    <option name="LAST_COMMIT_MESSAGE" value="login and create" />
+    <MESSAGE value="update block and floor" />
+    <option name="LAST_COMMIT_MESSAGE" value="update block and floor" />
   </component>
 </project>
