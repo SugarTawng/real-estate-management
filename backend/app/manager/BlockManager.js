@@ -253,6 +253,8 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, blockI
             return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
         }
 
+
+
         // nếu mà người dùng không phải là chủ tài khoảng và người dùng cũng không phải là admin thì không cho vào
         // if ( accessUserId !== parseInt(userId) && accessUserType < Constant.USER_TYPE.MODERATOR ) {
         //     return callback(1, 'invalid_user_right', 403, null, null);
@@ -274,6 +276,8 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, blockI
             queryObj.number_of_floor = updateData.number_of_floor;
         }
 
+
+
         if ( Pieces.VariableBaseTypeChecking(updateData.lat,'string')
             && Validator.isLength(updateData.lat, {min: 1, max: 128})
             && (parseFloat(updateData.lat)>=-90 && parseFloat(updateData.lat)<=90)
@@ -293,19 +297,24 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, blockI
             queryObj.desc = updateData.desc;
         }
 
+
+
         if ( Pieces.VariableBaseTypeChecking(parseInt(updateData.progress), 'number')
             && (parseInt(data.progress) >=0 && parseInt(updateData.progress) <=100)) {
             queryObj.progress = updateData.progress;
         }
 
+
         queryObj.updated_at = new Date();
+
+
 
         Block.update(
             queryObj,
             {where: where}).then(result=>{
             "use strict";
             if( (result !== null) && (result.length > 0) && (result[0] > 0) ){
-                return callback(null, null, 200, null, userId);
+                return callback(null, null, 200, null, blockId);
             }else{
                 return callback(1, 'update_user_fail', 400, '', null);
             }
@@ -314,6 +323,7 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, blockI
             return callback(1, 'update_user_fail', 420, error, null);
         });
     }catch(error){
+        console.log('toi da bi loi')
         return callback(1, 'update_user_fail', 400, error, null);
     }
 }

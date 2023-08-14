@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="update block and floor" />
+    <list default="true" id="02b3501f-d069-4724-afe2-e2cb083f79a1" name="Changes" comment="update block and floor">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/FloorCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/FloorCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/BlockManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/BlockManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/FloorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/FloorManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/HighAreaManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/HighAreaManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager/LandAreaManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager/LandAreaManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/block.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/block.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/floor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/floor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/highArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/highArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/landArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/landArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/route/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/route/message.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,6 +113,7 @@
       <workItem from="1691549303517" duration="27947000" />
       <workItem from="1691635817908" duration="52868000" />
       <workItem from="1691906200683" duration="14362000" />
+      <workItem from="1691979501577" duration="9070000" />
     </task>
     <task id="LOCAL-00001" summary="done get one">
       <created>1690620170767</created>

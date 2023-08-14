@@ -165,7 +165,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.put('/v1/auth/block/:id', BlockCtrl.update);
+    app.put('/v1/auth/block/:id', BlockCtrl.update);
     /**
      * @api {DELETE} /v1/auth/block/:id Delete One
      * @apiVersion 1.0.0

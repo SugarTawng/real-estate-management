@@ -263,14 +263,14 @@ exports.getAll = function (accessUserId, accessUserType, accessUserName, queryCo
 };
 
 
-exports.update = function (accessUserId, accessUserType, accessLoginName, userId, updateData, callback) {
+exports.update = function (accessUserId, accessUserType, accessLoginName, landAreaId, updateData, callback) {
     try {
         let queryObj = {};
         let where = {};
 
-        if ( !( Pieces.VariableBaseTypeChecking(userId,'string')
-                && Validator.isInt(userId) )
-            && !Pieces.VariableBaseTypeChecking(userId,'number') ){
+        if ( !( Pieces.VariableBaseTypeChecking(landAreaId,'string')
+                && Validator.isInt(landAreaId) )
+            && !Pieces.VariableBaseTypeChecking(landAreaId,'number') ){
             return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
         }
 
@@ -281,81 +281,95 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, userId
 
         queryObj.updater = accessUserId;
 
-        where.id = userId;
+        where.id = landAreaId;
 
-        if (accessUserId === parseInt(userId)){
-            where.activated = Constant.ACTIVATED.YES;
-            where.deleted = Constant.DELETED.NO;
-        }else{
-            // where.type = accessUserType; accessUserType phải lớn hơn type.
-            if ( Pieces.VariableBaseTypeChecking(updateData.login_name, 'string')
-                && Validator.isAlphanumeric(updateData.login_name)
-                && Validator.isLowercase(updateData.login_name)
-                && Validator.isLength(updateData.login_name, {min: 4, max: 128}) ) {
-                queryObj.login_name = updateData.login_name;
-            }
-
-            if ( Pieces.VariableBaseTypeChecking(updateData.email, 'string')
-                && !Validator.isEmail(updateData.email) ) {
-                queryObj.email = updateData.email;
-            }
-
-            if ( Pieces.VariableBaseTypeChecking(updateData.phone, 'string') && Validator.isLength(updateData.phone, {min: 4, max: 12})) {
-                queryObj.phone = updateData.phone;
-            }
-
-            if(Pieces.ValidObjectEnum(updateData.activated, Constant.ACTIVATED)){
-                queryObj.activated = updateData.activated;
-            }
-
-            if(Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)){
-                queryObj.type = updateData.type;
-            }
+        if (!parseInt(updateData.zone_id) <= 0
+            && !Number.isNaN(parseInt(updateData.zone_id))) {
+            queryObj.zone_id = updateData.zone_id;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.first_name, 'string')
-            && Validator.isAlphanumeric(updateData.first_name)
-            && Validator.isLength(updateData.first_name, {min: 2, max: 64}) ) {
-
-            queryObj.first_name = updateData.first_name;
+        if ( Pieces.VariableBaseTypeChecking(updateData.land_direction,'string')
+            && Validator.isAlphanumeric(updateData.land_direction)
+            && Validator.isLength(updateData.land_direction, {min: 1, max: 128})) {
+            queryObj.land_direction = updateData.land_direction;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.last_name, 'string')
-            && Validator.isAlphanumeric(updateData.last_name)
-            && Validator.isLength(updateData.last_name, {min: 2, max: 64}) ) {
-            queryObj.last_name = updateData.last_name;
+        if ( Pieces.VariableBaseTypeChecking(updateData.lat,'string')
+            && Validator.isLength(updateData.lat, {min: 1, max: 128})
+            && (parseFloat(updateData.lat)>=-90 && parseFloat(updateData.lat)<=90)
+            && Number.isNaN(parseFloat(updateData.lat))){
+            queryObj.lat = updateData.lat;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.email_verified, 'string')
-            && Validator.isEmail(updateData.email_verified)
-            && updateData.email === updateData.email_verified) {
-            queryObj.email_verified = updateData.email_verified;
+        if ( Pieces.VariableBaseTypeChecking(updateData.long,'string')
+            && Validator.isLength(updateData.long, {min: 1, max: 128})
+            && (parseFloat(updateData.long)>=-180 && parseFloat(updateData.long)<=180)
+            && Number.isNaN(parseFloat(updateData.long))){
+            queryObj.long = updateData.long;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.phone_verified, 'string')
-            && Validator.isLength(updateData.phone_verified, {min: 4, max: 12})
-            && updateData.phone === updateData.phone_verified) {
-            queryObj.phone_verified = updateData.phone_verified;
+        if ( Pieces.VariableBaseTypeChecking(updateData.building_area,'string')
+            && Validator.isAlphanumeric(updateData.building_area)
+            && Validator.isLength(updateData.building_area, {min: 1, max: 128})
+            && parseFloat(updateData.building_area) < 0 || Number.isNaN(parseFloat(updateData.building_area))) {
+            queryObj.building_area = updateData.building_area;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.display_name, 'string')
-            && Validator.isLength(updateData.display_name, {min: 1, max: 128}) ) {
-            queryObj.display_name = updateData.display_name;
+        if ( Pieces.VariableBaseTypeChecking(updateData.total_area,'string')
+            && Validator.isAlphanumeric(updateData.total_area)
+            && Validator.isLength(updateData.total_area, {min: 1, max: 128})
+            && parseFloat(updateData.total_area)>0) {
+            queryObj.total_area = updateData.total_area;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.password, 'string')
-            && Validator.isLength(updateData.password, {min: 4, max: 64}) ) {
-            queryObj.password = BCrypt.hashSync(updateData.password, 10);
+        if ( Pieces.VariableBaseTypeChecking(parseInt(updateData.progress), 'number')
+            && (parseInt(updateData.progress) >=0 && parseInt(updateData.progress) <=100)) {
+            queryObj.progress = updateData.progress;
         }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.number_of_wc,'string')
+            && Validator.isAlphanumeric(updateData.number_of_wc)
+            && Validator.isLength(updateData.number_of_wc, {min: 1, max: 128})
+            && !parseInt(updateData.number_of_wc) < 0 && !Number.isNaN(parseInt(updateData.number_of_wc))) {
+            queryObj.number_of_wc = updateData.number_of_wc;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.number_of_room,'string')
+            && Validator.isAlphanumeric(updateData.number_of_room)
+            && Validator.isLength(updateData.number_of_room, {min: 1, max: 128})
+            && !parseInt(updateData.number_of_room) < 0 && !Number.isNaN(parseInt(updateData.number_of_room))) {
+            queryObj.number_of_room = updateData.number_of_room;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.number_of_floor,'string')
+            && Validator.isAlphanumeric(updateData.number_of_floor)
+            && Validator.isLength(updateData.number_of_floor, {min: 1, max: 128})
+            && !parseInt(updateData.number_of_floor) < 0 && !Number.isNaN(parseInt(updateData.number_of_room))) {
+            queryObj.number_of_floor = updateData.number_of_floor;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.price,'string')
+            && Validator.isAlphanumeric(updateData.price)
+            && Validator.isLength(updateData.price, {min: 1, max: 128})
+            && !parseFloat(updateData.price) < 0 && !Number.isNaN(parseInt(updateData.price))) {
+            queryObj.price = updateData.price;
+        }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.desc,'string')
+            && Validator.isLength(updateData.desc, {min: 1, max: 256})) {
+            queryObj.desc = updateData.desc;
+        }
+
+        // chua set cac thuoc tinh mac dinh
 
         queryObj.updated_at = new Date();
 
-        Account.update(
+        LandArea.update(
             queryObj,
             {where: where}).then(result=>{
             "use strict";
             if( (result !== null) && (result.length > 0) && (result[0] > 0) ){
-                return callback(null, null, 200, null, userId);
+                return callback(null, null, 200, null, landAreaId);
             }else{
                 return callback(1, 'update_user_fail', 400, '', null);
             }

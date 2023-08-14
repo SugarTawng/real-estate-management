@@ -161,7 +161,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.put('/v1/auth/message/:id', Message.update);
+    app.put('/v1/auth/message/:id', Message.update);
     /**
      * @api {DELETE} /v1/auth/message/:id Delete One
      * @apiVersion 1.0.0

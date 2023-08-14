@@ -96,7 +96,7 @@ module.exports = {
 
         if( id === 'deletes' ){
             let ids = req.body.ids || '';
-            BlockManager.deletes(accessUserId, accessUserType, ids, function (errorCode, errorMessage, httpCode, errorDescription) {
+            FloorManager.deletes(accessUserId, accessUserType, ids, function (errorCode, errorMessage, httpCode, errorDescription) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }
@@ -105,7 +105,7 @@ module.exports = {
         }else {
             let accessLoginName = req.body.accessLoginName || '';
             let data = req.body || '';
-            BlockManager.update( accessUserId, accessUserType, accessLoginName, id, data, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+            FloorManager.update( accessUserId, accessUserType, accessLoginName, id, data, function (errorCode, errorMessage, httpCode, errorDescription, result) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }

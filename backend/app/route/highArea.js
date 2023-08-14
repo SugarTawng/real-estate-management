@@ -170,7 +170,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.put('/v1/auth/highArea/:id', HighArea.update);
+    app.put('/v1/auth/highArea/:id', HighArea.update);
     /**
      * @api {DELETE} /v1/auth/highArea/:id Delete One
      * @apiVersion 1.0.0

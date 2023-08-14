@@ -238,9 +238,9 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, floorI
         let queryObj = {};
         let where = {};
 
-        if ( !( Pieces.VariableBaseTypeChecking(userId,'string')
-                && Validator.isInt(userId) )
-            && !Pieces.VariableBaseTypeChecking(userId,'number') ){
+        if ( !( Pieces.VariableBaseTypeChecking(floorId,'string')
+                && Validator.isInt(floorId) )
+            && !Pieces.VariableBaseTypeChecking(floorId,'number') ){
             return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
         }
 
@@ -252,6 +252,10 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, floorI
         queryObj.updater = accessUserId;
 
         where.id = floorId;
+
+        console.log('toi da ơ day');
+
+        console.log('hihihi where', where);
 
         if (!parseInt(updateData.block_id) <= 0
             && !Number.isNaN(parseInt(updateData.block_id))) {
@@ -289,6 +293,10 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, floorI
             queryObj.desc = updateData.desc;
         }
 
+
+
+
+
         queryObj.updated_at = new Date();
 
         Floor.update(
@@ -296,7 +304,7 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, floorI
             {where: where}).then(result=>{
             "use strict";
             if( (result !== null) && (result.length > 0) && (result[0] > 0) ){
-                return callback(null, null, 200, null, userId);
+                return callback(null, null, 200, null, floorId);
             }else{
                 return callback(1, 'update_user_fail', 400, '', null);
             }
