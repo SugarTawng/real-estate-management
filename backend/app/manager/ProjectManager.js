@@ -416,14 +416,14 @@ exports.getAll = function (accessUserId, accessUserType, accessUserName, queryCo
 };
 
 
-exports.update = function (accessUserId, accessUserType, accessLoginName, userId, updateData, callback) {
+exports.update = function (accessUserId, accessUserType, accessLoginName, projectId, updateData, callback) {
     try {
         let queryObj = {};
         let where = {};
 
-        if ( !( Pieces.VariableBaseTypeChecking(userId,'string')
-                && Validator.isInt(userId) )
-            && !Pieces.VariableBaseTypeChecking(userId,'number') ){
+        if ( !( Pieces.VariableBaseTypeChecking(projectId,'string')
+                && Validator.isInt(projectId) )
+            && !Pieces.VariableBaseTypeChecking(projectId,'number') ){
             return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
         }
 
@@ -434,81 +434,44 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, userId
 
         queryObj.updater = accessUserId;
 
-        where.id = userId;
+        where.id = projectId;
 
-        if (accessUserId === parseInt(userId)){
-            where.activated = Constant.ACTIVATED.YES;
-            where.deleted = Constant.DELETED.NO;
-        }else{
-            // where.type = accessUserType; accessUserType phải lớn hơn type.
-            if ( Pieces.VariableBaseTypeChecking(updateData.login_name, 'string')
-                && Validator.isAlphanumeric(updateData.login_name)
-                && Validator.isLowercase(updateData.login_name)
-                && Validator.isLength(updateData.login_name, {min: 4, max: 128}) ) {
-                queryObj.login_name = updateData.login_name;
-            }
-
-            if ( Pieces.VariableBaseTypeChecking(updateData.email, 'string')
-                && !Validator.isEmail(updateData.email) ) {
-                queryObj.email = updateData.email;
-            }
-
-            if ( Pieces.VariableBaseTypeChecking(updateData.phone, 'string') && Validator.isLength(updateData.phone, {min: 4, max: 12})) {
-                queryObj.phone = updateData.phone;
-            }
-
-            if(Pieces.ValidObjectEnum(updateData.activated, Constant.ACTIVATED)){
-                queryObj.activated = updateData.activated;
-            }
-
-            if(Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)){
-                queryObj.type = updateData.type;
-            }
+        if ( Pieces.VariableBaseTypeChecking(updateData.name,'string')
+            && Validator.isAlphanumeric(updateData.name)
+            && Validator.isLength(updateData.name, {min: 0, max: 128})) {
+            queryObj.name = updateData.name;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.first_name, 'string')
-            && Validator.isAlphanumeric(updateData.first_name)
-            && Validator.isLength(updateData.first_name, {min: 2, max: 64}) ) {
-
-            queryObj.first_name = updateData.first_name;
+        if ( Pieces.VariableBaseTypeChecking(updateData.address,'string')
+            && Validator.isAlphanumeric(updateData.address)
+            && Validator.isLength(updateData.address, {min: 0, max: 256})) {
+            queryObj.address = updateData.address;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.last_name, 'string')
-            && Validator.isAlphanumeric(updateData.last_name)
-            && Validator.isLength(updateData.last_name, {min: 2, max: 64}) ) {
-            queryObj.last_name = updateData.last_name;
+        if ( Pieces.VariableBaseTypeChecking(updateData.phone,'string')
+            && Validator.isAlphanumeric(updateData.phone)
+            && Validator.isLength(updateData.phone, {min: 0, max: 12})) {
+            queryObj.phone = updateData.phone;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.email_verified, 'string')
-            && Validator.isEmail(updateData.email_verified)
-            && updateData.email === updateData.email_verified) {
-            queryObj.email_verified = updateData.email_verified;
+        if ( Pieces.VariableBaseTypeChecking(updateData.email, 'string')
+            && Validator.isEmail(updateData.email) ) {
+            queryObj.email = updateData.email;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.phone_verified, 'string')
-            && Validator.isLength(updateData.phone_verified, {min: 4, max: 12})
-            && updateData.phone === updateData.phone_verified) {
-            queryObj.phone_verified = updateData.phone_verified;
-        }
-
-        if ( Pieces.VariableBaseTypeChecking(updateData.display_name, 'string')
-            && Validator.isLength(updateData.display_name, {min: 1, max: 128}) ) {
-            queryObj.display_name = updateData.display_name;
-        }
-
-        if ( Pieces.VariableBaseTypeChecking(updateData.password, 'string')
-            && Validator.isLength(updateData.password, {min: 4, max: 64}) ) {
-            queryObj.password = BCrypt.hashSync(updateData.password, 10);
+        if ( Pieces.VariableBaseTypeChecking(parseInt(updateData.project_progress), 'number')
+            && (parseInt(updateData.project_progress) >= 0 && parseInt(updateData.project_progress) <= 100)) {
+            queryObj.project_progress = updateData.project_progress;
         }
 
         queryObj.updated_at = new Date();
 
-        Account.update(
+        Project.update(
             queryObj,
             {where: where}).then(result=>{
             "use strict";
             if( (result !== null) && (result.length > 0) && (result[0] > 0) ){
-                return callback(null, null, 200, null, userId);
+                return callback(null, null, 200, null, projectId);
             }else{
                 return callback(1, 'update_user_fail', 400, '', null);
             }

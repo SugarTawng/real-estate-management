@@ -216,14 +216,14 @@ exports.getAll = function (accessUserId, accessUserType, accessUserName, queryCo
 };
 
 
-exports.update = function (accessUserId, accessUserType, accessLoginName, userId, updateData, callback) {
+exports.update = function (accessUserId, accessUserType, accessLoginName, profileId, updateData, callback) {
     try {
         let queryObj = {};
         let where = {};
 
-        if ( !( Pieces.VariableBaseTypeChecking(userId,'string')
-                && Validator.isInt(userId) )
-            && !Pieces.VariableBaseTypeChecking(userId,'number') ){
+        if ( !( Pieces.VariableBaseTypeChecking(profileId,'string')
+                && Validator.isInt(profileId) )
+            && !Pieces.VariableBaseTypeChecking(profileId,'number') ){
             return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
         }
 
@@ -234,81 +234,54 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, userId
 
         queryObj.updater = accessUserId;
 
-        where.id = userId;
+        where.id = profileId;
 
-        if (accessUserId === parseInt(userId)){
-            where.activated = Constant.ACTIVATED.YES;
-            where.deleted = Constant.DELETED.NO;
-        }else{
-            // where.type = accessUserType; accessUserType phải lớn hơn type.
-            if ( Pieces.VariableBaseTypeChecking(updateData.login_name, 'string')
-                && Validator.isAlphanumeric(updateData.login_name)
-                && Validator.isLowercase(updateData.login_name)
-                && Validator.isLength(updateData.login_name, {min: 4, max: 128}) ) {
-                queryObj.login_name = updateData.login_name;
-            }
-
-            if ( Pieces.VariableBaseTypeChecking(updateData.email, 'string')
-                && !Validator.isEmail(updateData.email) ) {
-                queryObj.email = updateData.email;
-            }
-
-            if ( Pieces.VariableBaseTypeChecking(updateData.phone, 'string') && Validator.isLength(updateData.phone, {min: 4, max: 12})) {
-                queryObj.phone = updateData.phone;
-            }
-
-            if(Pieces.ValidObjectEnum(updateData.activated, Constant.ACTIVATED)){
-                queryObj.activated = updateData.activated;
-            }
-
-            if(Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)){
-                queryObj.type = updateData.type;
-            }
+        if (!parseInt(updateData.account_id) <= 0
+            && !Number.isNaN(parseInt(updateData.account_id))) {
+            queryObj.account_id = updateData.account_id;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.first_name, 'string')
-            && Validator.isAlphanumeric(updateData.first_name)
-            && Validator.isLength(updateData.first_name, {min: 2, max: 64}) ) {
-
-            queryObj.first_name = updateData.first_name;
+        if ( Pieces.VariableBaseTypeChecking(updateData.address,'string')
+            && Validator.isAlphanumeric(updateData.address)
+            && Validator.isLength(updateData.address, {min: 1, max: 128})) {
+            queryObj.address = updateData.address;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.last_name, 'string')
-            && Validator.isAlphanumeric(updateData.last_name)
-            && Validator.isLength(updateData.last_name, {min: 2, max: 64}) ) {
-            queryObj.last_name = updateData.last_name;
+        if ( Pieces.VariableBaseTypeChecking(updateData.experience_year,'string')
+            && Validator.isAlphanumeric(updateData.experience_year)
+            && Validator.isLength(updateData.experience_year, {min: 1, max: 128})
+            && !parseInt(updateData.experience_year) < 0 && !Number.isNaN(parseInt(updateData.experience_year))) {
+            queryObj.experience_year = updateData.experience_year;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.email_verified, 'string')
-            && Validator.isEmail(updateData.email_verified)
-            && updateData.email === updateData.email_verified) {
-            queryObj.email_verified = updateData.email_verified;
+        if ( Pieces.VariableBaseTypeChecking(updateData.previous_position,'string')
+            && Validator.isAlphanumeric(updateData.previous_position)
+            && Validator.isLength(updateData.previous_position, {min: 0, max: 128})) {
+            queryObj.previous_position = updateData.previous_position;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.phone_verified, 'string')
-            && Validator.isLength(updateData.phone_verified, {min: 4, max: 12})
-            && updateData.phone === updateData.phone_verified) {
-            queryObj.phone_verified = updateData.phone_verified;
+        if ( Pieces.VariableBaseTypeChecking(updateData.working_time,'string')
+            && Validator.isAlphanumeric(updateData.working_time)
+            && Validator.isLength(updateData.working_time, {min: 1, max: 128})
+            && parseInt(updateData.working_time)>0) {
+            queryObj.working_time = updateData.working_time;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.display_name, 'string')
-            && Validator.isLength(updateData.display_name, {min: 1, max: 128}) ) {
-            queryObj.display_name = updateData.display_name;
-        }
-
-        if ( Pieces.VariableBaseTypeChecking(updateData.password, 'string')
-            && Validator.isLength(updateData.password, {min: 4, max: 64}) ) {
-            queryObj.password = BCrypt.hashSync(updateData.password, 10);
+        if ( Pieces.VariableBaseTypeChecking(updateData.salary,'string')
+            && Validator.isAlphanumeric(updateData.salary)
+            && Validator.isLength(updateData.salary, {min: 1, max: 128})
+            && !parseFloat(updateData.salary) < 0 && !Number.isNaN(parseFloat(updateData.salary))) {
+            queryObj.salary = updateData.salary;
         }
 
         queryObj.updated_at = new Date();
 
-        Account.update(
+        Profile.update(
             queryObj,
             {where: where}).then(result=>{
             "use strict";
             if( (result !== null) && (result.length > 0) && (result[0] > 0) ){
-                return callback(null, null, 200, null, userId);
+                return callback(null, null, 200, null, profileId);
             }else{
                 return callback(1, 'update_user_fail', 400, '', null);
             }

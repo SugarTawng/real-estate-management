@@ -10,6 +10,10 @@ let Profile = MySequelize.define('profile', {
         allowNull: false,
         primaryKey: true
     },
+    address: {
+        type: Sequelize.STRING(256),
+        allowNull: false
+    },
     account_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,

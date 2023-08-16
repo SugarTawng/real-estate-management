@@ -165,7 +165,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.put('/v1/auth/whiteBoard/:id', oUserCtrl.update);
+    app.put('/v1/auth/whiteBoard/:id', WhiteBoard.update);
     /**
      * @api {DELETE} /v1/auth/whiteBoard/:id Delete One
      * @apiVersion 1.0.0

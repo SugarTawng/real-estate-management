@@ -162,7 +162,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.put('/v1/auth/project/:id', ProfileCtrl.update);
+    app.put('/v1/auth/profile/:id', ProfileCtrl.update);
     /**
      * @api {DELETE} /v1/auth/project/:id Delete One
      * @apiVersion 1.0.0
