@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.7.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: 217.21.74.51    Database: u289965850_apartments
 -- ------------------------------------------------------
@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,9 +21,9 @@
 
 DROP TABLE IF EXISTS `tbl_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_account` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `social_id` varchar(256) DEFAULT NULL,
   `phone` varchar(12) NOT NULL,
   `login_name` varchar(64) NOT NULL,
@@ -42,10 +42,10 @@ CREATE TABLE `tbl_account` (
   `deleted` enum('true','false') NOT NULL DEFAULT 'false',
   `created_by` bigint(20) NOT NULL,
   `updated_by` bigint(20) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,7 +54,7 @@ CREATE TABLE `tbl_account` (
 
 LOCK TABLES `tbl_account` WRITE;
 /*!40000 ALTER TABLE `tbl_account` DISABLE KEYS */;
-INSERT INTO `tbl_account` VALUES (13,'https://www.facebook.com/SugarTawng','0385132042','sadmin','$2a$10$944koTAEKOIddbXmOVXPV.BrkuGWmfT9fc.ySAlf.SKSoSmVlFzBi','user2','Sugar','Sugar Tawng','tangvietdien0707@gmail.com','vi','super_admin',NULL,'0385353783','20521185@gm.uit.edu.vn','https://www.facebook.com/chuot.xa.589','true','false',1,1,NULL,'2023-08-13 07:41:04'),(14,NULL,'0123456789','user1','$2a$10$SDx/h.ipqy0L/kypZgjMXOuxvuX40r22iaaSa1Wcfk9K13LkdPUK.','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','false',13,13,'2023-08-05 05:10:35','2023-08-05 05:10:35'),(15,NULL,'0123456789','user1','$2a$10$W7t8CzGRwFHNnBYaRYanSePZq7SWVOA1NSSAbPnV/vHqnRLNPZTcW','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','false',13,13,'2023-08-05 05:12:26','2023-08-05 05:12:26'),(16,NULL,'0123456789','user1','$2a$10$B5I9M7mMOYyqViwKkHkzDO5Nips0lbQvqtncakkXi5RAAl0Ud48jG','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','false',13,13,'2023-08-05 05:12:56','2023-08-05 05:12:56'),(19,NULL,'0123456789','user1','$2a$10$EKT4/C1R.IW.S/mwvXWquuk/NAqyVpaCw4m8AWqNC2PpNSjg7Ka/m','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','true',13,13,'2023-08-11 07:58:01','2023-08-11 07:58:01'),(20,NULL,'0123456789','user1','$2a$10$5hei6j/1Ha5IAlUtExQZYey/liAhvWUUmmt3AYmHi95yZ3AJ3/jXO','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','true',13,13,'2023-08-11 08:02:25','2023-08-11 08:02:25');
+INSERT INTO `tbl_account` VALUES (13,'https://www.facebook.com/SugarTawng','0385132042','sadmin','$2a$10$944koTAEKOIddbXmOVXPV.BrkuGWmfT9fc.ySAlf.SKSoSmVlFzBi','user2','Sugar','Sugar Tawng','tangvietdien0707@gmail.com','vi','super_admin',NULL,'0385353783','20521185@gm.uit.edu.vn','https://www.facebook.com/chuot.xa.589','true','false',1,1,'0000-00-00 00:00:00','2023-08-13 07:41:04'),(14,NULL,'0123456789','user1','$2a$10$SDx/h.ipqy0L/kypZgjMXOuxvuX40r22iaaSa1Wcfk9K13LkdPUK.','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','false',13,13,'2023-08-05 05:10:35','2023-08-05 05:10:35'),(15,NULL,'0123456789','user1','$2a$10$W7t8CzGRwFHNnBYaRYanSePZq7SWVOA1NSSAbPnV/vHqnRLNPZTcW','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','false',13,13,'2023-08-05 05:12:26','2023-08-05 05:12:26'),(16,NULL,'0123456789','user1','$2a$10$B5I9M7mMOYyqViwKkHkzDO5Nips0lbQvqtncakkXi5RAAl0Ud48jG','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','false',13,13,'2023-08-05 05:12:56','2023-08-05 05:12:56'),(19,NULL,'0123456789','user1','$2a$10$EKT4/C1R.IW.S/mwvXWquuk/NAqyVpaCw4m8AWqNC2PpNSjg7Ka/m','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','true',13,13,'2023-08-11 07:58:01','2023-08-11 07:58:01'),(20,NULL,'0123456789','user1','$2a$10$5hei6j/1Ha5IAlUtExQZYey/liAhvWUUmmt3AYmHi95yZ3AJ3/jXO','Tang','Sugar','user1','user1@gmail.com',NULL,'normal_user',NULL,'0123456788','user1verified@gmail.com',NULL,'true','true',13,13,'2023-08-11 08:02:25','2023-08-11 08:02:25');
 /*!40000 ALTER TABLE `tbl_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tbl_block`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_block` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `zone_id` bigint(20) NOT NULL,
@@ -103,7 +103,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tbl_floor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_floor` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `block_id` bigint(20) NOT NULL,
@@ -139,7 +139,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tbl_high_area`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_high_area` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `floor_id` bigint(20) NOT NULL,
@@ -176,12 +176,156 @@ INSERT INTO `tbl_high_area` VALUES (2,2,-1,-180,'a',1,100,0,0,0,13,'not block',N
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tbl_high_booking`
+--
+
+DROP TABLE IF EXISTS `tbl_high_booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_high_booking` (
+  `id` bigint(20) NOT NULL,
+  `high_area_id` bigint(20) DEFAULT NULL,
+  `zone_id` bigint(20) NOT NULL,
+  `booking_fee` float NOT NULL,
+  `sale_id` bigint(20) NOT NULL,
+  `buyer_id` bigint(20) NOT NULL,
+  `status` enum('enable','disable','cancelled') NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_highbooking_higharea_idx` (`high_area_id`),
+  KEY `fk_highbooking_profile1_idx` (`sale_id`),
+  KEY `fk_highbooking_profile2_idx` (`buyer_id`),
+  CONSTRAINT `fk_highbooking_higharea` FOREIGN KEY (`high_area_id`) REFERENCES `tbl_high_area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_highbooking_profile1` FOREIGN KEY (`sale_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_highbooking_profile2` FOREIGN KEY (`buyer_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_highbooking_zone` FOREIGN KEY (`id`) REFERENCES `tbl_zone` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_high_booking`
+--
+
+LOCK TABLES `tbl_high_booking` WRITE;
+/*!40000 ALTER TABLE `tbl_high_booking` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_high_booking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_high_list_owner`
+--
+
+DROP TABLE IF EXISTS `tbl_high_list_owner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_high_list_owner` (
+  `owner_id` bigint(20) NOT NULL,
+  `high_area_id` bigint(20) NOT NULL,
+  `desc` varchar(256) DEFAULT NULL,
+  `owned_at` datetime NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`owner_id`,`high_area_id`),
+  KEY `fk_highlistowner_higharea_idx` (`high_area_id`),
+  CONSTRAINT `fk_highlistowner_higharea` FOREIGN KEY (`high_area_id`) REFERENCES `tbl_high_area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_highlistowner_profile` FOREIGN KEY (`owner_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_high_list_owner`
+--
+
+LOCK TABLES `tbl_high_list_owner` WRITE;
+/*!40000 ALTER TABLE `tbl_high_list_owner` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_high_list_owner` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_high_payment_process`
+--
+
+DROP TABLE IF EXISTS `tbl_high_payment_process`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_high_payment_process` (
+  `id` bigint(20) NOT NULL,
+  `high_area_id` bigint(20) NOT NULL,
+  `payment_time` tinyint(4) NOT NULL,
+  `amount_of_money` double NOT NULL,
+  `number_of_debt` double NOT NULL,
+  `submitter` bigint(20) NOT NULL,
+  `status` enum('indebted','done') NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_highpaymentprocess_higharea_idx` (`high_area_id`),
+  KEY `fk_highpaymentprocess_profile_idx` (`submitter`),
+  CONSTRAINT `fk_highpaymentprocess_higharea` FOREIGN KEY (`high_area_id`) REFERENCES `tbl_high_area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_highpaymentprocess_profile` FOREIGN KEY (`submitter`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_high_payment_process`
+--
+
+LOCK TABLES `tbl_high_payment_process` WRITE;
+/*!40000 ALTER TABLE `tbl_high_payment_process` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_high_payment_process` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_high_sale_list`
+--
+
+DROP TABLE IF EXISTS `tbl_high_sale_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_high_sale_list` (
+  `id` bigint(20) NOT NULL,
+  `sale_id` bigint(20) NOT NULL,
+  `manager_sale_id` bigint(20) NOT NULL,
+  `high_area_id` bigint(20) NOT NULL,
+  `desc` varchar(256) DEFAULT NULL,
+  `status` enum('enable','disable') NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_highsalelist_higharea_idx` (`high_area_id`),
+  KEY `fk_highsalelist_profile1_idx` (`sale_id`),
+  KEY `fk_highsalelist_profile2_idx` (`manager_sale_id`),
+  CONSTRAINT `fk_highsalelist_higharea` FOREIGN KEY (`high_area_id`) REFERENCES `tbl_high_area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_highsalelist_profile1` FOREIGN KEY (`sale_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_highsalelist_profile2` FOREIGN KEY (`manager_sale_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_high_sale_list`
+--
+
+LOCK TABLES `tbl_high_sale_list` WRITE;
+/*!40000 ALTER TABLE `tbl_high_sale_list` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_high_sale_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbl_land_area`
 --
 
 DROP TABLE IF EXISTS `tbl_land_area`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_land_area` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `zone_id` bigint(20) NOT NULL,
@@ -222,12 +366,157 @@ INSERT INTO `tbl_land_area` VALUES (1,3,'a','false',0,0,0,1,0,0,0,0,0,13,'not bl
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tbl_land_booking`
+--
+
+DROP TABLE IF EXISTS `tbl_land_booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_land_booking` (
+  `id` bigint(20) NOT NULL,
+  `land_area_id` bigint(20) DEFAULT NULL,
+  `zone_id` bigint(20) NOT NULL,
+  `bookingFee` float NOT NULL,
+  `sale_id` bigint(20) NOT NULL,
+  `buyer_id` bigint(20) NOT NULL,
+  `status` enum('enable','disable','cancelled') NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_landbooking_landarea_idx` (`land_area_id`),
+  KEY `fk_landbooking_profile_idx` (`sale_id`),
+  KEY `fk_landbooking_profile2_idx` (`buyer_id`),
+  KEY `fk_landbooking_zone_idx` (`zone_id`),
+  CONSTRAINT `fk_landbooking_landarea` FOREIGN KEY (`land_area_id`) REFERENCES `tbl_land_area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_landbooking_profile1` FOREIGN KEY (`sale_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_landbooking_profile2` FOREIGN KEY (`buyer_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_landbooking_zone` FOREIGN KEY (`zone_id`) REFERENCES `tbl_zone` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_land_booking`
+--
+
+LOCK TABLES `tbl_land_booking` WRITE;
+/*!40000 ALTER TABLE `tbl_land_booking` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_land_booking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_land_list_onwer`
+--
+
+DROP TABLE IF EXISTS `tbl_land_list_onwer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_land_list_onwer` (
+  `owner_id` bigint(20) NOT NULL,
+  `land_area_id` bigint(20) NOT NULL,
+  `desc` varchar(256) DEFAULT NULL,
+  `owned_at` datetime NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`owner_id`,`land_area_id`),
+  KEY `fk_landlistowner_landarea_idx` (`land_area_id`),
+  CONSTRAINT `fk_landlistowner_landarea` FOREIGN KEY (`land_area_id`) REFERENCES `tbl_land_area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_landlistowner_profile` FOREIGN KEY (`owner_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_land_list_onwer`
+--
+
+LOCK TABLES `tbl_land_list_onwer` WRITE;
+/*!40000 ALTER TABLE `tbl_land_list_onwer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_land_list_onwer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_land_payment_process`
+--
+
+DROP TABLE IF EXISTS `tbl_land_payment_process`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_land_payment_process` (
+  `id` bigint(20) NOT NULL,
+  `land_area_id` bigint(20) NOT NULL,
+  `payment_time` tinyint(4) NOT NULL,
+  `amount_of_money` double NOT NULL,
+  `number_of_debt` double NOT NULL,
+  `submitter` bigint(20) NOT NULL,
+  `status` enum('indebted','done') NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_landpaymentprocess_landarea_idx` (`land_area_id`),
+  KEY `fk_landpaymentprocess_profile_idx` (`submitter`),
+  CONSTRAINT `fk_landpaymentprocess_landarea` FOREIGN KEY (`land_area_id`) REFERENCES `tbl_land_area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_landpaymentprocess_profile` FOREIGN KEY (`submitter`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_land_payment_process`
+--
+
+LOCK TABLES `tbl_land_payment_process` WRITE;
+/*!40000 ALTER TABLE `tbl_land_payment_process` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_land_payment_process` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_land_sale_list`
+--
+
+DROP TABLE IF EXISTS `tbl_land_sale_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_land_sale_list` (
+  `id` bigint(20) NOT NULL,
+  `sale_id` bigint(20) NOT NULL,
+  `manager_sale_id` bigint(20) NOT NULL,
+  `land_area_id` bigint(20) NOT NULL,
+  `desc` varchar(256) DEFAULT NULL,
+  `status` enum('enable','disable') NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_landsalelist_landarea_idx` (`land_area_id`),
+  KEY `fk_landsalelist_profile1_idx` (`sale_id`),
+  KEY `fk_landsalelist_profile2_idx` (`manager_sale_id`),
+  CONSTRAINT `fk_landsalelist_landarea` FOREIGN KEY (`land_area_id`) REFERENCES `tbl_land_area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_landsalelist_profile1` FOREIGN KEY (`sale_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_landsalelist_profile2` FOREIGN KEY (`manager_sale_id`) REFERENCES `tbl_profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_land_sale_list`
+--
+
+LOCK TABLES `tbl_land_sale_list` WRITE;
+/*!40000 ALTER TABLE `tbl_land_sale_list` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_land_sale_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbl_message`
 --
 
 DROP TABLE IF EXISTS `tbl_message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_message` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) NOT NULL,
@@ -257,12 +546,76 @@ INSERT INTO `tbl_message` VALUES (1,'a','a','a',13,13,'2023-08-09 08:39:49','202
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tbl_payment_method`
+--
+
+DROP TABLE IF EXISTS `tbl_payment_method`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_payment_method` (
+  `id` bigint(20) NOT NULL,
+  `zone_id` bigint(20) NOT NULL,
+  `total_of_pay_time` tinyint(4) NOT NULL DEFAULT 127,
+  `method_name` varchar(256) NOT NULL,
+  `percent_discount` float NOT NULL,
+  `vat` float DEFAULT NULL,
+  `maintenance_fee` float DEFAULT NULL,
+  `total_price` double DEFAULT NULL,
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_paymentmethod_zone_idx` (`zone_id`),
+  CONSTRAINT `fk_paymentmethod_zone` FOREIGN KEY (`zone_id`) REFERENCES `tbl_zone` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_payment_method`
+--
+
+LOCK TABLES `tbl_payment_method` WRITE;
+/*!40000 ALTER TABLE `tbl_payment_method` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_payment_method` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_payment_method_process`
+--
+
+DROP TABLE IF EXISTS `tbl_payment_method_process`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbl_payment_method_process` (
+  `id` bigint(20) NOT NULL,
+  `payment_method_id` bigint(20) NOT NULL,
+  `payment_time_example` tinyint(4) NOT NULL,
+  `flag_time` int(11) NOT NULL,
+  `include_vat` enum('true','false') NOT NULL,
+  `total_percent_payment` float NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_paymentmethodprocess_paymentmethod_idx` (`payment_method_id`),
+  CONSTRAINT `fk_paymentmethodprocess_paymentmethod` FOREIGN KEY (`payment_method_id`) REFERENCES `tbl_payment_method` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_payment_method_process`
+--
+
+LOCK TABLES `tbl_payment_method_process` WRITE;
+/*!40000 ALTER TABLE `tbl_payment_method_process` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_payment_method_process` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbl_profile`
 --
 
 DROP TABLE IF EXISTS `tbl_profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_profile` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `account_id` bigint(20) NOT NULL,
@@ -300,7 +653,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tbl_profile_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_profile_project` (
   `project_id` bigint(20) NOT NULL,
   `profile_id` bigint(20) NOT NULL,
@@ -332,7 +685,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tbl_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_project` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -369,7 +722,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tbl_whiteboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_whiteboard` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) NOT NULL,
@@ -405,7 +758,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tbl_zone`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_zone` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `project_id` bigint(20) NOT NULL,
@@ -447,4 +800,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-16 21:20:08
+-- Dump completed on 2023-10-27 17:41:25

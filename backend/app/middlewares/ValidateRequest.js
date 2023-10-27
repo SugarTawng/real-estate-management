@@ -24,20 +24,20 @@ module.exports = function (req, res, next) {
                     return Rest.sendError(res, 70, 'verify_token_fail', 400, error);
                 }
 
-                console.log('decoded ',decoded);
+                console.log('decoded new',decoded);
 
-                UserManager.verifyUser(decoded.id, decoded.type, decoded.loginName, function (errorCode, errorMessage, httpCode, errorDescription) {
+                UserManager.verifyUser(decoded.id, decoded.type, decoded.login_name, function (errorCode, errorMessage, httpCode, errorDescription) {
                     if (errorCode) {
                         return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                     }
                     if (req.method === 'GET') {
                         req.query.accessUserId = decoded.id;
                         req.query.accessUserType = decoded.type;
-                        req.query.accessLoginName = decoded.loginName;
+                        req.query.accessLoginName = decoded.login_name;
                     } else {
                         req.body.accessUserId = decoded.id;
                         req.body.accessUserType = decoded.type;
-                        req.body.accessLoginName = decoded.loginName;
+                        req.body.accessLoginName = decoded.login_name;
                     }
                     next();
                 });

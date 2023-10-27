@@ -16,9 +16,9 @@ module.exports = {
         let accessUserType = req.body.accessUserType || '';
         let accessLoginName = req.body.accessLoginName || '';
 
-        let Data = req.body || '';
+        let data = req.body || '';
 
-        AccountManager.createByAdmin(accessUserId, accessUserType, accessLoginName, Data, function (errorCode, errorMessage, httpCode, errorDescription, user) {
+        AccountManager.createByAdmin(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, user) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             }
@@ -109,10 +109,12 @@ module.exports = {
     },
 
     login: function (req, res) {
-        let loginName = req.body.loginName || '';
+        let login_name = req.body.login_name || '';
         let password = req.body.password || '';
 
-        AccountManager.authenticate(loginName, password, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+        console.log('login name   a',login_name);
+
+        AccountManager.authenticate(login_name, password, function (errorCode, errorMessage, httpCode, errorDescription, result) {
             if ( errorCode ) {
                 return Rest.sendError( res, errorCode, errorMessage, httpCode, errorDescription );
             }
@@ -120,7 +122,7 @@ module.exports = {
             console.log(result.dataValues.id, result.dataValues.login_name, result.dataValues.display_name, result.dataValues.email, result.dataValues.type)
 
 
-            JsonWebToken.sign({ id: result.dataValues.id, loginName: result.dataValues.login_name, displayName: result.dataValues.display_name, email: result.dataValues.email, type: result.dataValues.type }, Config.jwtAuthKey, { expiresIn: '25 days' }, function(error, token) {
+            JsonWebToken.sign({ id: result.dataValues.id, login_name: result.dataValues.login_name, display_name: result.dataValues.display_name, email: result.dataValues.email, type: result.dataValues.type }, Config.jwtAuthKey, { expiresIn: '25 days' }, function(error, token) {
                 if( error )
                 {
                     return Rest.sendError( res, 4000, 'create_token_fail', 400, error );
