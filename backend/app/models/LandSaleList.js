@@ -1,48 +1,33 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
 const Account = require('./Account');
-const Project = require('./Project');
 
-let WhiteBoard = MySequelize.define('whiteboard', {
+let LandSaleList = MySequelize.define('landSaleList', {
     id: {
         type: Sequelize.BIGINT(20),
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    title: {
-        type: Sequelize.STRING(256),
-        allowNull: false
-    },
-    content: {
-        type: Sequelize.STRING(4068),
-        allowNull: false
-    },
-    keyword: {
-        type: Sequelize.STRING(256),
-        allowNull: false
-    },
-    public:{
-        type: Sequelize.STRING(5),
-        allowNull: false
-    },
-    project_id:{
+    sale_id: {
         type: Sequelize.BIGINT(20),
-        allowNull: false,
-        references: {
-            model: Project,
-            key: 'id'
-        }
+        allowNull: false
     },
-    priority:{
-        type: Sequelize.STRING(6),
-        allowNull: false,
-        defaultValue: 'low'
+    manager_sale_id: {
+        type: Sequelize.BIGINT(20),
+        allowNull: false
     },
-    deleted:{
-        type: Sequelize.STRING(5),
-        allowNull: false,
-        defaultValue: 'false'
+    LandSaleList_area_id: {
+        type: Sequelize.BIGINT(20),
+        allowNull: false
+    },
+    status: {
+        type: Sequelize.ENUM('enable', 'disable'),
+        allowNull: false
+    },
+    desc: {
+        type: Sequelize.STRING(256),
+        allowNull: false
     },
     created_by: {
         type: Sequelize.BIGINT(20),
@@ -53,7 +38,7 @@ let WhiteBoard = MySequelize.define('whiteboard', {
         }
     },
     updated_by: {
-        type: Sequelize.BIGINT(10),
+        type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
             model: Account,
@@ -62,23 +47,23 @@ let WhiteBoard = MySequelize.define('whiteboard', {
     },
     created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.NOW
     },
     updated_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.NOW
-    },
+    }
 }, {
     underscored: true,
-    paranoid: false,
-    timestamps: true,
+    timestamps: false,
     updatedAt: false,
     createdAt: false,
     includeDeleted: true,
+    paranoid: true,
     freezeTableName: true,
-    tableName: 'tbl_whiteboard'
+    tableName: 'tbl_land_sale_list'
 });
 
-module.exports = WhiteBoard;
+module.exports = LandSaleList;

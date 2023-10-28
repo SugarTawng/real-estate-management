@@ -1,48 +1,33 @@
 const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
 const Account = require('./Account');
-const Project = require('./Project');
 
-let WhiteBoard = MySequelize.define('whiteboard', {
+let PaymentMethodProcess = MySequelize.define('paymentMethodProcess', {
     id: {
         type: Sequelize.BIGINT(20),
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    title: {
-        type: Sequelize.STRING(256),
-        allowNull: false
-    },
-    content: {
-        type: Sequelize.STRING(4068),
-        allowNull: false
-    },
-    keyword: {
-        type: Sequelize.STRING(256),
-        allowNull: false
-    },
-    public:{
-        type: Sequelize.STRING(5),
-        allowNull: false
-    },
-    project_id:{
+    payment_method_id: {
         type: Sequelize.BIGINT(20),
-        allowNull: false,
-        references: {
-            model: Project,
-            key: 'id'
-        }
+        allowNull: false
     },
-    priority:{
-        type: Sequelize.STRING(6),
-        allowNull: false,
-        defaultValue: 'low'
+    payment_time_example: {
+        type: Sequelize.TINYINT,
+        allowNull: false
     },
-    deleted:{
-        type: Sequelize.STRING(5),
-        allowNull: false,
-        defaultValue: 'false'
+    flag_time: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    include_vat: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    },
+    total_percent_payment: {
+        type: Sequelize.FLOAT,
+        allowNull: false
     },
     created_by: {
         type: Sequelize.BIGINT(20),
@@ -53,7 +38,7 @@ let WhiteBoard = MySequelize.define('whiteboard', {
         }
     },
     updated_by: {
-        type: Sequelize.BIGINT(10),
+        type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
             model: Account,
@@ -62,23 +47,23 @@ let WhiteBoard = MySequelize.define('whiteboard', {
     },
     created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.NOW
     },
     updated_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.NOW
-    },
+    }
 }, {
     underscored: true,
-    paranoid: false,
-    timestamps: true,
+    timestamps: false,
     updatedAt: false,
     createdAt: false,
     includeDeleted: true,
+    paranoid: true,
     freezeTableName: true,
-    tableName: 'tbl_whiteboard'
+    tableName: 'tbl_payment_method_process'
 });
 
-module.exports = WhiteBoard;
+module.exports = PaymentMethodProcess;
