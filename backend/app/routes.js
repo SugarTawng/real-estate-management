@@ -13,5 +13,17 @@ module.exports = function (app) {
     require('./route/landArea')(app);
     require('./route/message')(app);
     require('./route/whileBoard')(app);
+    
+    require('./route/paymentMethod')(app);
+    require('./route/paymentMethodProcess')(app);
 
+    require('./route/highSaleList')(app);
+    require('./route/highListOwner')(app);
+    require('./route/highPaymentProcess')(app);
+    require('./route/highBooking')(app);
+
+    require('./route/landSaleList')(app);
+    require('./route/landListOwner')(app);
+    require('./route/landPaymentProcess')(app);
+    require('./route/landBooking')(app);
 };
