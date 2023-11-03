@@ -37,10 +37,12 @@ module.exports = {
       let where = {};
       let attributes = [
         "id",
-        "login_name",
-        "email",
-        "type",
-        "display_name",
+        "high_area_id",
+        "payment_time",
+        "amount_of_money",
+        "amount_of_debt",
+        "submitter",
+        "status",
         "created_at",
         "updated_at",
         "created_by",
@@ -326,88 +328,95 @@ module.exports = {
 
       where.id = userId;
 
-      if (accessUserId === parseInt(userId)) {
-        where.activated = Constant.ACTIVATED.YES;
-        where.deleted = Constant.DELETED.NO;
-      } else {
-        // where.type = accessUserType; accessUserType phải lớn hơn type.
-        if (
-          Pieces.VariableBaseTypeChecking(updateData.login_name, "string") &&
-          Validator.isAlphanumeric(updateData.login_name) &&
-          Validator.isLowercase(updateData.login_name) &&
-          Validator.isLength(updateData.login_name, { min: 4, max: 128 })
-        ) {
-          queryObj.login_name = updateData.login_name;
-        }
+      // if (accessUserId === parseInt(userId)) {
+      //   where.activated = Constant.ACTIVATED.YES;
+      //   where.deleted = Constant.DELETED.NO;
+      // } else {
+      //   // where.type = accessUserType; accessUserType phải lớn hơn type.
+      //   if (
+      //     Pieces.VariableBaseTypeChecking(updateData.login_name, "string") &&
+      //     Validator.isAlphanumeric(updateData.login_name) &&
+      //     Validator.isLowercase(updateData.login_name) &&
+      //     Validator.isLength(updateData.login_name, { min: 4, max: 128 })
+      //   ) {
+      //     queryObj.login_name = updateData.login_name;
+      //   }
 
-        if (
-          Pieces.VariableBaseTypeChecking(updateData.email, "string") &&
-          !Validator.isEmail(updateData.email)
-        ) {
-          queryObj.email = updateData.email;
-        }
+      //   if (
+      //     Pieces.VariableBaseTypeChecking(updateData.email, "string") &&
+      //     !Validator.isEmail(updateData.email)
+      //   ) {
+      //     queryObj.email = updateData.email;
+      //   }
 
-        if (
-          Pieces.VariableBaseTypeChecking(updateData.phone, "string") &&
-          Validator.isLength(updateData.phone, { min: 4, max: 12 })
-        ) {
-          queryObj.phone = updateData.phone;
-        }
+      //   if (
+      //     Pieces.VariableBaseTypeChecking(updateData.phone, "string") &&
+      //     Validator.isLength(updateData.phone, { min: 4, max: 12 })
+      //   ) {
+      //     queryObj.phone = updateData.phone;
+      //   }
 
-        if (Pieces.ValidObjectEnum(updateData.activated, Constant.ACTIVATED)) {
-          queryObj.activated = updateData.activated;
-        }
+      //   if (Pieces.ValidObjectEnum(updateData.activated, Constant.ACTIVATED)) {
+      //     queryObj.activated = updateData.activated;
+      //   }
 
-        if (Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)) {
-          queryObj.type = updateData.type;
-        }
-      }
+      //   if (Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)) {
+      //     queryObj.type = updateData.type;
+      //   }
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.first_name, "string") &&
-        Validator.isAlphanumeric(updateData.first_name) &&
-        Validator.isLength(updateData.first_name, { min: 2, max: 64 })
-      ) {
-        queryObj.first_name = updateData.first_name;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.first_name, "string") &&
+      //   Validator.isAlphanumeric(updateData.first_name) &&
+      //   Validator.isLength(updateData.first_name, { min: 2, max: 64 })
+      // ) {
+      //   queryObj.first_name = updateData.first_name;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.last_name, "string") &&
-        Validator.isAlphanumeric(updateData.last_name) &&
-        Validator.isLength(updateData.last_name, { min: 2, max: 64 })
-      ) {
-        queryObj.last_name = updateData.last_name;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.last_name, "string") &&
+      //   Validator.isAlphanumeric(updateData.last_name) &&
+      //   Validator.isLength(updateData.last_name, { min: 2, max: 64 })
+      // ) {
+      //   queryObj.last_name = updateData.last_name;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.email_verified, "string") &&
-        Validator.isEmail(updateData.email_verified) &&
-        updateData.email === updateData.email_verified
-      ) {
-        queryObj.email_verified = updateData.email_verified;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.email_verified, "string") &&
+      //   Validator.isEmail(updateData.email_verified) &&
+      //   updateData.email === updateData.email_verified
+      // ) {
+      //   queryObj.email_verified = updateData.email_verified;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.phone_verified, "string") &&
-        Validator.isLength(updateData.phone_verified, { min: 4, max: 12 }) &&
-        updateData.phone === updateData.phone_verified
-      ) {
-        queryObj.phone_verified = updateData.phone_verified;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.phone_verified, "string") &&
+      //   Validator.isLength(updateData.phone_verified, { min: 4, max: 12 }) &&
+      //   updateData.phone === updateData.phone_verified
+      // ) {
+      //   queryObj.phone_verified = updateData.phone_verified;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.display_name, "string") &&
-        Validator.isLength(updateData.display_name, { min: 1, max: 128 })
-      ) {
-        queryObj.display_name = updateData.display_name;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.display_name, "string") &&
+      //   Validator.isLength(updateData.display_name, { min: 1, max: 128 })
+      // ) {
+      //   queryObj.display_name = updateData.display_name;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.password, "string") &&
-        Validator.isLength(updateData.password, { min: 4, max: 64 })
-      ) {
-        queryObj.password = BCrypt.hashSync(updateData.password, 10);
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.password, "string") &&
+      //   Validator.isLength(updateData.password, { min: 4, max: 64 })
+      // ) {
+      //   queryObj.password = BCrypt.hashSync(updateData.password, 10);
+      // }
+
+      queryObj.high_area_id = updateData.high_area_id;
+      queryObj.payment_time = updateData.payment_time;
+      queryObj.amount_of_money = updateData.amount_of_money;
+      queryObj.amount_of_debt = updateData.amount_of_debt;
+      queryObj.submitter = updateData.submitter;
+      queryObj.status = updateData.status;
 
       queryObj.updated_at = new Date();
 
@@ -652,171 +661,169 @@ module.exports = {
     callback
   ) {
     try {
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.loginName, "string") ||
-        !Validator.isAlphanumeric(userData.loginName) ||
-        !Validator.isLowercase(userData.loginName) ||
-        !Validator.isLength(userData.loginName, { min: 4, max: 128 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_login_name",
-          400,
-          "login name should be alphanumeric, lowercase and length 4-128",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.loginName, "string") ||
+      //   !Validator.isAlphanumeric(userData.loginName) ||
+      //   !Validator.isLowercase(userData.loginName) ||
+      //   !Validator.isLength(userData.loginName, { min: 4, max: 128 })
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_login_name",
+      //     400,
+      //     "login name should be alphanumeric, lowercase and length 4-128",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.firstName, "string") ||
-        !Validator.isAlphanumeric(userData.firstName) ||
-        !Validator.isLength(userData.firstName, { min: 2, max: 64 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_first_name",
-          400,
-          "first name should be alphanumeric, lowercase and length 2-64",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.firstName, "string") ||
+      //   !Validator.isAlphanumeric(userData.firstName) ||
+      //   !Validator.isLength(userData.firstName, { min: 2, max: 64 })
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_first_name",
+      //     400,
+      //     "first name should be alphanumeric, lowercase and length 2-64",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.lastName, "string") ||
-        !Validator.isAlphanumeric(userData.lastName) ||
-        !Validator.isLength(userData.lastName, { min: 2, max: 64 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_last_name",
-          400,
-          "last name should be alphanumeric, lowercase and length 2-64",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.lastName, "string") ||
+      //   !Validator.isAlphanumeric(userData.lastName) ||
+      //   !Validator.isLength(userData.lastName, { min: 2, max: 64 })
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_last_name",
+      //     400,
+      //     "last name should be alphanumeric, lowercase and length 2-64",
+      //     null
+      //   );
+      // }
 
-      if (!Pieces.VariableBaseTypeChecking(userData.password, "string")) {
-        return callback(
-          1,
-          "invalid_user_password",
-          400,
-          "password is not a string",
-          null
-        );
-      }
+      // if (!Pieces.VariableBaseTypeChecking(userData.password, "string")) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_password",
+      //     400,
+      //     "password is not a string",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.email, "string") ||
-        !Validator.isEmail(userData.email)
-      ) {
-        return callback(
-          1,
-          "invalid_user_email",
-          400,
-          "email is incorrect format",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.email, "string") ||
+      //   !Validator.isEmail(userData.email)
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_email",
+      //     400,
+      //     "email is incorrect format",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.emailVerified, "string") ||
-        !Validator.isEmail(userData.emailVerified) ||
-        userData.email === userData.emailVerified
-      ) {
-        return callback(
-          1,
-          "invalid_user_email_verified",
-          400,
-          "email verified is incorrect format or email matches verified email",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.emailVerified, "string") ||
+      //   !Validator.isEmail(userData.emailVerified) ||
+      //   userData.email === userData.emailVerified
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_email_verified",
+      //     400,
+      //     "email verified is incorrect format or email matches verified email",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.phone, "string") ||
-        !Validator.isLength(userData.phone, { min: 4, max: 12 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_phone",
-          400,
-          "phone number should be alphanumeric and length 4-12",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.phone, "string") ||
+      //   !Validator.isLength(userData.phone, { min: 4, max: 12 })
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_phone",
+      //     400,
+      //     "phone number should be alphanumeric and length 4-12",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.phoneVerified, "string") ||
-        !Validator.isLength(userData.phoneVerified, { min: 4, max: 12 }) ||
-        userData.phone === userData.phoneVerified
-      ) {
-        return callback(
-          1,
-          "invalid_user_phone_verified",
-          400,
-          "phone verified number should be alphanumeric and length 4-12 or phone matches verified phone",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.phoneVerified, "string") ||
+      //   !Validator.isLength(userData.phoneVerified, { min: 4, max: 12 }) ||
+      //   userData.phone === userData.phoneVerified
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_phone_verified",
+      //     400,
+      //     "phone verified number should be alphanumeric and length 4-12 or phone matches verified phone",
+      //     null
+      //   );
+      // }
 
       let queryObj = {};
 
-      queryObj.login_name = userData.loginName;
-      queryObj.email = userData.email;
-      queryObj.phone = userData.phone;
-      queryObj.first_name = userData.firstName;
-      queryObj.last_name = userData.lastName;
-      queryObj.phone_verified = userData.phoneVerified;
-      queryObj.email_verified = userData.emailVerified;
-      queryObj.password = BCrypt.hashSync(userData.password, 10);
+      queryObj.high_area_id = userData.high_area_id;
+      queryObj.payment_time = userData.payment_time;
+      queryObj.amount_of_money = userData.amount_of_money;
+      queryObj.amount_of_debt = userData.amount_of_debt;
+      queryObj.submitter = userData.submitter;
+      queryObj.status = userData.status;
 
-      if (
-        userData.activated === Constant.ACTIVATED.YES ||
-        userData.activated === Constant.ACTIVATED.NO
-      ) {
-        queryObj.activated = userData.activated;
-      } else {
-        queryObj.activated = Constant.ACTIVATED.YES;
-      }
+      // if (
+      //   userData.activated === Constant.ACTIVATED.YES ||
+      //   userData.activated === Constant.ACTIVATED.NO
+      // ) {
+      //   queryObj.activated = userData.activated;
+      // } else {
+      //   queryObj.activated = Constant.ACTIVATED.YES;
+      // }
 
-      if (
-        userData.deleted === Constant.DELETED.YES ||
-        userData.deleted === Constant.DELETED.NO
-      ) {
-        queryObj.deleted = userData.deleted;
-      } else {
-        queryObj.deleted = Constant.DELETED.NO;
-      }
+      // if (
+      //   userData.deleted === Constant.DELETED.YES ||
+      //   userData.deleted === Constant.DELETED.NO
+      // ) {
+      //   queryObj.deleted = userData.deleted;
+      // } else {
+      //   queryObj.deleted = Constant.DELETED.NO;
+      // }
 
-      if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
-        if (
-          Constant.USER_TYPE.indexOf(accessUserType) <=
-          Constant.USER_TYPE.indexOf(userData.type)
-        ) {
-          return callback(
-            1,
-            "invalid_user_right",
-            403,
-            "you have no right to do this",
-            null
-          );
-        }
-        queryObj.type = userData.type;
-      } else {
-        return callback(
-          1,
-          "invalid_user_type",
-          400,
-          "user type should be string enum {super_admin, admin, normal_user, anonymous}",
-          null
-        );
-      }
+      // if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
+      //   if (
+      //     Constant.USER_TYPE.indexOf(accessUserType) <=
+      //     Constant.USER_TYPE.indexOf(userData.type)
+      //   ) {
+      //     return callback(
+      //       1,
+      //       "invalid_user_right",
+      //       403,
+      //       "you have no right to do this",
+      //       null
+      //     );
+      //   }
+      //   queryObj.type = userData.type;
+      // } else {
+      //   return callback(
+      //     1,
+      //     "invalid_user_type",
+      //     400,
+      //     "user type should be string enum {super_admin, admin, normal_user, anonymous}",
+      //     null
+      //   );
+      // }
 
-      if (Pieces.VariableBaseTypeChecking(userData.displayName, "string")) {
-        queryObj.display_name = userData.displayName;
-      } else {
-        queryObj.display_name = userData.loginName;
-      }
+      // if (Pieces.VariableBaseTypeChecking(userData.displayName, "string")) {
+      //   queryObj.display_name = userData.displayName;
+      // } else {
+      //   queryObj.display_name = userData.loginName;
+      // }
 
       queryObj.created_by = accessUserId;
       queryObj.updated_by = accessUserId;

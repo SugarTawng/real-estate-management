@@ -17,7 +17,7 @@ let LandSaleList = MySequelize.define('landSaleList', {
         type: Sequelize.BIGINT(20),
         allowNull: false
     },
-    LandSaleList_area_id: {
+    land_area_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false
     },

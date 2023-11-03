@@ -7,7 +7,7 @@ const JsonWebToken = require('jsonwebtoken');
 
 // our components
 const Config = require('../config/Global');
-const HighBookingManager = require('../manager/HighBookingManager');
+const LandBookingManager = require('../manager/LandBookingManager');
 const Rest = require('../utils/Restware');
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
 
         let data = req.body || '';
 
-        HighBookingManager.createByAdmin(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, user) {
+        LandBookingManager.createByAdmin(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, user) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             }
@@ -35,14 +35,14 @@ module.exports = {
         let id = req.params.id || '';
 
         if(id === 'statistic'){
-         HighBookingManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+            LandBookingManager.getStatistic(accessUserId, accessUserType, function (errorCode, errorMessage, httpCode, errorDescription, result) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }
                 return Rest.sendSuccessOne(res, result, httpCode);
             })
         }else{
-         HighBookingManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+            LandBookingManager.getOne(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }
@@ -57,7 +57,7 @@ module.exports = {
         let accessLoginName = req.query.accessLoginName || '';
         let query = req.query || '';
 
-        HighBookingManager.getAll(accessUserId, accessUserType, accessLoginName, query, function (errorCode, errorMessage, httpCode, errorDescription, results) {
+        LandBookingManager.getAll(accessUserId, accessUserType, accessLoginName, query, function (errorCode, errorMessage, httpCode, errorDescription, results) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             }
@@ -73,7 +73,7 @@ module.exports = {
 
         if( id === 'deletes' ){
             let ids = req.body.ids || '';
-            HighBookingManager.deletes(accessUserId, accessUserType, ids, function (errorCode, errorMessage, httpCode, errorDescription) {
+            LandBookingManager.deletes(accessUserId, accessUserType, ids, function (errorCode, errorMessage, httpCode, errorDescription) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }
@@ -82,7 +82,7 @@ module.exports = {
         }else {
             let accessLoginName = req.body.accessLoginName || '';
             let data = req.body || '';
-            HighBookingManager.update( accessUserId, accessUserType, accessLoginName, id, data, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+            LandBookingManager.update( accessUserId, accessUserType, accessLoginName, id, data, function (errorCode, errorMessage, httpCode, errorDescription, result) {
                 if (errorCode) {
                     return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
                 }
@@ -98,7 +98,7 @@ module.exports = {
         let accessUserType = req.body.accessUserType || '';
         let id = req.params.id || '';
 
-        HighBookingManager.delete( accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription) {
+        LandBookingManager.delete( accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             }

@@ -488,171 +488,168 @@ module.exports = {
   },
   createByAdmin: function (accessUserId, accessUserType, accessLoginName, userData, callback) {
     try {
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.loginName, "string") ||
-        !Validator.isAlphanumeric(userData.loginName) ||
-        !Validator.isLowercase(userData.loginName) ||
-        !Validator.isLength(userData.loginName, { min: 4, max: 128 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_login_name",
-          400,
-          "login name should be alphanumeric, lowercase and length 4-128",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.loginName, "string") ||
+      //   !Validator.isAlphanumeric(userData.loginName) ||
+      //   !Validator.isLowercase(userData.loginName) ||
+      //   !Validator.isLength(userData.loginName, { min: 4, max: 128 })
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_login_name",
+      //     400,
+      //     "login name should be alphanumeric, lowercase and length 4-128",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.firstName, "string") ||
-        !Validator.isAlphanumeric(userData.firstName) ||
-        !Validator.isLength(userData.firstName, { min: 2, max: 64 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_first_name",
-          400,
-          "first name should be alphanumeric, lowercase and length 2-64",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.firstName, "string") ||
+      //   !Validator.isAlphanumeric(userData.firstName) ||
+      //   !Validator.isLength(userData.firstName, { min: 2, max: 64 })
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_first_name",
+      //     400,
+      //     "first name should be alphanumeric, lowercase and length 2-64",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.lastName, "string") ||
-        !Validator.isAlphanumeric(userData.lastName) ||
-        !Validator.isLength(userData.lastName, { min: 2, max: 64 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_last_name",
-          400,
-          "last name should be alphanumeric, lowercase and length 2-64",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.lastName, "string") ||
+      //   !Validator.isAlphanumeric(userData.lastName) ||
+      //   !Validator.isLength(userData.lastName, { min: 2, max: 64 })
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_last_name",
+      //     400,
+      //     "last name should be alphanumeric, lowercase and length 2-64",
+      //     null
+      //   );
+      // }
 
-      if (!Pieces.VariableBaseTypeChecking(userData.password, "string")) {
-        return callback(
-          1,
-          "invalid_user_password",
-          400,
-          "password is not a string",
-          null
-        );
-      }
+      // if (!Pieces.VariableBaseTypeChecking(userData.password, "string")) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_password",
+      //     400,
+      //     "password is not a string",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.email, "string") ||
-        !Validator.isEmail(userData.email)
-      ) {
-        return callback(
-          1,
-          "invalid_user_email",
-          400,
-          "email is incorrect format",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.email, "string") ||
+      //   !Validator.isEmail(userData.email)
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_email",
+      //     400,
+      //     "email is incorrect format",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.emailVerified, "string") ||
-        !Validator.isEmail(userData.emailVerified) ||
-        userData.email === userData.emailVerified
-      ) {
-        return callback(
-          1,
-          "invalid_user_email_verified",
-          400,
-          "email verified is incorrect format or email matches verified email",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.emailVerified, "string") ||
+      //   !Validator.isEmail(userData.emailVerified) ||
+      //   userData.email === userData.emailVerified
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_email_verified",
+      //     400,
+      //     "email verified is incorrect format or email matches verified email",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.phone, "string") ||
-        !Validator.isLength(userData.phone, { min: 4, max: 12 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_phone",
-          400,
-          "phone number should be alphanumeric and length 4-12",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.phone, "string") ||
+      //   !Validator.isLength(userData.phone, { min: 4, max: 12 })
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_phone",
+      //     400,
+      //     "phone number should be alphanumeric and length 4-12",
+      //     null
+      //   );
+      // }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.phoneVerified, "string") ||
-        !Validator.isLength(userData.phoneVerified, { min: 4, max: 12 }) ||
-        userData.phone === userData.phoneVerified
-      ) {
-        return callback(
-          1,
-          "invalid_user_phone_verified",
-          400,
-          "phone verified number should be alphanumeric and length 4-12 or phone matches verified phone",
-          null
-        );
-      }
+      // if (
+      //   !Pieces.VariableBaseTypeChecking(userData.phoneVerified, "string") ||
+      //   !Validator.isLength(userData.phoneVerified, { min: 4, max: 12 }) ||
+      //   userData.phone === userData.phoneVerified
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_phone_verified",
+      //     400,
+      //     "phone verified number should be alphanumeric and length 4-12 or phone matches verified phone",
+      //     null
+      //   );
+      // }
 
       let queryObj = {};
 
-      queryObj.login_name = userData.loginName;
-      queryObj.email = userData.email;
-      queryObj.phone = userData.phone;
-      queryObj.first_name = userData.firstName;
-      queryObj.last_name = userData.lastName;
-      queryObj.phone_verified = userData.phoneVerified;
-      queryObj.email_verified = userData.emailVerified;
-      queryObj.password = BCrypt.hashSync(userData.password, 10);
+      queryObj.owner_id = userData.owner_id;
+      queryObj.land_area_id = userData.land_area_id;
+      queryObj.desc = userData.desc;
+      queryObj.owned_at = userData.owned_at;
+      
 
-      if (
-        userData.activated === Constant.ACTIVATED.YES ||
-        userData.activated === Constant.ACTIVATED.NO
-      ) {
-        queryObj.activated = userData.activated;
-      } else {
-        queryObj.activated = Constant.ACTIVATED.YES;
-      }
+      // if (
+      //   userData.activated === Constant.ACTIVATED.YES ||
+      //   userData.activated === Constant.ACTIVATED.NO
+      // ) {
+      //   queryObj.activated = userData.activated;
+      // } else {
+      //   queryObj.activated = Constant.ACTIVATED.YES;
+      // }
 
-      if (
-        userData.deleted === Constant.DELETED.YES ||
-        userData.deleted === Constant.DELETED.NO
-      ) {
-        queryObj.deleted = userData.deleted;
-      } else {
-        queryObj.deleted = Constant.DELETED.NO;
-      }
+      // if (
+      //   userData.deleted === Constant.DELETED.YES ||
+      //   userData.deleted === Constant.DELETED.NO
+      // ) {
+      //   queryObj.deleted = userData.deleted;
+      // } else {
+      //   queryObj.deleted = Constant.DELETED.NO;
+      // }
 
-      if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
-        if (
-          Constant.USER_TYPE.indexOf(accessUserType) <=
-          Constant.USER_TYPE.indexOf(userData.type)
-        ) {
-          return callback(
-            1,
-            "invalid_user_right",
-            403,
-            "you have no right to do this",
-            null
-          );
-        }
-        queryObj.type = userData.type;
-      } else {
-        return callback(
-          1,
-          "invalid_user_type",
-          400,
-          "user type should be string enum {super_admin, admin, normal_user, anonymous}",
-          null
-        );
-      }
+      // if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
+      //   if (
+      //     Constant.USER_TYPE.indexOf(accessUserType) <=
+      //     Constant.USER_TYPE.indexOf(userData.type)
+      //   ) {
+      //     return callback(
+      //       1,
+      //       "invalid_user_right",
+      //       403,
+      //       "you have no right to do this",
+      //       null
+      //     );
+      //   }
+      //   queryObj.type = userData.type;
+      // } else {
+      //   return callback(
+      //     1,
+      //     "invalid_user_type",
+      //     400,
+      //     "user type should be string enum {super_admin, admin, normal_user, anonymous}",
+      //     null
+      //   );
+      // }
 
-      if (Pieces.VariableBaseTypeChecking(userData.displayName, "string")) {
-        queryObj.display_name = userData.displayName;
-      } else {
-        queryObj.display_name = userData.loginName;
-      }
+      // if (Pieces.VariableBaseTypeChecking(userData.displayName, "string")) {
+      //   queryObj.display_name = userData.displayName;
+      // } else {
+      //   queryObj.display_name = userData.loginName;
+      // }
 
       queryObj.created_by = accessUserId;
       queryObj.updated_by = accessUserId;

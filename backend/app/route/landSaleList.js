@@ -1,4 +1,4 @@
-const AccountCtrl = require('../controllers/AccountCtrl');
+const LandSaleListCtrl = require('../controllers/LandSaleListCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/account Create One
@@ -46,7 +46,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/account', AccountCtrl.createByAdmin);
+    app.post('/v1/auth/landSaleList', LandSaleListCtrl.createByAdmin);
     /**
      * @api {GET} /v1/auth/account Get List
      * @apiVersion 1.0.0
@@ -90,7 +90,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/account', AccountCtrl.getAll);
+    app.get('/v1/auth/landSaleList', LandSaleListCtrl.getAll);
     /**
      * @api {GET} /v1/auth/users/:id Get One
      * @apiVersion 1.0.0
@@ -136,7 +136,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/account/:id', AccountCtrl.getOne);
+    app.get('/v1/auth/landSaleList/:id', LandSaleListCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/account/:id Update One
      * @apiVersion 1.0.0
@@ -182,7 +182,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.put('/v1/auth/account/:id', AccountCtrl.update);
+    app.put('/v1/auth/landSaleList/:id', LandSaleListCtrl.update);
     /**
      * @api {DELETE} /v1/auth/account/:id Delete One
      * @apiVersion 1.0.0
@@ -218,7 +218,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/account/:id', AccountCtrl.delete);
+    app.delete('/v1/auth/landSaleList/:id', LandSaleListCtrl.delete);
     /**
      * @api {POST} /v1/login Login
      * @apiVersion 1.0.0
@@ -261,5 +261,4 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.post('/v1/login', AccountCtrl.login);
 }

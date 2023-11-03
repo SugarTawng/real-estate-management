@@ -25,7 +25,7 @@ let LandPaymentProcess = MySequelize.define('landPaymentProcess', {
         type: Sequelize.DOUBLE,
         allowNull: false
     },
-    submiter: {
+    submitter: {
         type: Sequelize.BIGINT(20),
         allowNull: false
     },
