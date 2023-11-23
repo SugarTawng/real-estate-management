@@ -1,34 +1,21 @@
-/**
-=========================================================
-* Material Dashboard 2  React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-function configs(labels, datasets) {
+function configs(labels, datasets, isDoubleBarChart) {
   return {
     data: {
       labels,
-      datasets: [
-        {
-          label: datasets.label,
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
-          data: datasets.data,
-          maxBarThickness: 6,
-        },
-      ],
+      datasets: isDoubleBarChart
+        ? datasets
+        : [
+            {
+              label: datasets.label,
+              data: datasets.data,
+              tension: 0.4,
+              borderWidth: 0,
+              borderRadius: 4,
+              borderSkipped: false,
+              backgroundColor: "rgba(255, 255, 255, 0.8)",
+              maxBarThickness: 6,
+            },
+          ],
     },
     options: {
       responsive: true,
