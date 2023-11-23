@@ -74,7 +74,6 @@ function Dashboard() {
           <Grid container spacing={1}>
             <Grid item xs={12} md={6} lg={6}>
               <MDBox mb={3}>
-<<<<<<< HEAD
                 <ReportsPieChart
                   color="light"
                   title="completed tasks (KPI)"
@@ -92,55 +91,6 @@ function Dashboard() {
                   description="Last Campaign Performance"
                   date="just updated"
                   chart={reportsPieChartData}
-=======
-                <ReportsLineChart
-                  color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox mt={4.5}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={12} lg={12}>
-              <MDBox mb={3}>
-                {/* <ReportsLineChart
-                  color="dark"
-                  title="completed tasks (KPI)"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
-                /> */}
-                <PieChart
-                  chart={{
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                    borderWidth: 1,
-                    backgroundColor: [
-                      "rgba(255, 99, 132, 0.2)",
-                      "rgba(54, 162, 235, 0.2)",
-                      "rgba(255, 206, 86, 0.2)",
-                      "rgba(75, 192, 192, 0.2)",
-                      "rgba(153, 102, 255, 0.2)",
-                      "rgba(255, 159, 64, 0.2)",
-                    ],
-                    borderColor: [
-                      "rgba(255, 99, 132, 1)",
-                      "rgba(54, 162, 235, 1)",
-                      "rgba(255, 206, 86, 1)",
-                      "rgba(75, 192, 192, 1)",
-                      "rgba(153, 102, 255, 1)",
-                      "rgba(255, 159, 64, 1)",
-                    ],
-                  }}
->>>>>>> 58c2f23cf7da1ad5a981f259772d557eaebadfc3
                 />
               </MDBox>
             </Grid>
