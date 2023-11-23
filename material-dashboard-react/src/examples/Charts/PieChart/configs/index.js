@@ -22,6 +22,8 @@ const { gradients, dark } = colors;
 function configs(labels, datasets) {
   const backgroundColors = [];
 
+  console.log(`ABC`, datasets.backgroundColors);
+
   if (datasets.backgroundColors) {
     datasets.backgroundColors.forEach((color) =>
       gradients[color]

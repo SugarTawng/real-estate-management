@@ -25,11 +25,14 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
+import ReportsPieChart from "examples/Charts/PieChart";
+
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
 
 // Data
 import reportsBarChartData from "layouts/process/data/reportsBarChartData";
 import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
+import reportsPieChartData from "layouts/process/data/reportsPieChartData";
 
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
@@ -67,33 +70,25 @@ function Dashboard() {
         </MDBox>
         <MDBox mt={4.5}>
           <Grid container spacing={1}>
-            <Grid item xs={12} md={12} lg={12}>
+            <Grid item xs={12} md={6} lg={6}>
               <MDBox mb={3}>
-                <ReportsLineChart
-                  color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox mt={4.5}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={12} lg={12}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
+                <ReportsPieChart
+                  color="light"
                   title="completed tasks (KPI)"
                   description="Last Campaign Performance"
                   date="just updated"
-                  chart={tasks}
+                  chart={reportsPieChartData}
+                />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={6}>
+              <MDBox mb={3}>
+                <ReportsPieChart
+                  color="light"
+                  title="completed tasks (KPI)"
+                  description="Last Campaign Performance"
+                  date="just updated"
+                  chart={reportsPieChartData}
                 />
               </MDBox>
             </Grid>
