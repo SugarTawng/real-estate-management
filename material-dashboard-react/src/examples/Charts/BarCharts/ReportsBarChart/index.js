@@ -44,8 +44,12 @@ import configs from "examples/Charts/BarCharts/ReportsBarChart/configs";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-function ReportsBarChart({ color, title, description, date, chart }) {
-  const { data, options } = configs(chart.labels || [], chart.datasets || {});
+function ReportsBarChart({ color, title, description, date, chart, isDoubleBarChart }) {
+  const { data, options } = configs(
+    chart.labels || [],
+    chart.datasets || {},
+    isDoubleBarChart || false
+  );
 
   return (
     <Card sx={{ height: "100%" }}>
@@ -93,6 +97,7 @@ function ReportsBarChart({ color, title, description, date, chart }) {
 ReportsBarChart.defaultProps = {
   color: "info",
   description: "",
+  isDoubleBarChart: false,
 };
 
 // Typechecking props for the ReportsBarChart
@@ -102,6 +107,7 @@ ReportsBarChart.propTypes = {
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   date: PropTypes.string.isRequired,
   chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired,
+  isDoubleBarChart: PropTypes.bool,
 };
 
 export default ReportsBarChart;

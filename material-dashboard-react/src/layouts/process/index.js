@@ -35,6 +35,7 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 import HorizontalBarChart from "examples/Charts/BarCharts/HorizontalBarChart";
+import PieChart from "examples/Charts/PieChart";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
@@ -53,6 +54,7 @@ function Dashboard() {
                   description="Last Campaign Performance"
                   date="campaign sent 2 days ago"
                   chart={reportsBarChartData}
+                  isDoubleBarChart={true}
                 />
                 {/* <HorizontalBarChart
                   color="info"
@@ -88,12 +90,34 @@ function Dashboard() {
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
               <MDBox mb={3}>
-                <ReportsLineChart
+                {/* <ReportsLineChart
                   color="dark"
                   title="completed tasks (KPI)"
                   description="Last Campaign Performance"
                   date="just updated"
                   chart={tasks}
+                /> */}
+                <PieChart
+                  chart={{
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    borderWidth: 1,
+                    backgroundColor: [
+                      "rgba(255, 99, 132, 0.2)",
+                      "rgba(54, 162, 235, 0.2)",
+                      "rgba(255, 206, 86, 0.2)",
+                      "rgba(75, 192, 192, 0.2)",
+                      "rgba(153, 102, 255, 0.2)",
+                      "rgba(255, 159, 64, 0.2)",
+                    ],
+                    borderColor: [
+                      "rgba(255, 99, 132, 1)",
+                      "rgba(54, 162, 235, 1)",
+                      "rgba(255, 206, 86, 1)",
+                      "rgba(75, 192, 192, 1)",
+                      "rgba(153, 102, 255, 1)",
+                      "rgba(255, 159, 64, 1)",
+                    ],
+                  }}
                 />
               </MDBox>
             </Grid>
