@@ -93,7 +93,7 @@ function Dashboard() {
                 color="primary"
                 icon="leaderboard"
                 title="Empty rooms"
-                count="+91"
+                count="-91"
                 percentage={{
                   color: "success",
                   amount: "",

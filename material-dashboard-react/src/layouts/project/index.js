@@ -29,7 +29,7 @@ import DataTable from "examples/Tables/DataTable";
 
 // Data
 import authorsTableData from "layouts/user/data/authorsTableData";
-import projectsTableData from "layouts/user/data/projectsTableData";
+import projectsTableData from "layouts/project/data/projectsTableData";
 
 function Tables() {
   const { columns, rows } = authorsTableData();
