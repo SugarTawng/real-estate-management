@@ -28,35 +28,39 @@ import axios from "axios";
 import team2 from "assets/images/team-2.jpg";
 
 import { apiUrl } from "constants/constants";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function data() {
-  var userData = null;
-
-  let fetchData = async () => {
-    try {
-      const response = await axios.get(apiUrl, {
-        headers: {
-          "Content-Type": "application/json",
-          access_token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImxvZ2luX25hbWUiOiJzYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTdWdhciBUYXduZyIsImVtYWlsIjoidGFuZ3ZpZXRkaWVuMDcwN0BnbWFpbC5jb20iLCJ0eXBlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MDI1MzYzNjEsImV4cCI6MTcwNDY5NjM2MX0.gXVTJj0_WbItNRSgOxTK6rsn7MNqptQX4GFkL-2AWV0",
-        },
-      });
-      if (response.data) {
-        console.log("response", response.data.data);
-        // Thực hiện map trực tiếp và lưu vào biến userData
-        userData = await response.data.data.map((data) => ({ ...data }));
-      } else {
-        // Xử lý khi response không có dữ liệu
-        console.error("Empty response data");
-      }
-    } catch (error) {
-      // Xử lý lỗi trong quá trình gửi request
-      console.error("Error fetching data:", error.message);
-    }
-  };
+  const [userData, setUserData] = useState(null);
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl, {
+          headers: {
+            "Content-Type": "application/json",
+            access_token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImxvZ2luX25hbWUiOiJzYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTdWdhciBUYXduZyIsImVtYWlsIjoidGFuZ3ZpZXRkaWVuMDcwN0BnbWFpbC5jb20iLCJ0eXBlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MDI1MzYzNjEsImV4cCI6MTcwNDY5NjM2MX0.gXVTJj0_WbItNRSgOxTK6rsn7MNqptQX4GFkL-2AWV0",
+          },
+        });
+        if (response.data) {
+          console.log("response", response.data.data);
+          // Thực hiện map trực tiếp và lưu vào biến userData
+          setUserData(response.data.data.map((data) => ({ ...data })));
+        } else {
+          // Xử lý khi response không có dữ liệu
+          console.error("Empty response data");
+          setUserData([]); // Đảm bảo userData không bao giờ là null
+        }
+      } catch (error) {
+        // Xử lý lỗi trong quá trình gửi request
+        console.error("Error fetching data:", error.message);
+        setUserData([]); // Đảm bảo userData không bao giờ là null
+      } finally {
+        setIsFetching(false);
+      }
+    };
     fetchData();
   }, []);
 
@@ -105,10 +109,34 @@ export default function data() {
       </MDTypography>
     ),
   });
+  console.log("userDataaaa: ", userData);
 
-  const generateRowsFromData = (data) => data.map(generateRowData);
+  const data = [
+    {
+      authorName: "Alexa Liras",
+      authorEmail: "alexa@creative-tim.com",
+      jobTitle: "Programator",
+      jobDescription: "Developer",
+      employedDate: "11/01/19",
+    },
+    {
+      authorName: "Laurent Perrier",
+      authorEmail: "laurent@creative-tim.com",
+      jobTitle: "Executive",
+      jobDescription: "Projects",
+      employedDate: "19/09/17",
+    },
+  ];
 
-  const rows = generateRowsFromData(userData);
+  const generateRowsFromData = (data) => {
+    if (!data) {
+      // Nếu data là null hoặc undefined, trả về một giá trị mặc định hoặc xử lý khác
+      return [];
+    }
+    return data.map(generateRowData);
+  };
+
+  const rows = generateRowsFromData(userData || []);
 
   return {
     columns: [
