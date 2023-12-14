@@ -32,7 +32,6 @@ import { useEffect, useState } from "react";
 
 export default function data() {
   const [userData, setUserData] = useState(null);
-  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,12 +56,14 @@ export default function data() {
         // Xử lý lỗi trong quá trình gửi request
         console.error("Error fetching data:", error.message);
         setUserData([]); // Đảm bảo userData không bao giờ là null
-      } finally {
-        setIsFetching(false);
       }
     };
     fetchData();
   }, []);
+
+  if (!userData) {
+    <div>loading</div>;
+  }
 
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -110,23 +111,6 @@ export default function data() {
     ),
   });
   console.log("userDataaaa: ", userData);
-
-  const data = [
-    {
-      authorName: "Alexa Liras",
-      authorEmail: "alexa@creative-tim.com",
-      jobTitle: "Programator",
-      jobDescription: "Developer",
-      employedDate: "11/01/19",
-    },
-    {
-      authorName: "Laurent Perrier",
-      authorEmail: "laurent@creative-tim.com",
-      jobTitle: "Executive",
-      jobDescription: "Projects",
-      employedDate: "19/09/17",
-    },
-  ];
 
   const generateRowsFromData = (data) => {
     if (!data) {
