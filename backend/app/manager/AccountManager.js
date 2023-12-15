@@ -823,6 +823,8 @@ module.exports = {
       queryObj.created_by = accessUserId;
       queryObj.updated_by = accessUserId;
 
+      console.log("queryObj", queryObj);
+
       Account.create(queryObj)
         .then((result) => {
           "use strict";

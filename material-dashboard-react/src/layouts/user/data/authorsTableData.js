@@ -110,7 +110,6 @@ export default function data() {
       </MDTypography>
     ),
   });
-  console.log("userDataaaa: ", userData);
 
   const generateRowsFromData = (data) => {
     if (!data) {
