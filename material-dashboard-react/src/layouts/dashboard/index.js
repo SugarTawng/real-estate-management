@@ -34,13 +34,18 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Dashboard() {
-  const [projectData, setProjectData] = useState(null);
+  const [bookingData, setBookingData] = useState(null);
+  const [accountData, setAccountData] = useState(null);
+  const [revenueData, setRevenueData] = useState(null);
+  const [roomData, setRoomData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/v1/dashboard/profileProject", {
+        const response = await axios.get("http://localhost:3000/v1/auth/dashboard/getStatistic", {
           headers: {
             "Content-Type": "application/json",
             access_token:
@@ -48,22 +53,26 @@ function Dashboard() {
           },
         });
         if (response.data) {
-          setProjectData(response.data.data.map((data) => ({ ...data })));
+          console.log("response dataa", response.data.data);
+          setBookingData(response.data.data.resultBooking);
+          setAccountData(response.data.data.resultAccount);
+          setRevenueData(response.data.data.resultMoney);
+          setRoomData(response.data.data.resultRoom);
         } else {
           // Xử lý khi response không có dữ liệu
           console.error("Empty response data");
-          setProjectData([]); // Đảm bảo userData không bao giờ là null
+          // setProjectData([]); // Đảm bảo userData không bao giờ là null
         }
       } catch (error) {
         // Xử lý lỗi trong quá trình gửi request
         console.error("Error fetching data:", error.message);
-        setProjectData([]); // Đảm bảo userData không bao giờ là null
+        // setProjectData([]); // Đảm bảo userData không bao giờ là null
       }
     };
     fetchData();
   }, []);
 
-  if (!projectData) {
+  if (!bookingData || !accountData || !revenueData || !roomData) {
     <div>loading</div>;
   }
 
@@ -78,7 +87,7 @@ function Dashboard() {
                 color="dark"
                 icon="weekend"
                 title="Bookings"
-                count={281}
+                count={bookingData || 0}
                 percentage={{
                   color: "success",
                   amount: "+55%",
@@ -92,7 +101,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="person_add"
                 title="Monthly User"
-                count="2,300"
+                count={accountData || 0}
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -107,7 +116,7 @@ function Dashboard() {
                 color="success"
                 icon="store"
                 title="Revenue"
-                count="34k"
+                count={revenueData || 0}
                 percentage={{
                   color: "success",
                   amount: "+1%",
@@ -122,7 +131,7 @@ function Dashboard() {
                 color="primary"
                 icon="leaderboard"
                 title="Empty rooms"
-                count="-91"
+                count={roomData || 0}
                 percentage={{
                   color: "success",
                   amount: "",
