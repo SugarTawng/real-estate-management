@@ -28,8 +28,43 @@ import team1 from "assets/images/team-1.jpg";
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function data() {
+  const [projectData, setProjectData] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/v1/dashboard/profileProject", {
+          headers: {
+            "Content-Type": "application/json",
+            access_token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImxvZ2luX25hbWUiOiJzYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTdWdhciBUYXduZyIsImVtYWlsIjoidGFuZ3ZpZXRkaWVuMDcwN0BnbWFpbC5jb20iLCJ0eXBlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MDI1MzYzNjEsImV4cCI6MTcwNDY5NjM2MX0.gXVTJj0_WbItNRSgOxTK6rsn7MNqptQX4GFkL-2AWV0",
+          },
+        });
+        if (response.data) {
+          console.log("response 1", response.data.data);
+          // Thực hiện map trực tiếp và lưu vào biến userData
+          setProjectData(response.data.data.data.map((data) => ({ ...data })));
+        } else {
+          // Xử lý khi response không có dữ liệu
+          console.error("Empty response data");
+          setProjectData([]); // Đảm bảo userData không bao giờ là null
+        }
+      } catch (error) {
+        // Xử lý lỗi trong quá trình gửi request
+        console.error("Error fetching data:", error.message);
+        setProjectData([]); // Đảm bảo userData không bao giờ là null
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!projectData) {
+    <div>loading</div>;
+  }
+
   const avatars = (
     members = [
       [team1, "Default Team 1"],
@@ -90,19 +125,38 @@ export default function data() {
     ),
   });
 
-  const rowData = [
-    generateRowData({
-      companyName: "Glory Heights",
-      budget: "$14,000",
-      completionValue: 60,
-    }),
-    generateRowData({
-      companyName: "Bcons City",
-      budget: "$3,000",
-      completionValue: 10,
-    }),
+  // const rowData = [
+  //   generateRowData({
+  //     companyName: "Glory Heights",
+  //     budget: "$14,000",
+  //     completionValue: 60,
+  //   }),
+  //   generateRowData({
+  //     companyName: "Bcons City",
+  //     budget: "$3,000",
+  //     completionValue: 10,
+  //   }),
+  //   // Add more entries as needed
+  // ];
+
+  const apiData = [
+    {
+      id: 1,
+      name: "abcd",
+      budget: 1000,
+      project_progress: 20,
+      img: "https://avatars.githubusercontent.com/u/6?v=4",
+      profiles: [
+        {
+          account_id: 13,
+          img: "https://avatars.githubusercontent.com/u/6?v=4",
+        },
+      ],
+    },
     // Add more entries as needed
   ];
+
+  const transformedData = apiData.map(generateRowData);
 
   return {
     columns: [
@@ -112,6 +166,6 @@ export default function data() {
       { Header: "completion", accessor: "completion", align: "center" },
     ],
 
-    rows: rowData,
+    rows: transformedData,
   };
 }

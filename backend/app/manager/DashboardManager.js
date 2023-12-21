@@ -20,7 +20,7 @@ module.exports = {
   getProfileProject: async function (callback){
     try {
       const projects = await Project.findAll({
-        attributes: ["id", "name", "budget", "project_progress"], // Chọn các thuộc tính bạn
+        attributes: ["id", "name", "budget", "project_progress", "img"], // Chọn các thuộc tính bạn
   
         include: [
           {
