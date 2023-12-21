@@ -127,38 +127,21 @@ export default function data() {
     ),
   });
 
-  // const rowData = [
-  //   generateRowData({
-  //     companyName: "Glory Heights",
-  //     budget: "$14,000",
-  //     completionValue: 60,
-  //   }),
-  //   generateRowData({
-  //     companyName: "Bcons City",
-  //     budget: "$3,000",
-  //     completionValue: 10,
-  //   }),
-  //   // Add more entries as needed
+  // const apiData = [
+  //   {
+  //     id: 1,
+  //     name: "abcd",
+  //     budget: 1000,
+  //     project_progress: 20,
+  //     img: "https://avatars.githubusercontent.com/u/6?v=4",
+  //     profiles: [
+  //       {
+  //         img: "https://avatars.githubusercontent.com/u/6?v=4",
+  //         account_id: 13,
+  //       },
+  //     ],
+  //   },
   // ];
-
-  const apiData = [
-    {
-      id: 1,
-      name: "abcd",
-      budget: 1000,
-      project_progress: 20,
-      img: "https://avatars.githubusercontent.com/u/6?v=4",
-      profiles: [
-        {
-          img: "https://avatars.githubusercontent.com/u/6?v=4",
-          account_id: 13,
-        },
-      ],
-    },
-    // Add more entries as needed
-  ];
-
-  // const transformedData = apiData.map(generateRowData);
   const generateRowsFromData = (data) => {
     if (!data) {
       return [];

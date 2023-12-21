@@ -9,7 +9,7 @@ module.exports = {
 
     let data = req.body || "";
 
-    DashboardManager.getStatictis(function (
+    DashboardManager.getStatistic(function (
       errorCode,
       errorMessage,
       httpCode,

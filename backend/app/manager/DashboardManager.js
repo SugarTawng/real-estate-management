@@ -1,7 +1,7 @@
 const sequelize = require("../utils/Sequelize");
 const {Profile, Project} = require('../models');
 module.exports = {
-  getStatictis: async function (callback) {
+  getStatistic: async function (callback) {
     try {
       const [results, metadata] = await sequelize.query(
         "CALL GetDashboardStatistics()"

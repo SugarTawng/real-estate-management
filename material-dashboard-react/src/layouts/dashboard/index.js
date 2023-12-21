@@ -36,7 +36,36 @@ import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 function Dashboard() {
-  const { sales, tasks } = reportsLineChartData;
+  const [projectData, setProjectData] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/v1/dashboard/profileProject", {
+          headers: {
+            "Content-Type": "application/json",
+            access_token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImxvZ2luX25hbWUiOiJzYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTdWdhciBUYXduZyIsImVtYWlsIjoidGFuZ3ZpZXRkaWVuMDcwN0BnbWFpbC5jb20iLCJ0eXBlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MDI1MzYzNjEsImV4cCI6MTcwNDY5NjM2MX0.gXVTJj0_WbItNRSgOxTK6rsn7MNqptQX4GFkL-2AWV0",
+          },
+        });
+        if (response.data) {
+          setProjectData(response.data.data.map((data) => ({ ...data })));
+        } else {
+          // Xử lý khi response không có dữ liệu
+          console.error("Empty response data");
+          setProjectData([]); // Đảm bảo userData không bao giờ là null
+        }
+      } catch (error) {
+        // Xử lý lỗi trong quá trình gửi request
+        console.error("Error fetching data:", error.message);
+        setProjectData([]); // Đảm bảo userData không bao giờ là null
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!projectData) {
+    <div>loading</div>;
+  }
 
   return (
     <DashboardLayout>
