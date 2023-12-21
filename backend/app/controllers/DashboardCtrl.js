@@ -29,4 +29,22 @@ module.exports = {
       return Rest.sendSuccessOne(res, data, httpCode);
     });
   },
+  getProfileProject: function (req, res){
+    DashboardManager.getProfileProject(function(
+      errorCode,
+      errorMessage,
+      httpCode,
+      errorDescription,
+      data){
+        if(errorCode){
+          return Rest.sendError(
+            res,
+            errorCode,
+            errorMessage,
+            errorDescription
+          );
+        }
+        return Rest.sendSuccessOne(res, data, httpCode);
+      });
+  }
 };

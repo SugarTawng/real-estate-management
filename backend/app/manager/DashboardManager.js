@@ -1,4 +1,5 @@
 const sequelize = require("../utils/Sequelize");
+const {Profile, Project} = require('../models');
 module.exports = {
   getStatictis: async function (callback) {
     try {
@@ -14,3 +15,28 @@ module.exports = {
     }
   },
 };
+
+module.exports = {
+  getProfileProject: async function (callback){
+    try {
+      const projects = await Project.findAll({
+        attributes: ["id", "name", "budget", "project_progress"], // Chọn các thuộc tính bạn
+  
+        include: [
+          {
+            model: Profile,
+            attributes: ["account_id", "img"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+      });
+  
+      return callback(null, null, 200, null, projects);
+    } catch (error) {
+      console.error("Error retrieving projects:", error);
+      return callback(1, "have and error", 400, "invalid api", null);
+    }
+  }
+}
