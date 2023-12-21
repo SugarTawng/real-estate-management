@@ -24,7 +24,7 @@ module.exports = {
           httpCode,
           errorDescription
         );
-      }
+      }           
       // resData.id = user.id;
       return Rest.sendSuccessOne(res, data, httpCode);
     });

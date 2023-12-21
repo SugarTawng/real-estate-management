@@ -9,9 +9,7 @@ const Sequelize = require("sequelize");
 // our components
 const Constant = require("../utils/Constant");
 const Pieces = require("../utils/Pieces");
-
 const Models = require("../models");
-const Block = require("../models/Block");
 const Account = Models.Account;
 
 module.exports = {

@@ -7,12 +7,9 @@ const JsonWebToken = require("jsonwebtoken");
 
 // our components
 const Constant = require("../utils/Constant");
-const Project = require("../models/Project");
 const Pieces = require("../utils/Pieces");
-const Config = require("../config/Global");
-const User = require("../models/User.js");
-const Block = require("../models/Block");
-const BCrypt = require("bcryptjs");
+const Models = require("../models");
+const Project = Models.Project;
 
 exports.create = function (
   accessUserId,

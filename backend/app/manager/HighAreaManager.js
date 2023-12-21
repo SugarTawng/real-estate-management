@@ -8,10 +8,10 @@ const JsonWebToken = require('jsonwebtoken');
 // our components
 const Constant = require('../utils/Constant');
 const Pieces = require('../utils/Pieces');
-const Config = require('../config/Global');
-const HighArea = require('../models/HighArea');
-const {NULL} = require("mysql/lib/protocol/constants/types");
-const BCrypt = require("bcryptjs");
+const Models = require("../models");
+const HighArea = Models.HighArea;
+
+
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
     try {

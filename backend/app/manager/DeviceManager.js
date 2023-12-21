@@ -11,7 +11,8 @@ const Device = require('../models/Device');
 const SocketManager = require('./SocketManager');
 const Pieces = require('../utils/Pieces');
 const Config = require('../config/Global');
-const User = require('../models/User.js');
+const Models = require("../models");
+const User = Models.User;
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, code, name, callback) {
     try {

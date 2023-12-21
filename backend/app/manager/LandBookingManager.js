@@ -9,8 +9,8 @@ const Sequelize = require("sequelize");
 // our components
 const Constant = require("../utils/Constant");
 const Pieces = require("../utils/Pieces");
-
-const LandBooking = require("../models/LandBooking");
+const Models = require("../models");
+const LandBooking = Models.LandBooking;
 
 module.exports = {
   getOne: function (accessUserId, accessUserType, id, callback) {
