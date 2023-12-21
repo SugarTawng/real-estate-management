@@ -25,7 +25,7 @@ module.exports = {
         include: [
           {
             model: Profile,
-            attributes: ["account_id", "img"],
+            attributes: ["img", "account_id"],
             through: {
               attributes: [],
             },

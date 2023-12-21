@@ -44,9 +44,7 @@ export default function data() {
           },
         });
         if (response.data) {
-          console.log("response 1", response.data.data);
-          // Thực hiện map trực tiếp và lưu vào biến userData
-          setProjectData(response.data.data.data.map((data) => ({ ...data })));
+          setProjectData(response.data.data.map((data) => ({ ...data })));
         } else {
           // Xử lý khi response không có dữ liệu
           console.error("Empty response data");
@@ -107,10 +105,14 @@ export default function data() {
   );
 
   const generateRowData = (item) => ({
-    companies: <Company image={item.companyImage || logoXD} name={item.companyName} />,
+    companies: <Company image={item.img || logoXD} name={item.name} />,
     members: (
       <MDBox display="flex" py={1}>
-        {avatars(item.teamMembers)}
+        {avatars(
+          item.profiles.map((item) => {
+            return Object.values(item);
+          })
+        )}
       </MDBox>
     ),
     budget: (
@@ -120,7 +122,7 @@ export default function data() {
     ),
     completion: (
       <MDBox width="8rem" textAlign="left">
-        <MDProgress value={item.completionValue} color="info" variant="gradient" label={false} />
+        <MDProgress value={item.project_progress} color="info" variant="gradient" label={false} />
       </MDBox>
     ),
   });
@@ -148,15 +150,23 @@ export default function data() {
       img: "https://avatars.githubusercontent.com/u/6?v=4",
       profiles: [
         {
-          account_id: 13,
           img: "https://avatars.githubusercontent.com/u/6?v=4",
+          account_id: 13,
         },
       ],
     },
     // Add more entries as needed
   ];
 
-  const transformedData = apiData.map(generateRowData);
+  // const transformedData = apiData.map(generateRowData);
+  const generateRowsFromData = (data) => {
+    if (!data) {
+      return [];
+    }
+    return data.map(generateRowData);
+  };
+
+  const rows = generateRowsFromData(projectData || []);
 
   return {
     columns: [
@@ -166,6 +176,6 @@ export default function data() {
       { Header: "completion", accessor: "completion", align: "center" },
     ],
 
-    rows: transformedData,
+    rows: rows,
   };
 }
