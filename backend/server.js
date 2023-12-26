@@ -7,8 +7,11 @@ const BodyParser = require("body-parser");
 const MethodOverride = require("method-override");
 const Morgan = require("morgan");
 const cors = require("cors");
+const { Server } = require("socket.io");
 // our components
 const Config = require("./app/config/Global");
+const LandPaymentProcess = require('./app/models').LandPaymentProcess;
+const HighPaymentProcess = require('./app/models').HighPaymentProcess;
 
 let App = Express();
 
@@ -60,7 +63,24 @@ const Port =
   parseInt(Config.port) +
   (process.env.NODE_APP_INSTANCE ? parseInt(process.env.NODE_APP_INSTANCE) : 0);
 
-console.log(Port);
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  LandPaymentProcess.afterCreate((item) => {
+    socket.emit('newItem', item);
+  });
+
+  HighPaymentProcess.afterCreate((item) => {
+    socket.emit('newItem', item);
+  });
+});
 
 server.listen(Port, function () {
   console.log("API started to listening on port %d", Port);

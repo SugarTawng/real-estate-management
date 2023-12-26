@@ -48,6 +48,7 @@ module.exports = function (app) {
    */
   app.get("/v1/auth/dashboard/getStatistic", DashboardCtrl.getStatistic);
   app.get("/v1/dashboard/profileProject", DashboardCtrl.getProfileProject);
+  app.get("/v1/dashboard/process", DashboardCtrl.getProcessPayment)
   /**
    * @api {GET} /v1/auth/account Get List
    * @apiVersion 1.0.0

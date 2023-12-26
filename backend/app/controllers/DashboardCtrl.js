@@ -46,5 +46,23 @@ module.exports = {
         }
         return Rest.sendSuccessOne(res, data, httpCode);
       });
+  },
+  getProcessPayment: function(req, res){
+    DashboardManager.getProcessPayment(function(
+      errorCode,
+      errorMessage,
+      httpCode,
+      errorDescription,
+      data){
+        if(errorCode){
+          return Rest.sendError(
+            res,
+            errorCode,
+            errorMessage,
+            errorDescription
+          );
+        }
+      return Rest.sendSuccessOne(res, data, httpCode);
+      })
   }
 };

@@ -44,7 +44,8 @@ export default function data() {
           },
         });
         if (response.data) {
-          setProjectData(response.data.data.map((data) => ({ ...data })));
+          // setProjectData(response.data.data.map((data) => ({ ...data })));
+          setProjectData(response.data.data);
         } else {
           // Xử lý khi response không có dữ liệu
           console.error("Empty response data");

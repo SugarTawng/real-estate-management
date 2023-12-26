@@ -1,5 +1,6 @@
 const sequelize = require("../utils/Sequelize");
-const {Profile, Project} = require('../models');
+const {Profile, Project, HighPaymentProcess, LandPaymentProcess} = require('../models');
+
 exports.getStatistic =  async function (callback) {
     try {
       const [results, metadata] = await sequelize.query(
@@ -33,6 +34,18 @@ exports.getStatistic =  async function (callback) {
       return callback(null, null, 200, null, projects);
     } catch (error) {
       console.error("Error retrieving projects:", error);
-      return callback(1, "have and error", 400, "invalid api", null);
+      return callback(1, "have an error", 400, "invalid api", null);
+    }
+  }
+
+  exports.getProcessPayment = async function(callback){
+    try{
+      const highProcessData = await HighPaymentProcess.findAll();
+      const landProcessData = await LandPaymentProcess.findAll();
+      const combinedData = highProcessData.concat(landProcessData);
+      callback(null, null, 200, null, combinedData);
+    } catch(error){
+      console.log("Error in server api process payment dashboard", error);
+      return callback(1, "have an error", 400, "invalid api", null);
     }
   }

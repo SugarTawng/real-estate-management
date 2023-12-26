@@ -42,7 +42,7 @@
     "request": "^2.88.0",
     "sequelize": "^6.32.1",
     "sharp": "^0.32.4",
-    "socket.io": "^4.7.1",
+    "socket.io": "^4.7.2",
     "socket.io-redis": "^5.2.0",
     "validator": "^13.9.0"
   },
