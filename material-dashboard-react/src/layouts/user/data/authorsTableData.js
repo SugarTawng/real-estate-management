@@ -16,10 +16,14 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React components
+import Icon from "@mui/material/Icon";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
+import InfoIcon from "@mui/icons-material/Info";
 
 // axios
 import axios from "axios";
@@ -29,9 +33,47 @@ import team2 from "assets/images/team-2.jpg";
 
 import { apiUrl } from "constants/constants";
 import { useEffect, useState } from "react";
+import { Delete, Edit } from "@mui/icons-material";
 
 export default function data() {
   const [userData, setUserData] = useState(null);
+  const iconStyle = {
+    width: "30px",
+    height: "30px",
+    marginRight: "10px",
+  };
+  const [menu, setMenu] = useState(null);
+  const openMenu = ({ currentTarget }) => setMenu(currentTarget);
+  const closeMenu = () => setMenu(null);
+  const renderMenu = (
+    <Menu
+      id="simple-menu"
+      anchorEl={menu}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={Boolean(menu)}
+      onClose={closeMenu}
+    >
+      <MenuItem onClick={closeMenu}>
+        <InfoIcon style={iconStyle} />
+        Detail
+      </MenuItem>
+      <MenuItem onClick={closeMenu}>
+        <Edit style={iconStyle} />
+        Edit
+      </MenuItem>
+      <MenuItem onClick={closeMenu}>
+        <Delete style={iconStyle} sx={{ color: "red" }} />
+        Delete
+      </MenuItem>
+    </Menu>
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -106,7 +148,12 @@ export default function data() {
     ),
     action: (
       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-        Edit
+        <MDBox color="text" px={2}>
+          <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
+            more_vert
+          </Icon>
+        </MDBox>
+        {renderMenu}
       </MDTypography>
     ),
   });

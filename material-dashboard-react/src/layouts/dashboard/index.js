@@ -45,7 +45,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/v1/auth/dashboard/getStatistic", {
+        const response = await axios.get("http://localhost:3003/v1/auth/dashboard/getStatistic", {
           headers: {
             "Content-Type": "application/json",
             access_token:

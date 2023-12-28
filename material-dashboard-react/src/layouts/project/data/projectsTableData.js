@@ -17,6 +17,10 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Icon from "@mui/material/Icon";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import InfoIcon from "@mui/icons-material/Info";
+import { Delete, Edit } from "@mui/icons-material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -32,10 +36,49 @@ import { useEffect, useState } from "react";
 
 export default function data() {
   const [projectData, setProjectData] = useState(null);
+
+  const iconStyle = {
+    width: "30px",
+    height: "30px",
+    marginRight: "10px",
+  };
+  const [menu, setMenu] = useState(null);
+  const openMenu = ({ currentTarget }) => setMenu(currentTarget);
+  const closeMenu = () => setMenu(null);
+  const renderMenu = (
+    <Menu
+      id="simple-menu"
+      anchorEl={menu}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={Boolean(menu)}
+      onClose={closeMenu}
+    >
+      <MenuItem onClick={closeMenu}>
+        <InfoIcon style={iconStyle} />
+        Detail
+      </MenuItem>
+      <MenuItem onClick={closeMenu}>
+        <Edit style={iconStyle} />
+        Edit
+      </MenuItem>
+      <MenuItem onClick={closeMenu}>
+        <Delete style={iconStyle} sx={{ color: "red" }} />
+        Delete
+      </MenuItem>
+    </Menu>
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/v1/auth/project", {
+        const response = await axios.get("http://localhost:3003/v1/auth/project", {
           headers: {
             "Content-Type": "application/json",
             access_token:
@@ -103,8 +146,13 @@ export default function data() {
       />
     ),
     action: (
-      <MDTypography component="a" href="#" color="text">
-        <Icon>more_vert</Icon>
+      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+        <MDBox color="text" px={2}>
+          <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
+            more_vert
+          </Icon>
+        </MDBox>
+        {renderMenu}
       </MDTypography>
     ),
   });

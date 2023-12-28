@@ -36,7 +36,7 @@ export default function data() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/v1/dashboard/profileProject", {
+        const response = await axios.get("http://localhost:3003/v1/dashboard/profileProject", {
           headers: {
             "Content-Type": "application/json",
             access_token:
