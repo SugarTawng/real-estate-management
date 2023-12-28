@@ -7,7 +7,7 @@ exports.getStatistic =  async function (callback) {
         "CALL GetDashboardStatistics()"
       );
       // results chứa kết quả từ stored procedure
-      console.log(results);
+      // console.log(results);
       return callback(null, null, 200, null, results);
     } catch (error) {
       console.log("error: ", error);
