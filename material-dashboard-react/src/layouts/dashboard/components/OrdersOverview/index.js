@@ -27,25 +27,32 @@ import TimelineItem from "examples/Timeline/TimelineItem";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-const CustomTimelineItem = ({ item, key, lastItem }) => (
-  <TimelineItem
-    key={key}
-    color={(item.color = "success")}
-    icon={(item.icon = "receipt")}
-    title={"Paid at: " + item.high_area_id ? item.high_area_id : item.land_area_id}
-    dateTime={item.created_at}
-    lastItem={lastItem}
-  />
-);
+const CustomTimelineItem = ({ item, key, lastItem }) => {
+  item.category = item.high_area_id ? "high area" : "land area";
+  item.title = `Paid at: ${item.high_area_id ? item.high_area_id : item.land_area_id}, 
+  ${item.category}`;
+  return (
+    <TimelineItem
+      key={key}
+      color={(item.color = "success")}
+      icon={(item.icon = "receipt")}
+      title={item.title}
+      dateTime={item.created_at}
+      lastItem={lastItem}
+    />
+  );
+};
 
 CustomTimelineItem.propTypes = {
   item: PropTypes.shape({
-    color: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
-    high_area_id: PropTypes.string.isRequired,
-    land_area_id: PropTypes.string.isRequired,
-    dateTime: PropTypes.string.isRequired,
-    created_at: PropTypes.string.isRequired,
+    color: PropTypes.string,
+    icon: PropTypes.string,
+    high_area_id: PropTypes.number,
+    land_area_id: PropTypes.number,
+    title: PropTypes.string,
+    dateTime: PropTypes.string,
+    created_at: PropTypes.string,
+    category: PropTypes.string,
   }).isRequired,
   key: PropTypes.number.isRequired,
   lastItem: PropTypes.bool.isRequired,
@@ -66,7 +73,6 @@ function OrdersOverview() {
         if (response.data) {
           console.log("response process data: ", response.data.data);
           setData(response.data.data);
-          console.log("data: ", data);
         } else {
           console.error("Empty response data");
           setData([]);
@@ -79,21 +85,11 @@ function OrdersOverview() {
     fetchData();
   }, []);
 
-  console.log("data2: ", data);
-
-  const apiDataa = [
-    {
-      title: "$2400, Design changes",
-      dateTime: "22 DEC 7:20 PM",
-    },
-    // ... (các phần tử còn lại)
-  ];
-
   return (
     <Card sx={{ height: "100%" }}>
       <MDBox pt={3} px={3}>
         <MDTypography variant="h6" fontWeight="medium">
-          Orders overview
+          Payment process
         </MDTypography>
         <MDBox mt={0} mb={2}>
           <MDTypography variant="button" color="text" fontWeight="regular">
@@ -109,9 +105,13 @@ function OrdersOverview() {
         </MDBox>
       </MDBox>
       <MDBox p={2}>
-        {data.map((item, index) => (
-          <CustomTimelineItem key={index} item={item} lastItem={index === data.length - 1} />
-        ))}
+        {data && data.length > 0 ? (
+          data.map((item, index) => (
+            <CustomTimelineItem key={index} item={item} lastItem={index === data.length - 1} />
+          ))
+        ) : (
+          <p>No data available</p>
+        )}
       </MDBox>
     </Card>
   );
