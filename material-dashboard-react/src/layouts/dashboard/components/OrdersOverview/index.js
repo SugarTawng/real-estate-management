@@ -27,6 +27,10 @@ import TimelineItem from "examples/Timeline/TimelineItem";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+//socket io import
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3003/");
+
 const CustomTimelineItem = ({ item, key, lastItem }) => {
   item.category = item.high_area_id ? "high area" : "land area";
   item.title = `Paid at: ${item.high_area_id ? item.high_area_id : item.land_area_id}, 
@@ -83,6 +87,12 @@ function OrdersOverview() {
       }
     };
     fetchData();
+    socket.on("newItem", (item) => {
+      setData((prevItems) => [...prevItems, item]);
+    });
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (

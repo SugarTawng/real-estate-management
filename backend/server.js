@@ -15,6 +15,29 @@ const HighPaymentProcess = require('./app/models').HighPaymentProcess;
 
 let App = Express();
 
+App.use(cors());
+
+// Create app
+let server = require("http").createServer(App);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+  LandPaymentProcess.afterCreate((item) => {
+    socket.emit('newItem', item);
+  });
+
+  HighPaymentProcess.afterCreate((item) => {
+    socket.emit('newItem', item);
+  });
+});
+
 // log by using morgan
 App.use(Morgan("combined"));
 
@@ -44,7 +67,7 @@ App.use(
 // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 App.use(MethodOverride("X-HTTP-Method-Override"));
 
-App.use(cors());
+
 
 // Public Location
 // App.use(Express.static(global.CLOUD_API.rootPath + Config.paths.public));
@@ -55,32 +78,10 @@ App.all("/v1/auth/*", [require("./app/middlewares/ValidateRequest")]);
 // Routes for API
 require("./app/routes")(App); // configure our routes
 
-// Create App
-let server = require("http").createServer(App);
-
 // Start App: http://IP_Address:port
 const Port =
   parseInt(Config.port) +
   (process.env.NODE_APP_INSTANCE ? parseInt(process.env.NODE_APP_INSTANCE) : 0);
-
-const io = new Server(server, {
-  cors: {
-    origin: 'http://localhost:3000/dashboard',
-    methods: ['GET', 'POST'],
-  },
-});
-
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-
-  LandPaymentProcess.afterCreate((item) => {
-    socket.emit('newItem', item);
-  });
-
-  HighPaymentProcess.afterCreate((item) => {
-    socket.emit('newItem', item);
-  });
-});
 
 server.listen(Port, function () {
   console.log("API started to listening on port %d", Port);
