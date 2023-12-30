@@ -39,7 +39,6 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 import User from "layouts/user";
 import Project from "layouts/project";
-import Billing from "layouts/billing";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
@@ -72,14 +71,6 @@ const routes = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/project",
     component: <Project />,
-  },
-  {
-    type: "collapse",
-    name: "Payment",
-    key: "billing",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/billing",
-    component: <Billing />,
   },
   {
     type: "collapse",
