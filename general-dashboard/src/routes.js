@@ -39,7 +39,6 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 import User from "layouts/user";
 import Project from "layouts/project";
-import Process from "layouts/process";
 import Billing from "layouts/billing";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
@@ -73,14 +72,6 @@ const routes = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/project",
     component: <Project />,
-  },
-  {
-    type: "collapse",
-    name: "process",
-    key: "process",
-    icon: <Icon fontSize="small">donut_large_outlined</Icon>,
-    route: "/process",
-    component: <Process />,
   },
   {
     type: "collapse",

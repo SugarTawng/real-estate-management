@@ -38,7 +38,6 @@ Coded by www.creative-tim.com
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import User from "layouts/user";
-import Project from "layouts/project";
 import Process from "layouts/process";
 import Billing from "layouts/billing";
 import Notifications from "layouts/notifications";
@@ -52,7 +51,7 @@ import Icon from "@mui/material/Icon";
 const routes = [
   {
     type: "collapse",
-    name: "Dashboard",
+    name: "Project overview",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
@@ -60,23 +59,15 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "User",
-    key: "user",
+    name: "Customer",
+    key: "customer",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/user",
+    route: "/customer",
     component: <User />,
   },
   {
     type: "collapse",
-    name: "Project",
-    key: "project",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/project",
-    component: <Project />,
-  },
-  {
-    type: "collapse",
-    name: "process",
+    name: "Process payment",
     key: "process",
     icon: <Icon fontSize="small">donut_large_outlined</Icon>,
     route: "/process",
@@ -84,7 +75,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Payment",
+    name: "Payment method",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/billing",
