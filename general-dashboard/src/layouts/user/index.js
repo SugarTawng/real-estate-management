@@ -16,7 +16,6 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -35,7 +34,6 @@ import authorsTableData from "layouts/user/data/authorsTableData";
 
 function Tables() {
   const { columns, rows } = authorsTableData();
-  console.log("column, row: ", columns, rows);
 
   return (
     <DashboardLayout>
@@ -55,7 +53,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Admin table
+                  User table
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

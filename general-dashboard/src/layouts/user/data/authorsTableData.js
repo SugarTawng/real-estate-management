@@ -16,6 +16,7 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React components
+import Backdrop from "@mui/material/Backdrop";
 import Icon from "@mui/material/Icon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -34,6 +35,13 @@ import team2 from "assets/images/team-2.jpg";
 import { apiUrl } from "constants/constants";
 import { useEffect, useState } from "react";
 import { Delete, Edit } from "@mui/icons-material";
+import { Fade, Modal } from "@mui/material";
+import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
+
+// Material Dashboard 2 React example components
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Sidenav from "examples/Sidenav";
 
 export default function data() {
   const [userData, setUserData] = useState(null);
@@ -45,6 +53,36 @@ export default function data() {
   const [menu, setMenu] = useState(null);
   const openMenu = ({ currentTarget }) => setMenu(currentTarget);
   const closeMenu = () => setMenu(null);
+
+  const [detailOpen, setDetailOpen] = useState(false);
+  const handleDetailClick = () => {
+    setDetailOpen(!detailOpen);
+  };
+
+  const detailUserData = {
+    title: "John Doe",
+    description: "Web Developer",
+    info: {
+      username: "john_doe",
+      email: "john.doe@example.com",
+      location: "City, Country",
+    },
+    social: [{ link: "https://facebook.com/SugarTawng", color: "facebook" }],
+    action: {
+      route: "/edit-profile",
+      tooltip: "Edit Profile",
+      tooltip2: "Close Detail",
+    },
+  };
+
+  const handleEditClick = () => {
+    console.log("edit clicked");
+  };
+
+  const handleDeleteClick = () => {
+    console.log("delte clicked");
+  };
+
   const renderMenu = (
     <Menu
       id="simple-menu"
@@ -60,15 +98,31 @@ export default function data() {
       open={Boolean(menu)}
       onClose={closeMenu}
     >
-      <MenuItem onClick={closeMenu}>
+      <MenuItem onClick={handleDetailClick}>
+        <Modal
+          open={detailOpen}
+          onClose={handleDetailClick}
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <DashboardLayout>
+            <DashboardNavbar />
+            <Fade in={true}>
+              <div>
+                <ProfileInfoCard {...detailUserData} />
+              </div>
+            </Fade>
+          </DashboardLayout>
+        </Modal>
         <InfoIcon style={iconStyle} />
-        Detail
+        Detail Info
       </MenuItem>
-      <MenuItem onClick={closeMenu}>
-        <Edit style={iconStyle} />
-        Edit
-      </MenuItem>
-      <MenuItem onClick={closeMenu}>
+      <MenuItem onClick={handleDeleteClick}>
         <Delete style={iconStyle} sx={{ color: "red" }} />
         Delete
       </MenuItem>

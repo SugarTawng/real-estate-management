@@ -43,6 +43,7 @@ import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import Testing from "layouts/testing/index";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -103,6 +104,14 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
+  },
+  {
+    type: "collapse",
+    name: "Testing",
+    key: "testing",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/testing",
+    component: <Testing />,
   },
 ];
 

@@ -33,6 +33,11 @@ import logoGithub from "assets/images/small-logos/github.svg";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Backdrop, Fade, Modal } from "@mui/material";
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
+import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 
 export default function data() {
   const [projectData, setProjectData] = useState(null);
@@ -45,6 +50,29 @@ export default function data() {
   const [menu, setMenu] = useState(null);
   const openMenu = ({ currentTarget }) => setMenu(currentTarget);
   const closeMenu = () => setMenu(null);
+
+  const [overallInfoOpen, setOverallInfoOpen] = useState(false);
+  const handleDetailClick = () => {
+    setOverallInfoOpen(!overallInfoOpen);
+  };
+
+  const projectOverallData = {
+    image: "đường dẫn/tới/hình_ảnh.jpg",
+    label: "Web Development",
+    title: "Project Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    action: {
+      type: "internal", // hoặc 'external' nếu là liên kết ngoại tuyến
+      route: "/project-details",
+      color: "primary",
+      label: "View Details",
+    },
+    authors: [
+      { image: "đường dẫn/tới/author1.jpg", name: "Author 1" },
+      { image: "đường dẫn/tới/author2.jpg", name: "Author 2" },
+    ],
+  };
+
   const renderMenu = (
     <Menu
       id="simple-menu"
@@ -60,13 +88,29 @@ export default function data() {
       open={Boolean(menu)}
       onClose={closeMenu}
     >
-      <MenuItem onClick={closeMenu}>
+      <MenuItem onClick={handleDetailClick}>
+        <Modal
+          open={overallInfoOpen}
+          onClose={handleDetailClick}
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <DashboardLayout>
+            <DashboardNavbar />
+            <Fade in={true}>
+              <div>
+                <DefaultProjectCard {...projectOverallData} />
+              </div>
+            </Fade>
+          </DashboardLayout>
+        </Modal>
         <InfoIcon style={iconStyle} />
-        Detail
-      </MenuItem>
-      <MenuItem onClick={closeMenu}>
-        <Edit style={iconStyle} />
-        Edit
+        Overall Info
       </MenuItem>
       <MenuItem onClick={closeMenu}>
         <Delete style={iconStyle} sx={{ color: "red" }} />

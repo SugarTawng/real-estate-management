@@ -32,8 +32,18 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React base styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
+import { Facebook } from "@mui/icons-material";
 
 function ProfileInfoCard({ title, description, info, social, action, shadow }) {
+  // event onclick button
+  const handleEditClick = () => {
+    console.log("edit clicked");
+  };
+
+  const handleCloseClick = () => {
+    console.log("close clicked");
+  };
+
   const labels = [];
   const values = [];
   const { socialMediaColors } = colors;
@@ -67,7 +77,7 @@ function ProfileInfoCard({ title, description, info, social, action, shadow }) {
   ));
 
   // Render the card social media icons
-  const renderSocial = social.map(({ link, icon, color }) => (
+  const renderSocial = social.map(({ link, color }) => (
     <MDBox
       key={color}
       component="a"
@@ -80,7 +90,7 @@ function ProfileInfoCard({ title, description, info, social, action, shadow }) {
       pl={0.5}
       lineHeight={1}
     >
-      {icon}
+      <Facebook />
     </MDBox>
   ));
 
@@ -90,9 +100,18 @@ function ProfileInfoCard({ title, description, info, social, action, shadow }) {
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
         </MDTypography>
-        <MDTypography component={Link} to={action.route} variant="body2" color="secondary">
-          <Tooltip title={action.tooltip} placement="top">
+        <MDTypography variant="body2" color="secondary">
+          <Tooltip
+            component={Link}
+            to={action.route}
+            title={action.tooltip}
+            placement="top"
+            onClick={handleEditClick}
+          >
             <Icon>edit</Icon>
+          </Tooltip>
+          <Tooltip title={action.tooltip2} placement="top" onClick={handleCloseClick}>
+            <Icon>close</Icon>
           </Tooltip>
         </MDTypography>
       </MDBox>
@@ -133,6 +152,7 @@ ProfileInfoCard.propTypes = {
   action: PropTypes.shape({
     route: PropTypes.string.isRequired,
     tooltip: PropTypes.string.isRequired,
+    tooltip2: PropTypes.string.isRequired,
   }).isRequired,
   shadow: PropTypes.bool,
 };
