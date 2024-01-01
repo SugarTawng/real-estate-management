@@ -43,6 +43,8 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Sidenav from "examples/Sidenav";
 
+import DetailUser from "./detail";
+
 export default function data() {
   const [userData, setUserData] = useState(null);
   const iconStyle = {
@@ -99,26 +101,11 @@ export default function data() {
       onClose={closeMenu}
     >
       <MenuItem onClick={handleDetailClick}>
-        <Modal
-          open={detailOpen}
-          onClose={handleDetailClick}
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <DashboardLayout>
-            <DashboardNavbar />
-            <Fade in={true}>
-              <div>
-                <ProfileInfoCard {...detailUserData} />
-              </div>
-            </Fade>
-          </DashboardLayout>
-        </Modal>
+        <DetailUser
+          detailOpen={detailOpen}
+          handleDetailClick={handleDetailClick}
+          detailUserData={detailUserData}
+        />
         <InfoIcon style={iconStyle} />
         Detail Info
       </MenuItem>
@@ -182,35 +169,75 @@ export default function data() {
     </MDBox>
   );
 
-  const generateRowData = (item) => ({
-    author: <Author image={item.teamImage || team2} name={item.display_name} email={item.email} />,
-    function: <Job title={item.type} description={item.language} />,
-    status: (
-      <MDBox ml={-1}>
-        <MDBadge
-          badgeContent={item.badgeContent || "online"}
-          color={item.badgeColor || "success"}
-          variant="gradient"
-          size="sm"
-        />
-      </MDBox>
-    ),
-    employed: (
-      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-        {item.updated_at}
-      </MDTypography>
-    ),
-    action: (
-      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-        <MDBox color="text" px={2}>
-          <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
-            more_vert
-          </Icon>
+  // const generateRowData = (item) => ({
+  //   author: <Author image={item.teamImage || team2} name={item.display_name} email={item.email} />,
+  //   function: <Job title={item.type} description={item.language} />,
+  //   status: (
+  //     <MDBox ml={-1}>
+  //       <MDBadge
+  //         badgeContent={item.badgeContent || "online"}
+  //         color={item.badgeColor || "success"}
+  //         variant="gradient"
+  //         size="sm"
+  //       />
+  //     </MDBox>
+  //   ),
+  //   employed: (
+  //     <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+  //       {item.updated_at}
+  //     </MDTypography>
+  //   ),
+  //   action: (
+  //     <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+  //       <MDBox color="text" px={2}>
+  //         <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
+  //           more_vert
+  //         </Icon>
+  //       </MDBox>
+  //       {renderMenu}
+  //     </MDTypography>
+  //   ),
+  // });
+
+  const generateRowData = (item) => {
+    console.log(item.id); // Chèn câu lệnh log ở đây
+
+    return {
+      author: (
+        <Author image={item.teamImage || team2} name={item.display_name} email={item.email} />
+      ),
+      function: <Job title={item.type} description={item.language} />,
+      status: (
+        <MDBox ml={-1}>
+          <MDBadge
+            badgeContent={item.badgeContent || "online"}
+            color={item.badgeColor || "success"}
+            variant="gradient"
+            size="sm"
+          />
         </MDBox>
-        {renderMenu}
-      </MDTypography>
-    ),
-  });
+      ),
+      employed: (
+        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          {item.updated_at}
+        </MDTypography>
+      ),
+      action: (
+        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          <MDBox color="text" px={2}>
+            <Icon
+              sx={{ cursor: "pointer", fontWeight: "bold" }}
+              fontSize="small"
+              onClick={openMenu}
+            >
+              more_vert
+            </Icon>
+          </MDBox>
+          {renderMenu}
+        </MDTypography>
+      ),
+    };
+  };
 
   const generateRowsFromData = (data) => {
     if (!data) {

@@ -38,6 +38,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
+import DetailProject from "./detail/index";
 
 export default function data() {
   const [projectData, setProjectData] = useState(null);
@@ -89,26 +90,11 @@ export default function data() {
       onClose={closeMenu}
     >
       <MenuItem onClick={handleDetailClick}>
-        <Modal
-          open={overallInfoOpen}
-          onClose={handleDetailClick}
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <DashboardLayout>
-            <DashboardNavbar />
-            <Fade in={true}>
-              <div>
-                <DefaultProjectCard {...projectOverallData} />
-              </div>
-            </Fade>
-          </DashboardLayout>
-        </Modal>
+        <DetailProject
+          overallInfoOpen={overallInfoOpen}
+          handleDetailClick={handleDetailClick}
+          projectOverallData={projectOverallData}
+        />
         <InfoIcon style={iconStyle} />
         Overall Info
       </MenuItem>
