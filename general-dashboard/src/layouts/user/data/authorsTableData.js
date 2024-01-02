@@ -53,8 +53,15 @@ export default function data() {
     marginRight: "10px",
   };
   const [menu, setMenu] = useState(null);
-  const openMenu = ({ currentTarget }) => setMenu(currentTarget);
+  const openMenu = (event) => setMenu(event.currentTarget);
   const closeMenu = () => setMenu(null);
+
+  const [clickedItemId, setClickedItemId] = useState(null);
+  const handleItemClick = (id, event) => {
+    setClickedItemId(id);
+    console.log("event: ", event);
+    openMenu(event);
+  };
 
   const [detailOpen, setDetailOpen] = useState(false);
   const handleDetailClick = () => {
@@ -85,7 +92,7 @@ export default function data() {
     console.log("delte clicked");
   };
 
-  const renderMenu = (
+  const renderMenu = () => (
     <Menu
       id="simple-menu"
       anchorEl={menu}
@@ -100,12 +107,15 @@ export default function data() {
       open={Boolean(menu)}
       onClose={closeMenu}
     >
-      <MenuItem onClick={handleDetailClick}>
-        <DetailUser
-          detailOpen={detailOpen}
-          handleDetailClick={handleDetailClick}
-          detailUserData={detailUserData}
-        />
+      <MenuItem id={clickedItemId} onClick={handleDetailClick}>
+        {detailOpen && (
+          <DetailUser
+            detailOpen={detailOpen}
+            handleDetailClick={handleDetailClick}
+            detailUserData={detailUserData}
+            userId={clickedItemId}
+          />
+        )}
         <InfoIcon style={iconStyle} />
         Detail Info
       </MenuItem>
@@ -127,7 +137,6 @@ export default function data() {
           },
         });
         if (response.data) {
-          console.log("response", response.data.data);
           // Thực hiện map trực tiếp và lưu vào biến userData
           setUserData(response.data.data.map((data) => ({ ...data })));
         } else {
@@ -169,38 +178,8 @@ export default function data() {
     </MDBox>
   );
 
-  // const generateRowData = (item) => ({
-  //   author: <Author image={item.teamImage || team2} name={item.display_name} email={item.email} />,
-  //   function: <Job title={item.type} description={item.language} />,
-  //   status: (
-  //     <MDBox ml={-1}>
-  //       <MDBadge
-  //         badgeContent={item.badgeContent || "online"}
-  //         color={item.badgeColor || "success"}
-  //         variant="gradient"
-  //         size="sm"
-  //       />
-  //     </MDBox>
-  //   ),
-  //   employed: (
-  //     <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-  //       {item.updated_at}
-  //     </MDTypography>
-  //   ),
-  //   action: (
-  //     <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-  //       <MDBox color="text" px={2}>
-  //         <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
-  //           more_vert
-  //         </Icon>
-  //       </MDBox>
-  //       {renderMenu}
-  //     </MDTypography>
-  //   ),
-  // });
-
   const generateRowData = (item) => {
-    console.log(item.id); // Chèn câu lệnh log ở đây
+    // console.log(item.id); // Chèn câu lệnh log ở đây
 
     return {
       author: (
@@ -228,12 +207,12 @@ export default function data() {
             <Icon
               sx={{ cursor: "pointer", fontWeight: "bold" }}
               fontSize="small"
-              onClick={openMenu}
+              onClick={(event) => handleItemClick(item.id, event)}
             >
               more_vert
             </Icon>
           </MDBox>
-          {renderMenu}
+          {renderMenu()}
         </MDTypography>
       ),
     };

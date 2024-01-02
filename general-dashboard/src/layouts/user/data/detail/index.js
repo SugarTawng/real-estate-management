@@ -5,7 +5,8 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import React from "react";
 
-const Index = ({ detailOpen, handleDetailClick, detailUserData }) => {
+const Index = ({ detailOpen, handleDetailClick, detailUserData, userId }) => {
+  console.log("im at: ", userId);
   return (
     <Modal
       open={detailOpen}
@@ -30,6 +31,7 @@ Index.propTypes = {
   detailOpen: PropTypes.bool.isRequired,
   handleDetailClick: PropTypes.func.isRequired,
   detailUserData: PropTypes.object.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default Index;
