@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -30,8 +30,38 @@ import MDSnackbar from "components/MDSnackbar";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
+import axios from "axios";
 
 function Notifications() {
+  const [notificationData, setNotification] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3003/v1/auth/message", {
+          headers: {
+            "Content-Type": "application/json",
+            access_token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImxvZ2luX25hbWUiOiJzYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTdWdhciBUYXduZyIsImVtYWlsIjoidGFuZ3ZpZXRkaWVuMDcwN0BnbWFpbC5jb20iLCJ0eXBlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MDQ3ODQ3NjgsImV4cCI6MTcwNjk0NDc2OH0.b9zFBZ7HXLarUS1WlSrF85hwKvRwG4Y8BmiSly4CyEA",
+          },
+        });
+        if (response.data) {
+          console.log("response", response.data.data.data);
+          // Thực hiện map trực tiếp và lưu vào biến userData
+          setNotification(response.data.data.data.map((data) => ({ ...data })));
+        } else {
+          // Xử lý khi response không có dữ liệu
+          console.error("Empty response data");
+          setNotification([]); // Đảm bảo userData không bao giờ là null
+        }
+      } catch (error) {
+        // Xử lý lỗi trong quá trình gửi request
+        console.error("Error fetching data:", error.message);
+        setNotification([]); // Đảm bảo userData không bao giờ là null
+      }
+    };
+    fetchData();
+  }, []);
+
   const [successSB, setSuccessSB] = useState(false);
   const [infoSB, setInfoSB] = useState(false);
   const [warningSB, setWarningSB] = useState(false);
@@ -50,7 +80,7 @@ function Notifications() {
     <MDTypography variant="body2" color="white">
       A simple {name} alert with{" "}
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
-        an example link
+        an example linkkk
       </MDTypography>
       . Give it a click if you like.
     </MDTypography>
@@ -110,6 +140,19 @@ function Notifications() {
     />
   );
 
+  console.log("notification data: ", notificationData);
+
+  const alerts = [
+    { color: "primary", content: alertContent("primary") },
+    { color: "secondary", content: alertContent("secondary") },
+    { color: "success", content: alertContent("success") },
+    { color: "error", content: alertContent("error") },
+    { color: "warning", content: alertContent("warning") },
+    { color: "info", content: alertContent("info") },
+    { color: "light", content: alertContent("light") },
+    { color: "dark", content: alertContent("dark") },
+  ];
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -121,7 +164,7 @@ function Notifications() {
                 <MDTypography variant="h5">Alerts</MDTypography>
               </MDBox>
               <MDBox pt={2} px={2}>
-                <MDAlert color="primary" dismissible>
+                {/* <MDAlert color="primary" dismissible>
                   {alertContent("primary")}
                 </MDAlert>
                 <MDAlert color="secondary" dismissible>
@@ -144,7 +187,12 @@ function Notifications() {
                 </MDAlert>
                 <MDAlert color="dark" dismissible>
                   {alertContent("dark")}
-                </MDAlert>
+                </MDAlert> */}
+                {notificationData.map((alert, index) => (
+                  <MDAlert key={index} color={alert.status} dismissible>
+                    {alert.title}
+                  </MDAlert>
+                ))}
               </MDBox>
             </Card>
           </Grid>

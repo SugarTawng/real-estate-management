@@ -1,58 +1,61 @@
-const Sequelize = require('sequelize');
-const MySequelize = require('../utils/Sequelize');
-const Account = require('./Account');
+const Sequelize = require("sequelize");
+const MySequelize = require("../utils/Sequelize");
+const Account = require("./Account");
 
-let Message = MySequelize.define('message', {
+let Message = MySequelize.define(
+  "message",
+  {
     id: {
-        type: Sequelize.BIGINT(20),
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
+      type: Sequelize.BIGINT(20),
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
     },
     title: {
-        type: Sequelize.STRING(256),
-        allowNull: false
+      type: Sequelize.STRING(256),
+      allowNull: false,
     },
     content: {
-        type: Sequelize.STRING(4068),
-        allowNull: false
+      type: Sequelize.STRING(4068),
+      allowNull: false,
     },
-    keyword: {
-        type: Sequelize.STRING(256),
-        allowNull: false
+    status: {
+      type: Sequelize.STRING(256),
+      allowNull: false,
     },
-    deleted:{
-        type: Sequelize.STRING(5),
-        allowNull: false,
-        defaultValue: 'false'
+    deleted: {
+      type: Sequelize.STRING(5),
+      allowNull: false,
+      defaultValue: "false",
     },
     created_by: {
-        type: Sequelize.BIGINT(20),
-        allowNull: false,
-        references: {
-            model: Account,
-            key: 'id'
-        }
+      type: Sequelize.BIGINT(20),
+      allowNull: false,
+      references: {
+        model: Account,
+        key: "id",
+      },
     },
     updated_by: {
-        type: Sequelize.BIGINT(10),
-        allowNull: false,
-        references: {
-            model: Account,
-            key: 'id'
-        }
+      type: Sequelize.BIGINT(10),
+      allowNull: false,
+      references: {
+        model: Account,
+        key: "id",
+      },
     },
     created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
     },
     updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
     },
-}, {
+  },
+  {
     underscored: true,
     paranoid: false,
     timestamps: true,
@@ -60,7 +63,8 @@ let Message = MySequelize.define('message', {
     createdAt: false,
     includeDeleted: true,
     freezeTableName: true,
-    tableName: 'tbl_message'
-});
+    tableName: "tbl_message",
+  }
+);
 
 module.exports = Message;
