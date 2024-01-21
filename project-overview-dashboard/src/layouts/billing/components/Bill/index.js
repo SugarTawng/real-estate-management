@@ -27,7 +27,15 @@ import MDButton from "components/MDButton";
 // Material Dashboard 2 React context
 import { useMaterialUIController } from "context";
 
-function Bill({ name, company, email, vat, noGutter }) {
+function Bill({
+  name,
+  project_id,
+  total_of_payment_time,
+  vat,
+  maintenance_fee,
+  total_price,
+  noGutter,
+}) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
 
@@ -68,26 +76,44 @@ function Bill({ name, company, email, vat, noGutter }) {
         </MDBox>
         <MDBox mb={1} lineHeight={0}>
           <MDTypography variant="caption" color="text">
-            Company Name:&nbsp;&nbsp;&nbsp;
-            <MDTypography variant="caption" fontWeight="medium" textTransform="capitalize">
-              {company}
+            Project Id:&nbsp;&nbsp;&nbsp;
+            <MDTypography variant="caption" fontWeight="medium">
+              {project_id}
             </MDTypography>
           </MDTypography>
         </MDBox>
         <MDBox mb={1} lineHeight={0}>
           <MDTypography variant="caption" color="text">
-            Email Address:&nbsp;&nbsp;&nbsp;
+            Total of payment time:&nbsp;&nbsp;&nbsp;
             <MDTypography variant="caption" fontWeight="medium">
-              {email}
+              {total_of_payment_time}
             </MDTypography>
           </MDTypography>
         </MDBox>
-        <MDTypography variant="caption" color="text">
-          VAT Number:&nbsp;&nbsp;&nbsp;
-          <MDTypography variant="caption" fontWeight="medium">
-            {vat}
+        <MDBox mb={1} lineHeight={0}>
+          <MDTypography variant="caption" color="text">
+            VAT Number:&nbsp;&nbsp;&nbsp;
+            <MDTypography variant="caption" fontWeight="medium">
+              {vat}
+            </MDTypography>
           </MDTypography>
-        </MDTypography>
+        </MDBox>
+        <MDBox mb={1} lineHeight={0}>
+          <MDTypography variant="caption" color="text">
+            Maintenance fee:&nbsp;&nbsp;&nbsp;
+            <MDTypography variant="caption" fontWeight="medium">
+              {maintenance_fee}
+            </MDTypography>
+          </MDTypography>
+        </MDBox>
+        <MDBox mb={1} lineHeight={0}>
+          <MDTypography variant="caption" color="text">
+            Total price:&nbsp;&nbsp;&nbsp;
+            <MDTypography variant="caption" fontWeight="medium">
+              {total_price}
+            </MDTypography>
+          </MDTypography>
+        </MDBox>
       </MDBox>
     </MDBox>
   );
@@ -101,9 +127,11 @@ Bill.defaultProps = {
 // Typechecking props for the Bill
 Bill.propTypes = {
   name: PropTypes.string.isRequired,
-  company: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  vat: PropTypes.string.isRequired,
+  project_id: PropTypes.number.isRequired,
+  total_of_payment_time: PropTypes.number.isRequired,
+  vat: PropTypes.number.isRequired,
+  maintenance_fee: PropTypes.number.isRequired,
+  total_price: PropTypes.number.isRequired,
   noGutter: PropTypes.bool,
 };
 
