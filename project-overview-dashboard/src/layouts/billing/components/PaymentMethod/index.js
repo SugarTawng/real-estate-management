@@ -23,6 +23,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
+import MDTextField from "components/MDInput";
 
 // Images
 import masterCardLogo from "assets/images/logos/mastercard.png";
@@ -47,7 +48,55 @@ function PaymentMethod() {
         </MDButton>
       </MDBox>
       <MDBox p={2}>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <MDTypography variant="h6">Project id</MDTypography>
+            <MDTextField label="Enter Project id" fullWidth />
+          </Grid>
+
+          <Grid item xs={12}>
+            <MDTypography variant="h6">Total of payment time</MDTypography>
+            <MDTextField label="Enter Total of payment time" fullWidth />
+          </Grid>
+
+          <Grid item xs={12}>
+            <MDTypography variant="h6">Method name</MDTypography>
+            <MDTextField label="Enter Method name" fullWidth />
+          </Grid>
+
+          <Grid item xs={12}>
+            <MDTypography variant="h6">Percent discount</MDTypography>
+            <MDTextField label="Enter Percent discount" fullWidth />
+          </Grid>
+
+          <Grid item xs={12}>
+            <MDTypography variant="h6">VAT</MDTypography>
+            <MDTextField label="Enter VAT" fullWidth />
+          </Grid>
+
+          <Grid item xs={12}>
+            <MDTypography variant="h6">Maintenance fee</MDTypography>
+            <MDTextField label="Enter Maintenance fee" fullWidth />
+          </Grid>
+
+          <Grid item xs={12}>
+            <MDTypography variant="h6">Total price</MDTypography>
+            <MDTextField label="Enter Total price" fullWidth />
+          </Grid>
+
+          <Grid item xs={6}>
+            <MDButton variant="contained" color="default" fullWidth>
+              Cancel
+            </MDButton>
+          </Grid>
+
+          <Grid item xs={6}>
+            <MDButton variant="contained" color="primary" fullWidth>
+              Submit
+            </MDButton>
+          </Grid>
+        </Grid>
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <MDBox
               borderRadius="lg"
@@ -98,7 +147,7 @@ function PaymentMethod() {
               </MDBox>
             </MDBox>
           </Grid>
-        </Grid>
+        </Grid> */}
       </MDBox>
     </Card>
   );
