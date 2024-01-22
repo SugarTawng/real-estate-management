@@ -337,7 +337,6 @@ module.exports = {
       queryObj.maintenance_fee = updateData.maintenance_fee;
       queryObj.total_price = updateData.total_price;
 
-
       // if (accessUserId === parseInt(userId)) {
       //   where.activated = Constant.ACTIVATED.YES;
       //   where.deleted = Constant.DELETED.NO;
@@ -616,7 +615,7 @@ module.exports = {
 
       let queryObj = {};
 
-      queryObj.zone_id = userData.zone_id;
+      queryObj.project_id = userData.project_id;
       queryObj.total_of_payment_time = userData.total_of_payment_time;
       queryObj.method_name = userData.method_name;
       queryObj.percent_discount = userData.percent_discount;
@@ -624,7 +623,6 @@ module.exports = {
       queryObj.maintenance_fee = userData.maintenance_fee;
       queryObj.total_price = userData.total_price;
 
-      
       queryObj.created_by = accessUserId;
       queryObj.updated_by = accessUserId;
 
