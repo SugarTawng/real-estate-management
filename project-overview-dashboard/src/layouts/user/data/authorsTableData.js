@@ -78,17 +78,17 @@ export default function data() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(apiUrl, {
+        const response = await axios.get("http://localhost:3003/v1/auth/customer/25", {
           headers: {
             "Content-Type": "application/json",
             access_token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImxvZ2luX25hbWUiOiJzYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTdWdhciBUYXduZyIsImVtYWlsIjoidGFuZ3ZpZXRkaWVuMDcwN0BnbWFpbC5jb20iLCJ0eXBlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MDI1MzYzNjEsImV4cCI6MTcwNDY5NjM2MX0.gXVTJj0_WbItNRSgOxTK6rsn7MNqptQX4GFkL-2AWV0",
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImxvZ2luX25hbWUiOiJzYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTdWdhciBUYXduZyIsImVtYWlsIjoidGFuZ3ZpZXRkaWVuMDcwN0BnbWFpbC5jb20iLCJ0eXBlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MDU5MDU0MzAsImV4cCI6MTcwODA2NTQzMH0.Ujsy1dPcX1iyX7gxx1DlSZxGLBHEpM1QRW_Z7jiMTY4",
           },
         });
         if (response.data) {
-          console.log("response", response.data.data);
+          console.log("response", response.data.data.data);
           // Thực hiện map trực tiếp và lưu vào biến userData
-          setUserData(response.data.data.map((data) => ({ ...data })));
+          setUserData(response.data.data.data.map((data) => ({ ...data })));
         } else {
           // Xử lý khi response không có dữ liệu
           console.error("Empty response data");
@@ -119,18 +119,36 @@ export default function data() {
     </MDBox>
   );
 
-  const Job = ({ title, description }) => (
-    <MDBox lineHeight={1} textAlign="left">
-      <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
-        {title}
-      </MDTypography>
-      <MDTypography variant="caption">{description}</MDTypography>
-    </MDBox>
-  );
+  // const Job = ({ title, description }) => (
+  //   <MDBox lineHeight={1} textAlign="left">
+  //     <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+  //       {title}
+  //     </MDTypography>
+  //     <MDTypography variant="caption">{description}</MDTypography>
+  //   </MDBox>
+  // );
+
+  const Job = ({ title, description }) => {
+    if (!title && !description) {
+      // Nếu cả title và description đều không có giá trị
+      return null;
+    }
+
+    return (
+      <MDBox lineHeight={1} textAlign="left">
+        {title && (
+          <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+            {title}
+          </MDTypography>
+        )}
+        {description && <MDTypography variant="caption">{description}</MDTypography>}
+      </MDBox>
+    );
+  };
 
   const generateRowData = (item) => ({
     author: <Author image={item.teamImage || team2} name={item.display_name} email={item.email} />,
-    function: <Job title={item.type} description={item.language} />,
+    function: <Job title={item.type || "a"} description={item.language || "b"} />,
     status: (
       <MDBox ml={-1}>
         <MDBadge

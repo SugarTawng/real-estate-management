@@ -169,14 +169,32 @@ export default function data() {
     </MDBox>
   );
 
-  const Job = ({ title, description }) => (
-    <MDBox lineHeight={1} textAlign="left">
-      <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
-        {title}
-      </MDTypography>
-      <MDTypography variant="caption">{description}</MDTypography>
-    </MDBox>
-  );
+  // const Job = ({ title, description }) => (
+  //   <MDBox lineHeight={1} textAlign="left">
+  //     <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+  //       {title}
+  //     </MDTypography>
+  //     <MDTypography variant="caption">{description}</MDTypography>
+  //   </MDBox>
+  // );
+
+  const Job = ({ title, description }) => {
+    if (!title && !description) {
+      // Nếu cả title và description đều không có giá trị
+      return null;
+    }
+
+    return (
+      <MDBox lineHeight={1} textAlign="left">
+        {title && (
+          <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+            {title}
+          </MDTypography>
+        )}
+        {description && <MDTypography variant="caption">{description}</MDTypography>}
+      </MDBox>
+    );
+  };
 
   const generateRowData = (item) => {
     // console.log(item.id); // Chèn câu lệnh log ở đây

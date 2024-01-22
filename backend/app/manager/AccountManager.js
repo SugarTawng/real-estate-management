@@ -47,8 +47,6 @@ module.exports = {
         "updated_by",
       ];
 
-      console.log(attributes);
-
       where = { id: id };
 
       // if(accessUserId !== parseInt(id)) {
@@ -56,8 +54,6 @@ module.exports = {
       // }else{
       //     where = {id: id};
       // }
-
-      console.log("where is this ", where);
 
       Account.findOne({
         where: where,
@@ -72,6 +68,56 @@ module.exports = {
       });
     } catch (error) {
       return callback(1, "get_one_account_fail", 400, error, null);
+    }
+  },
+
+  getCustomer: function(accessUserId, accessUserType, id, callback){
+    try {
+      let where = {};
+      let page = 1;
+      let perPage = Constant.DEFAULT_PAGING_SIZE;
+      let sort = []
+      where = { created_by: id };
+
+      let offset = perPage * (page - 1);
+      
+      Account.findAndCountAll({
+        where: where,
+        //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
+        limit: perPage,
+        offset: offset,
+        order: sort,
+      })
+        .then((data) => {
+          let pages = Math.ceil(data.count / perPage);
+          let Projects = data.rows;
+          let output = {
+            data: Projects,
+            pages: {
+              current: page,
+              prev: page - 1,
+              hasPrev: false,
+              next: page + 1 > pages ? 0 : page + 1,
+              hasNext: false,
+              total: pages,
+            },
+            items: {
+              begin: page * perPage - perPage + 1,
+              end: page * perPage,
+              total: data.count,
+            },
+          };
+          output.pages.hasNext = output.pages.next !== 0;
+          output.pages.hasPrev = output.pages.prev !== 0;
+          return callback(null, null, 200, null, output);
+        })
+        .catch(function (error) {
+          console.log("this is the error", error);
+          return callback(2, "find_count_all_Project_fail", 400, error, null);
+        });
+    } catch (error) {
+      console.log("this is the error", error);
+      return callback(2, "get_all_Project_fail", 400, error, null);
     }
   },
 
