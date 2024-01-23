@@ -83,6 +83,7 @@ module.exports = function (app) {
      *     }
      */
     app.get('/v1/auth/message', Message.getAll);
+    app.get('/v1/auth/customerMessage/:id', Message.getCustomerMessage);
     /**
      * @api {GET} /v1/auth/message/:id Get One
      * @apiVersion 1.0.0

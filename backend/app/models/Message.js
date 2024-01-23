@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const MySequelize = require("../utils/Sequelize");
 const Account = require("./Account");
+const Project = require("./Project");
 
 let Message = MySequelize.define(
   "message",
@@ -27,6 +28,14 @@ let Message = MySequelize.define(
       type: Sequelize.STRING(5),
       allowNull: false,
       defaultValue: "false",
+    },
+    project_id: {
+      type: Sequelize.BIGINT(20),
+      allowNull: false,
+      references: {
+        model: Project,
+        key: "id",
+      },
     },
     created_by: {
       type: Sequelize.BIGINT(20),

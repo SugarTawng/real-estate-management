@@ -37,6 +37,20 @@ module.exports = {
             }
         });
     },
+    getCustomerMessage: function (req, res){
+        console.log('im here');
+        let accessUserId = req.query.accessUserId || '';
+        let accessUserType = req.query.accessUserType || '';
+
+        let id = req.params.id || '';
+
+        MessageManager.getCustomerMessage(accessUserId, accessUserType, id, function (errorCode, errorMessage, httpCode, errorDescription, result) {
+            if (errorCode) {
+                return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
+            }
+            return Rest.sendSuccessOne(res, result, httpCode);
+        })
+    },
     getOne: function (req, res) {
         let accessUserId = req.query.accessUserId || '';
         let accessUserType = req.query.accessUserType || '';
