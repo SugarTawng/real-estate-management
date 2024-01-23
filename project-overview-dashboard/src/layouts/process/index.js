@@ -35,7 +35,8 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import reportsPieChartData from "layouts/process/data/reportsPieChartData";
 
 // Dashboard components
-import Projects from "layouts/dashboard/components/Projects";
+// import Projects from "layouts/dashboard/components/Projects";
+import Project from "layouts/project";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 import HorizontalBarChart from "examples/Charts/BarCharts/HorizontalBarChart";
 import PieChart from "examples/Charts/PieChart";
@@ -96,6 +97,7 @@ function Dashboard() {
             </Grid>
           </Grid>
         </MDBox>
+        <Project />
       </MDBox>
       <Footer />
     </DashboardLayout>
