@@ -3,7 +3,7 @@
  */
 // third party components
 const Validator = require('validator');
-const JsonWebToken = require('jsonwebtoken');
+const JsonWebToken = require('jsonwebtoken');   
 
 // our components
 const Constant = require('../utils/Constant');
@@ -103,7 +103,7 @@ exports.getCustomerMessage = function (accessUserId, accessUserType, id, callbac
         let page = 1;
         let perPage = Constant.DEFAULT_PAGING_SIZE;
         let sort = [];
-        where = {created_by: id};
+        where = {project_id: id};
 
         let offset = perPage * (page - 1);
         Message.findAndCountAll({

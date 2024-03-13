@@ -388,7 +388,7 @@ module.exports = {
 
         if (
           Pieces.VariableBaseTypeChecking(updateData.email, "string") &&
-          !Validator.isEmail(updateData.email)
+          Validator.isEmail(updateData.email)
         ) {
           queryObj.email = updateData.email;
         }
@@ -806,6 +806,7 @@ module.exports = {
       }
 
       let queryObj = {};
+
 
       queryObj.login_name = userData.loginName;
       queryObj.email = userData.email;

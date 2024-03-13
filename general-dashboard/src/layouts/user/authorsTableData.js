@@ -33,7 +33,7 @@ import axios from "axios";
 import team2 from "assets/images/team-2.jpg";
 
 import { apiUrl } from "constants/constants";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Delete, Edit } from "@mui/icons-material";
 import { Fade, Modal } from "@mui/material";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
@@ -45,29 +45,6 @@ import Sidenav from "examples/Sidenav";
 
 import DetailUser from "./detail";
 
-const renderMenu = ({ anchorEl, handleClose }) => (
-  <Menu
-    id="simple-menu"
-    anchorEl={anchorEl}
-    anchorOrigin={{
-      vertical: "top",
-      horizontal: "left",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    open={Boolean(anchorEl)}
-    onClose={handleClose}
-  >
-    <MenuItem onClick={() => handleActionClick("Action 1")}>Action 1</MenuItem>
-    <MenuItem onClick={() => handleActionClick("Action 2")}>
-      <Delete style={iconStyle} sx={{ color: "red" }} />
-      Delete
-    </MenuItem>
-  </Menu>
-);
-
 export default function data() {
   const [userData, setUserData] = useState(null);
   const iconStyle = {
@@ -75,31 +52,20 @@ export default function data() {
     height: "30px",
     marginRight: "10px",
   };
+  //
+  const [menu, setMenu] = useState(null);
+  const openMenu = (event) => setMenu(event.currentTarget);
+  const closeMenu = () => setMenu(null);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedItemId, setSelectedItemId] = useState(null);
-  const isComponentMounted = useRef(true);
-
-  const handleMenuOpen = (event, itemId) => {
-    setAnchorEl(event.currentTarget);
-    setSelectedItemId(itemId);
+  const [clickedItemId, setClickedItemId] = useState(null);
+  const handleItemClick = (id, event) => {
+    setClickedItemId(id);
+    openMenu(event);
   };
 
-  const handleMenuClose = () => {
-    if (event.currentTarget) {
-      if (isComponentMounted.current) {
-        setAnchorEl(null);
-        setSelectedItemId(null);
-      }
-    }
-  };
-
-  const handleActionClick = (action) => {
-    if (isComponentMounted.current) {
-      // Xử lý logic khi action được bấm
-      console.log(`Item ${selectedItemId} - Action: ${action}`);
-      handleMenuClose();
-    }
+  const [detailOpen, setDetailOpen] = useState(false);
+  const handleDetailClick = () => {
+    setDetailOpen(!detailOpen);
   };
 
   const detailUserData = {
@@ -131,7 +97,7 @@ export default function data() {
   const renderMenu = () => (
     <Menu
       id="simple-menu"
-      anchorEl={anchorEl}
+      anchorEl={menu}
       anchorOrigin={{
         vertical: "top",
         horizontal: "left",
@@ -140,11 +106,22 @@ export default function data() {
         vertical: "top",
         horizontal: "right",
       }}
-      open={Boolean(anchorEl)}
-      onClose={handleMenuClose}
+      open={Boolean(menu)}
+      onClose={closeMenu}
     >
-      <MenuItem onClick={() => handleActionClick("Action 1")}>Action 1</MenuItem>
-      <MenuItem onClick={() => handleActionClick("Action 2")}>
+      <MenuItem id={clickedItemId} onClick={handleDetailClick}>
+        {detailOpen && (
+          <DetailUser
+            detailOpen={detailOpen}
+            handleDetailClick={handleDetailClick}
+            detailUserData={detailUserData}
+            userId={clickedItemId}
+          />
+        )}
+        <InfoIcon style={iconStyle} />
+        Detail Info
+      </MenuItem>
+      <MenuItem onClick={handleDeleteClick}>
         <Delete style={iconStyle} sx={{ color: "red" }} />
         Delete
       </MenuItem>
@@ -176,14 +153,11 @@ export default function data() {
       }
     };
     fetchData();
-    return () => {
-      isComponentMounted.current = false;
-    };
   }, []);
 
-  // if (!userData) {
-  //   <div>loading</div>;
-  // }
+  if (!userData) {
+    <div>loading</div>;
+  }
 
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -197,8 +171,18 @@ export default function data() {
     </MDBox>
   );
 
+  // const Job = ({ title, description }) => (
+  //   <MDBox lineHeight={1} textAlign="left">
+  //     <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+  //       {title}
+  //     </MDTypography>
+  //     <MDTypography variant="caption">{description}</MDTypography>
+  //   </MDBox>
+  // );
+
   const Job = ({ title, description }) => {
     if (!title && !description) {
+      // Nếu cả title và description đều không có giá trị
       return null;
     }
 
@@ -215,6 +199,8 @@ export default function data() {
   };
 
   const generateRowData = (item) => {
+    // console.log(item.id); // Chèn câu lệnh log ở đây
+
     return {
       author: (
         <Author image={item.teamImage || team2} name={item.display_name} email={item.email} />
@@ -241,11 +227,12 @@ export default function data() {
             <Icon
               sx={{ cursor: "pointer", fontWeight: "bold" }}
               fontSize="small"
-              onClick={(e) => handleMenuOpen(e, item.id)}
+              onClick={(event) => handleItemClick(item.id, event)}
             >
               more_vert
             </Icon>
           </MDBox>
+          {renderMenu()}
         </MDTypography>
       ),
     };
@@ -253,6 +240,7 @@ export default function data() {
 
   const generateRowsFromData = (data) => {
     if (!data) {
+      // Nếu data là null hoặc undefined, trả về một giá trị mặc định hoặc xử lý khác
       return [];
     }
     return data.map(generateRowData);
