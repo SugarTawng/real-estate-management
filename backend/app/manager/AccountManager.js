@@ -698,11 +698,13 @@ module.exports = {
     callback
   ) {
     try {
+
+      console.log('userDataa', userData);
+
       if (
-        !Pieces.VariableBaseTypeChecking(userData.loginName, "string") ||
-        !Validator.isAlphanumeric(userData.loginName) ||
-        !Validator.isLowercase(userData.loginName) ||
-        !Validator.isLength(userData.loginName, { min: 4, max: 128 })
+        !Pieces.VariableBaseTypeChecking(userData.login_name, "string") ||
+        !Validator.isAlphanumeric(userData.login_name) ||
+        !Validator.isLength(userData.login_name, { min: 4, max: 128 })
       ) {
         return callback(
           1,
@@ -714,9 +716,9 @@ module.exports = {
       }
 
       if (
-        !Pieces.VariableBaseTypeChecking(userData.firstName, "string") ||
-        !Validator.isAlphanumeric(userData.firstName) ||
-        !Validator.isLength(userData.firstName, { min: 2, max: 64 })
+        !Pieces.VariableBaseTypeChecking(userData.first_name, "string") ||
+        !Validator.isAlphanumeric(userData.first_name) ||
+        !Validator.isLength(userData.first_name, { min: 2, max: 64 })
       ) {
         return callback(
           1,
@@ -728,9 +730,9 @@ module.exports = {
       }
 
       if (
-        !Pieces.VariableBaseTypeChecking(userData.lastName, "string") ||
-        !Validator.isAlphanumeric(userData.lastName) ||
-        !Validator.isLength(userData.lastName, { min: 2, max: 64 })
+        !Pieces.VariableBaseTypeChecking(userData.last_name, "string") ||
+        !Validator.isAlphanumeric(userData.last_name) ||
+        !Validator.isLength(userData.last_name, { min: 2, max: 64 })
       ) {
         return callback(
           1,
@@ -765,9 +767,9 @@ module.exports = {
       }
 
       if (
-        !Pieces.VariableBaseTypeChecking(userData.emailVerified, "string") ||
-        !Validator.isEmail(userData.emailVerified) ||
-        userData.email === userData.emailVerified
+        !Pieces.VariableBaseTypeChecking(userData.email_verified, "string") ||
+        !Validator.isEmail(userData.email_verified) ||
+        userData.email === userData.email_verified
       ) {
         return callback(
           1,
@@ -792,9 +794,9 @@ module.exports = {
       }
 
       if (
-        !Pieces.VariableBaseTypeChecking(userData.phoneVerified, "string") ||
-        !Validator.isLength(userData.phoneVerified, { min: 4, max: 12 }) ||
-        userData.phone === userData.phoneVerified
+        !Pieces.VariableBaseTypeChecking(userData.phone_verified, "string") ||
+        !Validator.isLength(userData.phone_verified, { min: 4, max: 12 }) ||
+        userData.phone === userData.phone_verified
       ) {
         return callback(
           1,
@@ -808,13 +810,13 @@ module.exports = {
       let queryObj = {};
 
 
-      queryObj.login_name = userData.loginName;
+      queryObj.login_name = userData.login_name;
       queryObj.email = userData.email;
       queryObj.phone = userData.phone;
-      queryObj.first_name = userData.firstName;
-      queryObj.last_name = userData.lastName;
-      queryObj.phone_verified = userData.phoneVerified;
-      queryObj.email_verified = userData.emailVerified;
+      queryObj.first_name = userData.first_name;
+      queryObj.last_name = userData.last_name;
+      queryObj.phone_verified = userData.phone_verified;
+      queryObj.email_verified = userData.email_verified;
       queryObj.password = BCrypt.hashSync(userData.password, 10);
 
       if (
@@ -862,7 +864,7 @@ module.exports = {
       if (Pieces.VariableBaseTypeChecking(userData.displayName, "string")) {
         queryObj.display_name = userData.displayName;
       } else {
-        queryObj.display_name = userData.loginName;
+        queryObj.display_name = userData.login_name;
       }
 
       queryObj.created_by = accessUserId;
