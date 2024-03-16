@@ -618,9 +618,10 @@ module.exports = {
     }
   },
 
-  authenticate: function (loginName, password, callback) {
+  authenticate: function (login_name, password, callback) {
     try {
-      if (!Pieces.VariableBaseTypeChecking(loginName, "string")) {
+      console.log('login name, password: ', login_name, password);
+      if (!Pieces.VariableBaseTypeChecking(login_name, "string")) {
         return callback(
           1,
           "invalid_user_login_name",
@@ -640,9 +641,7 @@ module.exports = {
         );
       }
 
-      let where = { login_name: loginName };
-
-      console.log(where);
+      let where = { login_name: login_name };
 
       let attributes = [
         "id",
@@ -837,32 +836,34 @@ module.exports = {
         queryObj.deleted = Constant.DELETED.NO;
       }
 
-      if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
-        if (
-          Constant.USER_TYPE.indexOf(accessUserType) <=
-          Constant.USER_TYPE.indexOf(userData.type)
-        ) {
-          return callback(
-            1,
-            "invalid_user_right",
-            403,
-            "you have no right to do this",
-            null
-          );
-        }
-        queryObj.type = userData.type;
-      } else {
-        return callback(
-          1,
-          "invalid_user_type",
-          400,
-          "user type should be string enum {super_admin, admin, normal_user, anonymous}",
-          null
-        );
-      }
+      // if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
+      //   if (
+      //     Constant.USER_TYPE.indexOf(accessUserType) <=
+      //     Constant.USER_TYPE.indexOf(userData.type)
+      //   ) {
+      //     return callback(
+      //       1,
+      //       "invalid_user_right",
+      //       403,
+      //       "you have no right to do this",
+      //       null
+      //     );
+      //   }
+      //   queryObj.type = userData.type;
+      // } else {
+      //   return callback(
+      //     1,
+      //     "invalid_user_type",
+      //     400,
+      //     "user type should be string enum {super_admin, admin, normal_user, anonymous}",
+      //     null
+      //   );
+      // }
 
-      if (Pieces.VariableBaseTypeChecking(userData.displayName, "string")) {
-        queryObj.display_name = userData.displayName;
+      queryObj.type = userData.type;
+
+      if (Pieces.VariableBaseTypeChecking(userData.display_name, "string")) {
+        queryObj.display_name = userData.display_name;
       } else {
         queryObj.display_name = userData.login_name;
       }
