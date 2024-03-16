@@ -698,8 +698,6 @@ module.exports = {
   ) {
     try {
 
-      console.log('userDataa', userData);
-
       if (
         !Pieces.VariableBaseTypeChecking(userData.login_name, "string") ||
         !Validator.isAlphanumeric(userData.login_name) ||
