@@ -834,31 +834,30 @@ module.exports = {
         queryObj.deleted = Constant.DELETED.NO;
       }
 
-      // if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
-      //   if (
-      //     Constant.USER_TYPE.indexOf(accessUserType) <=
-      //     Constant.USER_TYPE.indexOf(userData.type)
-      //   ) {
-      //     return callback(
-      //       1,
-      //       "invalid_user_right",
-      //       403,
-      //       "you have no right to do this",
-      //       null
-      //     );
-      //   }
-      //   queryObj.type = userData.type;
-      // } else {
-      //   return callback(
-      //     1,
-      //     "invalid_user_type",
-      //     400,
-      //     "user type should be string enum {super_admin, admin, normal_user, anonymous}",
-      //     null
-      //   );
-      // }
+      if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
+        if (
+          Constant.USER_TYPE.indexOf(accessUserType) <=
+          Constant.USER_TYPE.indexOf(userData.type)
+        ) {
+          return callback(
+            1,
+            "invalid_user_right",
+            403,
+            "you have no right to do this",
+            null
+          );
+        }
+        queryObj.type = userData.type;
+      } else {
+        return callback(
+          1,
+          "invalid_user_type",
+          400,
+          "user type should be string enum {super_admin, admin, normal_user, anonymous}",
+          null
+        );
+      }
 
-      queryObj.type = userData.type;
 
       if (Pieces.VariableBaseTypeChecking(userData.display_name, "string")) {
         queryObj.display_name = userData.display_name;
