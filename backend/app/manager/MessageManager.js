@@ -25,17 +25,10 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(2, 'invalid_content', 400, 'content is not alphanumeric and 4 - 128 characters', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.keyword,'string')
-            || !Validator.isLength(data.keyword, {min: 1, max: 256})) {
-            return callback(2, 'invalid_keyword', 400, 'keyword is not alphanumeric and 4 - 128 characters', null);
-        }
-
-
 
         let queryObj = {};
         queryObj.title = data.title;
         queryObj.content = data.content;
-        queryObj.keyword = data.keyword;
         queryObj.created_by = accessUserId;
         queryObj.updated_by = accessUserId;
         queryObj.project_id = data.project_id;
