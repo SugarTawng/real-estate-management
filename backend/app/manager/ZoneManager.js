@@ -22,7 +22,6 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         }
 
         if ( !Pieces.VariableBaseTypeChecking(data.name,'string')
-            || !Validator.isAlphanumeric(data.name)
             || !Validator.isLength(data.name, {min: 1, max: 128})) {
             return callback(2, 'invalid_project_name', 400, 'name is not alphanumeric and 4 - 128 characters', null);
         }

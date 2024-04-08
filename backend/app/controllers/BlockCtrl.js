@@ -29,6 +29,8 @@ module.exports = {
 
         let queryContent = req.query || '';
 
+        console.log('query Content', queryContent);
+
         BlockManager.getAll(accessUserId, accessUserType, accessLoginName, queryContent, function (errorCode, errorMessage, httpCode, errorDescription, results) {
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);

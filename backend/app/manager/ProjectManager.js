@@ -21,7 +21,6 @@ exports.create = function (
   try {
     if (
       !Pieces.VariableBaseTypeChecking(data.name, "string") ||
-      !Validator.isAlphanumeric(data.name) ||
       !Validator.isLength(data.name, { min: 0, max: 128 })
     ) {
       return callback(
@@ -35,7 +34,6 @@ exports.create = function (
 
     if (
       !Pieces.VariableBaseTypeChecking(data.address, "string") ||
-      !Validator.isAlphanumeric(data.address) ||
       !Validator.isLength(data.address, { min: 0, max: 256 })
     ) {
       return callback(
@@ -535,7 +533,6 @@ exports.update = function (
 
     if (
       Pieces.VariableBaseTypeChecking(updateData.address, "string") &&
-      Validator.isAlphanumeric(updateData.address) &&
       Validator.isLength(updateData.address, { min: 0, max: 256 })
     ) {
       queryObj.address = updateData.address;
@@ -568,6 +565,8 @@ exports.update = function (
     }
 
     queryObj.updated_at = new Date();
+
+    console.log('queryObj: ', queryObj);
 
     Project.update(queryObj, { where: where })
       .then((result) => {

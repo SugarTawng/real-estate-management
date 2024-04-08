@@ -21,7 +21,6 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         }
 
         if ( !Pieces.VariableBaseTypeChecking(data.high_area_direction,'string')
-            || !Validator.isAlphanumeric(data.high_area_direction)
             || !Validator.isLength(data.high_area_direction, {min: 1, max: 128})) {
             return callback(2, 'invalid_high_area_direction', 400, 'high area direction is not alphanumeric and 4 - 128 characters', null);
         }
@@ -88,7 +87,7 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         queryObj.number_of_wc = data.number_of_wc;
         queryObj.number_of_room = data.number_of_room;
         queryObj.price = data.price;
-        queryObj.desc = queryObj.desc;
+        queryObj.desc = data.desc;
 
         if(data.buy_status === Constant.BUY_STATUS.NOT_BLOCK || data.buy_status === Constant.BUY_STATUS.DEAL || data.buy_status === Constant.BUY_STATUS.BLOCK) {
             queryObj.buy_status = data.buy_status;
