@@ -35,10 +35,6 @@ let PaymentMethod = MySequelize.define(
       type: Sequelize.DOUBLE,
       allowNull: false,
     },
-    total_price: {
-      type: Sequelize.DOUBLE,
-      allowNull: false,
-    },
     created_by: {
       type: Sequelize.BIGINT(20),
       allowNull: false,

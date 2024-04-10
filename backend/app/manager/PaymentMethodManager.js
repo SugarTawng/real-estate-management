@@ -621,7 +621,6 @@ module.exports = {
       queryObj.percent_discount = userData.percent_discount;
       queryObj.vat = userData.vat;
       queryObj.maintenance_fee = userData.maintenance_fee;
-      queryObj.total_price = userData.total_price;
 
       queryObj.created_by = accessUserId;
       queryObj.updated_by = accessUserId;

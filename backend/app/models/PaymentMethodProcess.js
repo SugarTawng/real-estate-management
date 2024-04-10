@@ -29,6 +29,10 @@ let PaymentMethodProcess = MySequelize.define('paymentMethodProcess', {
         type: Sequelize.FLOAT,
         allowNull: false
     },
+    desc: {
+        type: Sequelize.STRING(256),
+        allowNull: true
+    },
     created_by: {
         type: Sequelize.BIGINT(20),
         allowNull: false,

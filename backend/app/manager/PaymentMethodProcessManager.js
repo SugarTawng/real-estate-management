@@ -42,6 +42,7 @@ module.exports = {
         "flag_time",
         "include_vat",
         "total_percent_payment",
+        "desc",
         "created_at",
         "updated_at",
         "created_by",
@@ -415,6 +416,7 @@ module.exports = {
       queryObj.flag_time = updateData.flag_time;
       queryObj.include_vat = updateData.include_vat;
       queryObj.total_percent_payment = updateData.total_percent_payment;
+      queryObj.desc = updateData.desc;
 
       queryObj.updated_at = new Date();
 
@@ -616,6 +618,7 @@ module.exports = {
       queryObj.flag_time = userData.flag_time;
       queryObj.include_vat = userData.include_vat;
       queryObj.total_percent_payment = userData.total_percent_payment;
+      queryObj.desc = userData.desc;
 
       // if (
       //   userData.activated === Constant.ACTIVATED.YES ||
