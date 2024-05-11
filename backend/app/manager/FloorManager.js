@@ -21,24 +21,15 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(1, 'invalid_block_id', 400, 'block id is incorrect format', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.number_of_high_area,'string')
-            || !Validator.isAlphanumeric(data.number_of_high_area)
-            || !Validator.isLength(data.number_of_high_area, {min: 1, max: 128})
-            || !parseInt(data.number_of_high_area)>0) {
+        if (!parseInt(data.number_of_high_area)>0) {
             return callback(2, 'invalid_number_of_room', 400, 'number of room is not numerical and greater than 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.public_area,'string')
-            || !Validator.isAlphanumeric(data.public_area)
-            || !Validator.isLength(data.public_area, {min: 1, max: 128})
-            || !parseFloat(data.public_area)>0) {
+        if (!parseFloat(data.public_area)>0) {
             return callback(2, 'invalid_public_area', 400, 'public area not numerical and greater than 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.total_area,'string')
-            || !Validator.isAlphanumeric(data.total_area)
-            || !Validator.isLength(data.total_area, {min: 1, max: 128})
-            || !parseFloat(data.total_area)>0) {
+        if (!parseFloat(data.total_area)>0) {
             return callback(2, 'invalid_total_area', 400, 'total area not numerical and greater than 0', null);
         }
 
@@ -251,33 +242,20 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, floorI
 
         where.id = floorId;
 
-        console.log('toi da ơ day');
-
-        console.log('hihihi where', where);
-
         if (!parseInt(updateData.block_id) <= 0
             && !Number.isNaN(parseInt(updateData.block_id))) {
             queryObj.block_id = updateData.block_id;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.number_of_high_area,'string')
-            && Validator.isAlphanumeric(updateData.number_of_high_area)
-            && Validator.isLength(updateData.number_of_high_area, {min: 1, max: 128})
-            && parseInt(updateData.number_of_high_area)>0) {
+        if (parseInt(updateData.number_of_high_area)>0) {
             queryObj.number_of_high_area = updateData.number_of_high_area;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.public_area,'string')
-            && Validator.isAlphanumeric(updateData.public_area)
-            && Validator.isLength(updateData.public_area, {min: 1, max: 128})
-            && parseFloat(updateData.public_area)>0) {
+        if (parseFloat(updateData.public_area)>0) {
             queryObj.public_area = updateData.public_area;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.total_area,'string')
-            && Validator.isAlphanumeric(updateData.total_area)
-            && Validator.isLength(updateData.total_area, {min: 1, max: 128})
-            && parseFloat(updateData.total_area)>0) {
+        if (parseFloat(updateData.total_area)>0) {
             queryObj.total_area = updateData.total_area;
         }
 
@@ -290,10 +268,6 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, floorI
             && Validator.isLength(updateData.desc, {min: 1, max: 256})) {
             queryObj.desc = updateData.desc;
         }
-
-
-
-
 
         queryObj.updated_at = new Date();
 

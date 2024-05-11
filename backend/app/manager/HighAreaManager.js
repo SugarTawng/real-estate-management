@@ -320,6 +320,11 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, highAr
             && Validator.isLength(updateData.desc, {min: 1, max: 256})) {
             queryObj.desc = updateData.desc;
         }
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.buy_status,'string')
+            && Validator.isLength(updateData.buy_status, {min: 1, max: 256})) {
+            queryObj.buy_status = updateData.buy_status;
+        }
         // chua set cac thuoc tinh mac dinh
 
         queryObj.updated_at = new Date();

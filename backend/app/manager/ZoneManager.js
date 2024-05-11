@@ -31,33 +31,26 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(2, 'invalid_desc', 400, 'desc is not 4 - 128 characters', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.construction_area,'string')
-            || !Validator.isAlphanumeric(data.construction_area)
-            || !Validator.isLength(data.construction_area, {min: 1, max: 128})
-            || !parseFloat(data.construction_area)>0) {
+
+
+        if ( !parseFloat(data.construction_area)>0) {
             return callback(2, 'invalid_construction_area', 400, 'construction area not numerical and greater than 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.total_area,'string')
-            || !Validator.isAlphanumeric(data.total_area)
-            || !Validator.isLength(data.total_area, {min: 1, max: 128})
-            || !parseFloat(data.total_area)>0) {
+
+        if ( !parseFloat(data.total_area)>0) {
             return callback(2, 'invalid_total_area', 400, 'total area is not numerical and greater than 0', null);
         }
 
         console.log('chet tiec', );
 
-        if ( !Pieces.VariableBaseTypeChecking(data.number_of_block,'string')
-            || !Validator.isAlphanumeric(data.number_of_block)
-            || !Validator.isLength(data.number_of_block, {min: 1, max: 128})
-            || parseInt(data.number_of_block) < 0 || Number.isNaN(parseInt(data.number_of_block))) {
+        if (parseInt(data.number_of_block) < 0 
+        || Number.isNaN(parseInt(data.number_of_block))) {
             return callback(2, 'invalid_number_of_block', 400, 'number of block is not numerical and greater than or equal 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.number_of_unit_land,'string')
-            || !Validator.isAlphanumeric(data.number_of_unit_land)
-            || !Validator.isLength(data.number_of_unit_land, {min: 1, max: 128})
-            || parseInt(data.number_of_unit_land) < 0 || Number.isNaN(parseInt(data.number_of_unit_land))) {
+        if ( parseInt(data.number_of_unit_land) < 0 
+        || Number.isNaN(parseInt(data.number_of_unit_land))) {
             return callback(2, 'invalid_number_of_unit_land', 400, 'number of unit land is not numerical and greater than or equal 0', null);
         }
 
@@ -85,7 +78,6 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(null, null, 200, null, Project);
         }).catch(function(error){
             "use strict";
-            console.log('HIHIHI TUI DA O DAY', error)
             return callback(2, 'create_Project_fail', 400, error, null);
         });
     }catch(error){
@@ -240,43 +232,32 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, zoneId
         }
 
         if ( Pieces.VariableBaseTypeChecking(updateData.name,'string')
-            && Validator.isAlphanumeric(updateData.name)
             && Validator.isLength(updateData.name, {min: 1, max: 128})) {
             queryObj.name = updateData.name;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.desc,'string') && updateData.desc === NULL
+        console.log('update data', updateData.name);
+
+        if ( Pieces.VariableBaseTypeChecking(updateData.desc,'string') && updateData.desc != NULL
             && Validator.isLength(updateData.desc, {min: 0, max: 256})) {
             queryObj.desc = updateData.desc;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.construction_area,'string')
-            && Validator.isAlphanumeric(updateData.construction_area)
-            && Validator.isLength(updateData.construction_area, {min: 1, max: 128})
-            && parseFloat(updateData.construction_area)>0) {
+        if (parseFloat(updateData.construction_area)>0) {
             queryObj.construction_area = updateData.construction_area;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.total_area,'string')
-            && Validator.isAlphanumeric(updateData.total_area)
-            && Validator.isLength(updateData.total_area, {min: 1, max: 128})
-            && parseFloat(updateData.total_area)>0) {
+        if (parseFloat(updateData.total_area)>0) {
             queryObj.total_area = updateData.total_area;
         }
 
-        console.log('chet tiec', );
-
-        if ( Pieces.VariableBaseTypeChecking(updateData.number_of_block,'string')
-            && Validator.isAlphanumeric(updateData.number_of_block)
-            && Validator.isLength(updateData.number_of_block, {min: 1, max: 128})
-            && !parseInt(updateData.number_of_block) < 0 && !Number.isNaN(parseInt(updateData.number_of_block))) {
+        if (parseInt(updateData.number_of_block) > 0 
+        && !Number.isNaN(parseInt(updateData.number_of_block))) {
             queryObj.number_of_block = updateData.number_of_block;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.number_of_unit_land,'string')
-            && Validator.isAlphanumeric(updateData.number_of_unit_land)
-            && Validator.isLength(updateData.number_of_unit_land, {min: 1, max: 128})
-            && !parseInt(updateData.number_of_unit_land) < 0 && !Number.isNaN(parseInt(updateData.number_of_unit_land))) {
+        if (parseInt(updateData.number_of_unit_land) > 0 
+        && !Number.isNaN(parseInt(updateData.number_of_unit_land))) {
             queryObj.number_of_unit_land = updateData.number_of_unit_land;
         }
 
@@ -285,6 +266,9 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, zoneId
             queryObj.progress = updateData.progress;
         }
 
+        if (!isNaN(Date.parse(updateData.started_day))) {
+            queryObj.started_day = updateData.started_day;
+        }        
 
         queryObj.updated_at = new Date();
 
