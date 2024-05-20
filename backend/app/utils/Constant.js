@@ -72,5 +72,5 @@ module.exports = {
     CONTENT_TYPE_ENUM: ['*', 'bestProduct','video','advertiseText'],
     MAX_ASSET_SIZE_ALLOW: 1073741824,
     MAX_THUMB_SIZE_ALLOW: 1048576,
-    DEFAULT_PAGING_SIZE: 25
+    DEFAULT_PAGING_SIZE: 10000
 };
