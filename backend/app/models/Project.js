@@ -94,6 +94,11 @@ let Project = MySequelize.define(
       allowNull: false,
       defaultValue: "working",
     },
+    type: {
+      type: Sequelize.STRING(256),
+      allowNull: true,
+      default: NULL,
+    },
   },
   {
     underscored: true,
