@@ -251,6 +251,7 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, blockI
             return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
         }
 
+        
 
 
         // nếu mà người dùng không phải là chủ tài khoảng và người dùng cũng không phải là admin thì không cho vào
@@ -258,7 +259,7 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, blockI
         //     return callback(1, 'invalid_user_right', 403, null, null);
         // }
 
-        queryObj.updater = accessUserId;
+        // queryObj.updater = accessUserId;
 
         where.id = blockId;
 
@@ -266,6 +267,8 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, blockI
             && !Number.isNaN(parseInt(updateData.zone_id))) {
             queryObj.zone_id = updateData.zone_id;
         }
+
+        
 
         if ( Pieces.VariableBaseTypeChecking(updateData.number_of_floor,'string')
             && Validator.isAlphanumeric(updateData.number_of_floor)
@@ -295,17 +298,13 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, blockI
             queryObj.desc = updateData.desc;
         }
 
+        console.log('hihihomnay')
 
-
-        if ( Pieces.VariableBaseTypeChecking(parseInt(updateData.progress), 'number')
-            && (parseInt(data.progress) >=0 && parseInt(updateData.progress) <=100)) {
+        if ((parseInt(updateData.progress) >=0 && parseInt(updateData.progress) <=100)) {
             queryObj.progress = updateData.progress;
         }
 
-
         queryObj.updated_at = new Date();
-
-
 
         Block.update(
             queryObj,
