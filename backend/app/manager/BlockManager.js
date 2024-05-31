@@ -9,6 +9,7 @@ const JsonWebToken = require('jsonwebtoken');
 const Constant = require('../utils/Constant');
 const Pieces = require('../utils/Pieces');
 const Models = require("../models");
+const { DataTypes } = require('sequelize');
 const Block = Models.Block;
 
 
@@ -20,25 +21,16 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(1, 'invalid_zone_id', 400, 'zone id is incorrect format', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.number_of_floor,'string')
-            || !Validator.isAlphanumeric(data.number_of_floor)
-            || !Validator.isLength(data.number_of_floor, {min: 1, max: 128})
-            || !parseInt(data.number_of_floor)>0) {
+        if (!parseInt(data.number_of_floor)>0) {
             return callback(2, 'invalid_number_of_floor', 400, 'number of floor is not numerical and greater than 0', null);
         }
 
-        console.log('lat ',Number.isNaN(parseFloat(data.lat)))
-
-        if ( !Pieces.VariableBaseTypeChecking(data.lat,'string')
-            || !Validator.isLength(data.lat, {min: 1, max: 128})
-            || !(parseFloat(data.lat)>=-90 && parseFloat(data.lat)<=90)
+        if (!(parseFloat(data.lat)>=-90 && parseFloat(data.lat)<=90)
             || Number.isNaN(parseFloat(data.lat))){
             return callback(2, 'invalid_lat', 400, 'lat is not numerical and greater than 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.long,'string')
-            || !Validator.isLength(data.long, {min: 1, max: 128})
-            || !(parseFloat(data.long)>=-180 && parseFloat(data.long)<=180)
+        if (!(parseFloat(data.long)>=-180 && parseFloat(data.long)<=180)
             || Number.isNaN(parseFloat(data.long))){
             return callback(2, 'invalid_long', 400, 'long is not numerical and greater than 0', null);
         }
@@ -60,6 +52,7 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         queryObj.long = data.long;
         queryObj.desc = data.desc;
         queryObj.progress = data.progress;
+        queryObj.is_service = data.is_service;
 
         if(data.type === Constant.BLOCK_TYPE.NORMAL || data.type === Constant.BLOCK_TYPE.LUXURY){
             queryObj.type = data.type;
@@ -76,16 +69,15 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         queryObj.created_by = accessUserId;
         queryObj.updated_by = accessUserId;
 
-        Block.create(queryObj).then(Project=>{
+        Block.create(queryObj).then(result=>{
             "use strict";
-            return callback(null, null, 200, null, Project);
+            return callback(null, null, 200, null, result);
         }).catch(function(error){
             "use strict";
-            console.log('HIHIHI TUI DA O DAY', error)
-            return callback(2, 'create_Project_fail', 400, error, null);
+            return callback(2, 'create_Block_fail', 400, error, null);
         });
     }catch(error){
-        return callback(2, 'create_Project_fail', 400, error, null);
+        return callback(2, 'create_Block_fail', 400, error, null);
     }
 };
 
