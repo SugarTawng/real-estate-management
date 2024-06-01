@@ -61,6 +61,10 @@ let PaymentMethod = MySequelize.define(
       allowNull: true,
       defaultValue: Sequelize.NOW,
     },
+    desc: {
+      type: Sequelize.STRING(4068),
+      allowNull: true,
+    },
   },
   {
     underscored: true,

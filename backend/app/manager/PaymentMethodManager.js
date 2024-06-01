@@ -209,89 +209,6 @@ module.exports = {
     }
   },
 
-  // getAll: function(accessUserId, accessUserType, query, callback){
-  //     try {
-  //         // if ( accessUserType < Constant.USER_TYPE.MODERATOR ) {
-  //         //     return callback(1, 'invalid_user_type', 400, null, null);
-  //         // }
-  //
-  //         let where;
-  //         let cond1 = {};
-  //         let page = 1;
-  //         let perPage = Constant.DEFAULT_PAGING_SIZE;
-  //         let sort = [];
-  //         let attributes = [];
-  //
-  //
-  //         cond1.type = {$lt: accessUserType};
-  //
-  //         this.parseFilter(accessUserId, accessUserType, cond1, query.filter);
-  //         if( Pieces.VariableBaseTypeChecking(query.q, 'string') ){
-  //             cond1.displayName = {[Sequelize.Op.like]: query.q};
-  //         }
-  //
-  //         where = {$or:[{id: accessUserId} ,cond1] };
-  //
-  //         if( (Pieces.VariableBaseTypeChecking(query['page'], 'string') && Validator.isInt(query['page']))
-  //             || (Pieces.VariableBaseTypeChecking(query['page'], 'number')) ){
-  //             page = parseInt(query['page']);
-  //             if(page === 0){
-  //                 page = 1;
-  //             }
-  //         }
-  //
-  //         if( (Pieces.VariableBaseTypeChecking(query['perPage'], 'string') && Validator.isInt(query['perPage']))
-  //             || (Pieces.VariableBaseTypeChecking(query['perPage'], 'number')) ){
-  //             perPage = parseInt(query['perPage']);
-  //             if(perPage <= 0){
-  //                 perPage = Constant.DEFAULT_PAGING_SIZE;
-  //             }
-  //         }
-  //
-  //         Pieces.splitAndAssignValueForSort(sort, query['sort']);
-  //         if(sort.length <= 0){
-  //             sort.push(['updatedAt', 'DESC']);
-  //         }
-  //
-  //         let offset = perPage * (page - 1);
-  //         PaymentMethod.findAndCountAll({
-  //             where: where,
-  //             limit: perPage,
-  //             offset: offset,
-  //             order: sort
-  //         })
-  //             .then((data) => {
-  //                 let pages = Math.ceil(data.count / perPage);
-  //                 let PaymentMethods = data.rows;
-  //                 let output = {
-  //                     data: PaymentMethods,
-  //                     pages: {
-  //                         current: page,
-  //                         prev: page - 1,
-  //                         hasPrev: false,
-  //                         next: (page + 1) > pages ? 0 : (page + 1),
-  //                         hasNext: false,
-  //                         total: pages
-  //                     },
-  //                     items: {
-  //                         begin: ((page * perPage) - perPage) + 1,
-  //                         end: page * perPage,
-  //                         total: data.count
-  //                     }
-  //                 };
-  //                 output.pages.hasNext = (output.pages.next !== 0);
-  //                 output.pages.hasPrev = (output.pages.prev !== 0);
-  //                 return callback(null, null, 200, null, output);
-  //             }).catch(function (error) {
-  //                 console.log('this is the error  ',error)
-  //             return callback(1, 'find_and_count_all_user_fail', 420, error, null);
-  //         });
-  //     }catch(error){
-  //         return callback(1, 'get_all_user_fail', 400, error, null);
-  //     }
-  // },
-  //
-
   update: function (
     accessUserId,
     accessUserType,
@@ -336,6 +253,7 @@ module.exports = {
       queryObj.vat = updateData.vat;
       queryObj.maintenance_fee = updateData.maintenance_fee;
       queryObj.total_price = updateData.total_price;
+      queryObj.desc = updateData.desc;
 
       // if (accessUserId === parseInt(userId)) {
       //   where.activated = Constant.ACTIVATED.YES;
@@ -621,7 +539,7 @@ module.exports = {
       queryObj.percent_discount = userData.percent_discount;
       queryObj.vat = userData.vat;
       queryObj.maintenance_fee = userData.maintenance_fee;
-
+      queryObj.desc = userData.desc;
       queryObj.created_by = accessUserId;
       queryObj.updated_by = accessUserId;
 
