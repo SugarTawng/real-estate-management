@@ -131,7 +131,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
 
         let where = {};
-        let attributes = ['id', 'floor_id','lat','long', 'high_area_direction', 'total_area', 'progress', 'number_of_wc', 'number_of_room', 'price', 'owner', 'buy_status', 'desc', 'created_by', 'updated_by', 'created_at', 'updated_at'];
+        let attributes = ['id', 'floor_id','lat','long', 'high_area_direction', 'total_area', 'progress', 'number_of_wc', 'number_of_room', 'price', 'owner', 'buy_status', 'desc', 'created_by', 'updated_by', 'created_at', 'updated_at', 'payment_method_id'];
 
         where = {id: id};
 
@@ -261,6 +261,11 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, highAr
         if (!parseInt(updateData.floor_id) <= 0
             && !Number.isNaN(parseInt(updateData.floor_id))) {
             queryObj.floor_id = updateData.floor_id;
+        }
+
+        if (!parseInt(updateData.payment_method_id) <= 0
+            && !Number.isNaN(parseInt(updateData.payment_method_id))) {
+            queryObj.payment_method_id = updateData.payment_method_id;
         }
 
         if ( Pieces.VariableBaseTypeChecking(updateData.high_area_direction,'string')
