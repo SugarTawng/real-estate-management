@@ -58,7 +58,12 @@ let HighPaymentProcess = MySequelize.define('highPaymentProcess', {
         type: Sequelize.DATE,
         allowNull: true,
         defaultValue: Sequelize.NOW
-    }
+    },
+    deleted: {
+        type: Sequelize.STRING(5),
+        allowNull: false,
+        defaultValue: "false",
+      },
 }, {
     underscored: true,
     timestamps: false,
