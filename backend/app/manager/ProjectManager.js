@@ -122,189 +122,7 @@ exports.create = function (
   }
 };
 
-// exports.notifySync = function (accessUserId, accessUserType, siteCode, companyCode, type, callback) {
-//     try {
-//         let where = {};
-//
-//         if ( !Pieces.VariableBaseTypeChecking(siteCode,'string') ) {
-//             return callback(2, 'invalid_Project_site_code', 400, 'code is not a string', null);
-//         }
-//
-//         if ( !Pieces.VariableBaseTypeChecking(companyCode,'string') ) {
-//             return callback(2, 'invalid_Project_company_code', 400, 'code is not a string', null);
-//         }
-//
-//         if ( !Pieces.VariableEnumChecking(type, Constant.CONTENT_TYPE_ENUM) ) {
-//             return callback(2, 'invalid_Project_source_type', 400, 'source type is not a string', null);
-//         }
-//
-//         if ( accessUserType < Constant.USER_TYPE.MODERATOR ){
-//             where.createdBy = accessUserId;
-//         }
-//
-//         where.deleted = { $ne: Constant.DELETED.YES };
-//         where.isAlive = true;
-//
-//         if(siteCode !== Constant.CONTENT_TYPE_ENUM[0]) {
-//             where.siteCode = siteCode;
-//         }
-//
-//         if(companyCode !== Constant.CONTENT_TYPE_ENUM[0]){
-//             where.companyCode = companyCode;
-//         }
-//         Project.findAll({
-//             //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
-//             where: where,
-//             limit: 200
-//         }).then((Projects) => {
-//             let result = {};
-//             if(Projects !== null && Projects.length > 0){
-//                 for(let i = 0; i < Projects.length; i++){
-//                     if(Pieces.VariableBaseTypeChecking(Projects[i].socketIO,'string')){
-//                         let data = {};
-//                         data.type = type;
-//                         SocketManager.sendCmd(Projects[i].socketIO, 'notifySync', data);
-//                     }
-//                 }
-//                 result.success = true;
-//                 result.Project = Projects.length;
-//                 return callback(null, null, 200, null, result);
-//             }else{
-//                 result.success = false;
-//                 result.Project = 0;
-//                 return callback(null, null, 200, null, result);
-//             }
-//         }).catch(function(error){
-//             "use strict";
-//             return callback(2, 'find_all_Project_fail', 400, error, null);
-//         });
-//     }catch(error){
-//         return callback(2, 'notify_sync_Project_fail', 400, error, null);
-//     }
-// };
-//
-// exports.notifyUpgrade = function (accessUserId, accessUserType, id, callback) {
-//     try {
-//         let where = {};
-//
-//         if ( (id !== Constant.CONTENT_TYPE_ENUM[0])
-//             && !( Pieces.VariableBaseTypeChecking(id,'string') && Validator.isInt(id) )
-//             && !Pieces.VariableBaseTypeChecking(id,'number') ){
-//             return callback(2, 'invalid_Project_id', 400, 'Project id is incorrect', null);
-//         }
-//
-//         if (accessUserType < Constant.USER_TYPE.MODERATOR){
-//             where.createdBy = accessUserId;
-//         }
-//
-//         where.deleted = { $ne: Constant.DELETED.YES };
-//         where.isAlive = true;
-//
-//         if(id !== Constant.CONTENT_TYPE_ENUM[0]) {
-//             where.id = id;
-//         }
-//
-//         Project.findAll({
-//             //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
-//             where: where,
-//             limit: 200
-//         }).then((Projects) => {
-//             let result = {};
-//             if(Projects !== null && Projects.length > 0){
-//                 for(let i = 0; i < Projects.length; i++){
-//                     if(Pieces.VariableBaseTypeChecking(Projects[i].socketIO,'string')){
-//                         let data = {};
-//                         SocketManager.sendCmd(Projects[i].socketIO, 'notifyUpgrade', data);
-//                     }
-//                 }
-//                 result.success = true;
-//                 result.Project = Projects.length;
-//                 return callback(null, null, 200, null, result);
-//             }else{
-//                 result.success = false;
-//                 result.Project = 0;
-//                 return callback(null, null, 200, null, result);
-//             }
-//         }).catch(function(error){
-//             "use strict";
-//             return callback(2, 'find_all_Project_fail', 400, error, null);
-//         });
-//     }catch(error){
-//         return callback(2, 'notify_upgrade_Project_fail', 400, error, null);
-//     }
-// };
-//
-//
-// /////// GET
-//
-// exports.getOne = function (accessUserId, accessUserType, Id, callback) {
-//     try {
-//         if ( !( Pieces.VariableBaseTypeChecking(Id,'string')
-//                 && Validator.isInt(Id) )
-//             && !Pieces.VariableBaseTypeChecking(Id,'number') ){
-//             return callback(2, 'invalid_Project_id', 400, 'Project id is incorrect', null);
-//         }
-//
-//         let where = {};
-//         //let attributes;
-//
-//         if( accessUserType <= Constant.USER_TYPE.MODERATOR ){
-//             where.createdBy = accessUserId;
-//             where.deleted = { $ne: Constant.DELETED.YES };
-//         }
-//
-//         where.id = Id;
-//
-//         Project.findOne({where:where}).then(Project=>{
-//             "use strict";
-//             if(Project){
-//                 return callback(null, null, 200, null, Project);
-//             }else{
-//                 return callback(2, 'find_one_Project_fail', 404, null, null);
-//             }
-//         }).catch(function(error){
-//             "use strict";
-//             return callback(2, 'find_one_Project_fail', 400, error, null);
-//         });
-//     }catch(error){
-//         return callback(2, 'get_one_Project_fail', 400, error, null);
-//     }
-// };
-//
-// exports.getStatistic = function (accessUserId, accessUserType, callback) {
-//     try {
-//         let final = {};
-//         let where = {};
-//         final = {activated: 0, total: 0};
-//
-//         if( accessUserType < Constant.USER_TYPE.MODERATOR ){
-//             return callback(null, null, 200, null, final);
-//         }
-//
-//         Project.count({
-//             where:where,
-//         }).then(function(total){
-//             "use strict";
-//             final.total = total;
-//             where.activated = Constant.ACTIVATED.YES;
-//             Project.count({
-//                 where:where,
-//             }).then(function(activated){
-//                 final.activated = activated;
-//                 return callback(null, null, 200, null, final);
-//             }).catch(function(error){
-//                 "use strict";
-//                 return callback(2, 'count_Project_fail', 400, error, null);
-//             });
-//         }).catch(function(error){
-//             "use strict";
-//             return callback(2, 'count_Project_fail', 400, error, null);
-//         });
-//     }catch(error){
-//         return callback(2, 'statistic_Project_fail', 400, error, null);
-//     }
-// };
-//
+
 
 exports.getOne = function (accessUserId, accessUserType, id, callback) {
   try {
@@ -504,6 +322,8 @@ exports.update = function (
     let queryObj = {};
     let where = {};
 
+    console.log("update data project: ", updateData);
+
     if (
       !(
         Pieces.VariableBaseTypeChecking(projectId, "string") &&
@@ -525,7 +345,6 @@ exports.update = function (
 
     if (
       Pieces.VariableBaseTypeChecking(updateData.name, "string") &&
-      Validator.isAlphanumeric(updateData.name) &&
       Validator.isLength(updateData.name, { min: 0, max: 128 })
     ) {
       queryObj.name = updateData.name;
@@ -562,6 +381,31 @@ exports.update = function (
       parseInt(updateData.project_progress) <= 100
     ) {
       queryObj.project_progress = updateData.project_progress;
+    }
+
+    if(!parseInt(updateData.budget)>=0 || Number.isNaN(parseInt(updateData.budget))){
+      queryObj.budget = updateData.budget;
+    }
+
+    if (
+      Pieces.VariableBaseTypeChecking(updateData.type, "string") &&
+      Validator.isLength(updateData.type, { min: 0, max: 6 })
+    ) {
+      queryObj.type = updateData.type;
+    }
+
+    
+
+    if (
+      Pieces.VariableBaseTypeChecking(updateData.open_at, "string") 
+    ) {
+      queryObj.open_at = updateData.open_at;
+    }
+
+    if (
+      Pieces.VariableBaseTypeChecking(updateData.started_day, "string")
+    ) {
+      queryObj.started_day = updateData.started_day;
     }
 
     queryObj.updated_at = new Date();

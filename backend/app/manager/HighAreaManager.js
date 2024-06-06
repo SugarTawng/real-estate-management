@@ -20,55 +20,44 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(1, 'invalid_floor_id', 400, 'floor id is incorrect format', null);
         }
 
+        if (parseInt(data.payment_method_id) <= 0
+            || Number.isNaN(parseInt(data.payment_method_id))) {
+            return callback(1, 'invalid_payment_method_id', 400, 'payment method id is incorrect format', null);
+        }
+
         if ( !Pieces.VariableBaseTypeChecking(data.high_area_direction,'string')
             || !Validator.isLength(data.high_area_direction, {min: 1, max: 128})) {
             return callback(2, 'invalid_high_area_direction', 400, 'high area direction is not alphanumeric and 4 - 128 characters', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.lat,'string')
-            || !Validator.isLength(data.lat, {min: 1, max: 128})
-            || !(parseFloat(data.lat)>=-90 && parseFloat(data.lat)<=90)
+        if ( !(parseFloat(data.lat)>=-90 && parseFloat(data.lat)<=90)
             || Number.isNaN(parseFloat(data.lat))){
             return callback(2, 'invalid_lat', 400, 'lat is not numerical and greater than 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.long,'string')
-            || !Validator.isLength(data.long, {min: 1, max: 128})
-            || !(parseFloat(data.long)>=-180 && parseFloat(data.long)<=180)
+        if ( !(parseFloat(data.long)>=-180 && parseFloat(data.long)<=180)
             || Number.isNaN(parseFloat(data.long))){
             return callback(2, 'invalid_long', 400, 'long is not numerical and greater than 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.total_area,'string')
-            || !Validator.isAlphanumeric(data.total_area)
-            || !Validator.isLength(data.total_area, {min: 1, max: 128})
-            || !parseFloat(data.total_area)>0) {
+        if ( !parseFloat(data.total_area)>0
+            || Number.isNaN(parseFloat(data.total_area))){
             return callback(2, 'invalid_total_area', 400, 'total area is not numerical and greater than 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(parseInt(data.progress), 'number')
-            || !(parseInt(data.progress) >=0 && parseInt(data.progress) <=100)) {
+        if ( !(parseInt(data.progress) >=0 && parseInt(data.progress) <=100)) {
             return callback(1, 'invalid_progress', 400, 'progress is incorrect format', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.number_of_wc,'string')
-            || !Validator.isAlphanumeric(data.number_of_wc)
-            || !Validator.isLength(data.number_of_wc, {min: 1, max: 128})
-            || parseInt(data.number_of_wc) < 0 || Number.isNaN(parseInt(data.number_of_wc))) {
+        if ( parseInt(data.number_of_wc) < 0 || Number.isNaN(parseInt(data.number_of_wc))) {
             return callback(2, 'invalid_number_of_wc', 400, 'number of wc is not numerical and greater than or equal 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.number_of_room,'string')
-            || !Validator.isAlphanumeric(data.number_of_room)
-            || !Validator.isLength(data.number_of_room, {min: 1, max: 128})
-            || parseInt(data.number_of_room) < 0 || Number.isNaN(parseInt(data.number_of_room))) {
+        if ( parseInt(data.number_of_room) < 0 || Number.isNaN(parseInt(data.number_of_room))) {
             return callback(2, 'invalid_number_of_room', 400, 'number of room is not numerical and greater than or equal 0', null);
         }
 
-        if ( !Pieces.VariableBaseTypeChecking(data.price,'string')
-            || !Validator.isAlphanumeric(data.price)
-            || !Validator.isLength(data.price, {min: 1, max: 128})
-            || parseFloat(data.price) < 0 || Number.isNaN(parseInt(data.price))) {
+        if ( parseFloat(data.price) < 0 || Number.isNaN(parseInt(data.price))) {
             return callback(2, 'invalid_price', 400, 'price is not numerical and greater than or equal 0', null);
         }
 
@@ -78,6 +67,7 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         }
 
         let queryObj = {};
+        queryObj.payment_method_id = data.payment_method_id;
         queryObj.floor_id = data.floor_id;
         queryObj.high_area_direction = data.high_area_direction;
         queryObj.lat = data.lat;
@@ -109,7 +99,6 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(null, null, 200, null, Project);
         }).catch(function(error){
             "use strict";
-            console.log('HIHIHI TUI DA O DAY', error)
             return callback(2, 'create_Project_fail', 400, error, null);
         });
     }catch(error){

@@ -19,8 +19,9 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(1, 'invalid_zone_id', 400, 'zone id is incorrect format', null);
         }
 
+        console.log('land direc', data.land_direction);
+
         if ( !Pieces.VariableBaseTypeChecking(data.land_direction,'string')
-            || !Validator.isAlphanumeric(data.land_direction)
             || !Validator.isLength(data.land_direction, {min: 1, max: 128})) {
             return callback(2, 'invalid_land_direction', 400, 'land area direction is not alphanumeric and 4 - 128 characters', null);
         }
