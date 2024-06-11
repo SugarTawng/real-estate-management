@@ -28,4 +28,5 @@ module.exports = function (app) {
   require("./route/landBooking")(app);
 
   require("./route/dashboard")(app);
+  require("./route/customer")(app);
 };

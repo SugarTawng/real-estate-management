@@ -11,6 +11,16 @@ const ACTIVATED = {
     YES: 'true'
 };
 
+const CONTACTED = {
+    NO: 'false',
+    YES: 'true'
+};
+
+const POTENTIAL = {
+    NO: 'false',
+    YES: 'true'
+};
+
 const IS_FRONT = {
     NO: 'false',
     YES: 'true'
@@ -58,6 +68,8 @@ const PROFILE_POSITION_JOB = {
 
 module.exports = {
     DELETED,
+    CONTACTED,
+    POTENTIAL,
     ACTIVATED,
     USER_TYPE,
     SYSTEM,

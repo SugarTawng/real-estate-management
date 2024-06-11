@@ -10,7 +10,7 @@ const Sequelize = require("sequelize");
 const Constant = require("../utils/Constant");
 const Pieces = require("../utils/Pieces");
 const Models = require("../models");
-const Account = Models.Account;
+const Customer = Models.Customer;
 
 module.exports = {
   getOne: function (accessUserId, accessUserType, id, callback) {
@@ -55,7 +55,7 @@ module.exports = {
       //     where = {id: id};
       // }
 
-      Account.findOne({
+      Customer.findOne({
         where: where,
         attributes: attributes,
       }).then((result) => {
@@ -63,98 +63,14 @@ module.exports = {
         if (result) {
           return callback(null, null, 200, null, result);
         } else {
-          return callback(1, "invalid_account", 403, null, null);
+          return callback(1, "invalid_Customer", 403, null, null);
         }
       });
     } catch (error) {
-      return callback(1, "get_one_account_fail", 400, error, null);
+      return callback(1, "get_one_Customer_fail", 400, error, null);
     }
   },
 
-  getCustomer: function(accessUserId, accessUserType, id, callback){
-    try {
-      let where = {};
-      let page = 1;
-      let perPage = Constant.DEFAULT_PAGING_SIZE;
-      let sort = []
-      where = { created_by: id };
-
-      let offset = perPage * (page - 1);
-      
-      Account.findAndCountAll({
-        where: where,
-        //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
-        limit: perPage,
-        offset: offset,
-        order: sort,
-      })
-        .then((data) => {
-          let pages = Math.ceil(data.count / perPage);
-          let Projects = data.rows;
-          let output = {
-            data: Projects,
-            pages: {
-              current: page,
-              prev: page - 1,
-              hasPrev: false,
-              next: page + 1 > pages ? 0 : page + 1,
-              hasNext: false,
-              total: pages,
-            },
-            items: {
-              begin: page * perPage - perPage + 1,
-              end: page * perPage,
-              total: data.count,
-            },
-          };
-          output.pages.hasNext = output.pages.next !== 0;
-          output.pages.hasPrev = output.pages.prev !== 0;
-          return callback(null, null, 200, null, output);
-        })
-        .catch(function (error) {
-          console.log("this is the error", error);
-          return callback(2, "find_count_all_Project_fail", 400, error, null);
-        });
-    } catch (error) {
-      console.log("this is the error", error);
-      return callback(2, "get_all_Project_fail", 400, error, null);
-    }
-  },
-
-  getStatistic: function (accessUserId, accessUserType, callback) {
-    try {
-      let final = {};
-      final = { activated: 0, total: 0 };
-      if (accessUserType < Constant.USER_TYPE.MODERATOR) {
-        return callback(null, null, 200, null, final);
-      }
-
-      Account.count({
-        where: {},
-      })
-        .then(function (total) {
-          "use strict";
-          final.total = total;
-          Account.count({
-            where: { activated: 1 },
-          })
-            .then(function (activated) {
-              final.activated = activated;
-              return callback(null, null, 200, null, final);
-            })
-            .catch(function (error) {
-              "use strict";
-              return callback(1, "count_user_fail", 400, error, null);
-            });
-        })
-        .catch(function (error) {
-          "use strict";
-          return callback(1, "count_user_fail", 400, error, null);
-        });
-    } catch (error) {
-      return callback(1, "statistic_user_fail", 400, error, null);
-    }
-  },
   getAll: function (
     accessUserId,
     accessUserType,
@@ -212,7 +128,7 @@ module.exports = {
       }
 
       let offset = perPage * (page - 1);
-      Account.findAndCountAll({
+      Customer.findAndCountAll({
         where: where,
         //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
         limit: perPage,
@@ -251,7 +167,7 @@ module.exports = {
       return callback(2, "get_all_Project_fail", 400, error, null);
     }
   },
-  
+
   update: function (
     accessUserId,
     accessUserType,
@@ -374,7 +290,7 @@ module.exports = {
 
       queryObj.updated_at = new Date();
 
-      Account.update(queryObj, { where: where })
+      Customer.update(queryObj, { where: where })
         .then((result) => {
           "use strict";
           if (result !== null && result.length > 0 && result[0] > 0) {
@@ -419,190 +335,34 @@ module.exports = {
       where = { id: id }; // , type:{$lt: accessUserType}, system: Constant.SYSTEM.NO
       queryObj = { deleted: Constant.DELETED.YES };
 
-      Account.findOne({ where: where })
-        .then((account) => {
+      Customer.findOne({ where: where })
+        .then((customer) => {
           "use strict";
-          if (account && account.deleted === Constant.DELETED.YES) {
-            Account.destroy({ where: where })
+          if (customer && customer.deleted === Constant.DELETED.YES) {
+            Customer.destroy({ where: where })
               .then((result) => {
                 return callback(null, null, 200, null);
               })
               .catch(function (error) {
-                return callback(1, "remove_account_fail", 420, error);
+                return callback(1, "remove_customer_fail", 420, error);
               });
           } else {
-            Account.update(queryObj, { where: where })
+            Customer.update(queryObj, { where: where })
               .then((result) => {
                 "use strict";
                 return callback(null, null, 200, null);
               })
               .catch(function (error) {
-                return callback(1, "update_account_fail", 420, error);
+                return callback(1, "update_customer_fail", 420, error);
               });
           }
         })
         .catch(function (error) {
           "use strict";
-          return callback(1, "find_one_account_fail", 400, error, null);
+          return callback(1, "find_one_customer_fail", 400, error, null);
         });
     } catch (error) {
-      return callback(1, "delete_account_fail", 400, error);
-    }
-  },
-
-  verifyUser: function (
-    accessUserId,
-    accessUserType,
-    accessLoginName,
-    callback
-  ) {
-    try {
-      console.log("accessUserID", accessUserId);
-      console.log("accessUserID", accessUserType);
-      console.log("accessUserID", accessLoginName);
-      if (
-        !(
-          Pieces.VariableBaseTypeChecking(accessUserId, "string") &&
-          Validator.isInt(accessUserId)
-        ) &&
-        !Pieces.VariableBaseTypeChecking(accessUserId, "number")
-      ) {
-        return callback(
-          1,
-          "invalid_user_id",
-          400,
-          "user id is incorrect",
-          null
-        );
-      }
-
-      if (!Pieces.VariableBaseTypeChecking(accessUserType, "string")) {
-        return callback(
-          1,
-          "invalid_user_type",
-          400,
-          "user type is incorrect",
-          null
-        );
-      }
-
-      if (!Pieces.VariableBaseTypeChecking(accessLoginName, "string")) {
-        return callback(
-          1,
-          "invalid_user_username",
-          400,
-          "login name is incorrect",
-          null
-        );
-      }
-
-      let where = {
-        id: accessUserId,
-        login_name: accessLoginName,
-        type: accessUserType,
-        activated: Constant.ACTIVATED.YES,
-      };
-      let attributes = [
-        "id",
-        "login_name",
-        "email",
-        "type",
-        "display_name",
-        "created_at",
-        "updated_at",
-        "created_by",
-        "updated_by",
-      ];
-
-      Account.findOne({
-        where: where,
-        attributes: attributes,
-      })
-        .then((result) => {
-          "use strict";
-          if (result) {
-            return callback(null, null, 200, null, result);
-          } else {
-            return callback(1, "invalid_user", 403, null, null);
-          }
-        })
-        .catch(function (error) {
-          "use strict";
-          return callback(2, "find_one_user_fail", 400, error, null);
-        });
-    } catch (error) {
-      return callback(1, "find_one_user_fail", 400, error, null);
-    }
-  },
-
-  authenticate: function (login_name, password, callback) {
-    try {
-      console.log('login name, password: ', login_name, password);
-      if (!Pieces.VariableBaseTypeChecking(login_name, "string")) {
-        return callback(
-          1,
-          "invalid_user_login_name",
-          422,
-          "login name is not a string",
-          null
-        );
-      }
-
-      if (!Pieces.VariableBaseTypeChecking(password, "string")) {
-        return callback(
-          1,
-          "invalid_user_password",
-          422,
-          "password is not a string",
-          null
-        );
-      }
-
-      let where = { login_name: login_name };
-
-      let attributes = [
-        "id",
-        "login_name",
-        "password",
-        "activated",
-        "deleted",
-        "display_name",
-        "email",
-        "type",
-      ];
-
-      Account.findOne({
-        where: where,
-        attributes: attributes,
-      })
-        .then((account) => {
-          "use strict";
-          if (account) {
-            if (account.activated === "false") {
-              return callback(1, "unactivated_user", 404, null, null);
-            } else {
-              BCrypt.compare(
-                password,
-                account.password,
-                function (error, result) {
-                  if (result === true) {
-                    return callback(null, null, 200, null, account);
-                  } else {
-                    return callback(1, "wrong_password", 422, null, null);
-                  }
-                }
-              );
-            }
-          } else {
-            return callback(1, "invalid_user", 404, null, null);
-          }
-        })
-        .catch(function (error) {
-          "use strict";
-          return callback(1, "find_one_user_fail", 400, error, null);
-        });
-    } catch (error) {
-      return callback(1, "authenticate_user_fail", 400, error, null);
+      return callback(1, "delete_customer_fail", 400, error);
     }
   },
 
@@ -614,20 +374,6 @@ module.exports = {
     callback
   ) {
     try {
-
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.login_name, "string") ||
-        !Validator.isAlphanumeric(userData.login_name) ||
-        !Validator.isLength(userData.login_name, { min: 4, max: 128 })
-      ) {
-        return callback(
-          1,
-          "invalid_user_login_name",
-          400,
-          "login name should be alphanumeric, lowercase and length 4-128",
-          null
-        );
-      }
 
       if (
         !Pieces.VariableBaseTypeChecking(userData.first_name, "string") ||
@@ -657,16 +403,6 @@ module.exports = {
         );
       }
 
-      if (!Pieces.VariableBaseTypeChecking(userData.password, "string")) {
-        return callback(
-          1,
-          "invalid_user_password",
-          400,
-          "password is not a string",
-          null
-        );
-      }
-
       if (
         !Pieces.VariableBaseTypeChecking(userData.email, "string") ||
         !Validator.isEmail(userData.email)
@@ -676,20 +412,6 @@ module.exports = {
           "invalid_user_email",
           400,
           "email is incorrect format",
-          null
-        );
-      }
-
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.email_verified, "string") ||
-        !Validator.isEmail(userData.email_verified) ||
-        userData.email === userData.email_verified
-      ) {
-        return callback(
-          1,
-          "invalid_user_email_verified",
-          400,
-          "email verified is incorrect format or email matches verified email",
           null
         );
       }
@@ -707,31 +429,23 @@ module.exports = {
         );
       }
 
-      if (
-        !Pieces.VariableBaseTypeChecking(userData.phone_verified, "string") ||
-        !Validator.isLength(userData.phone_verified, { min: 4, max: 12 }) ||
-        userData.phone === userData.phone_verified
-      ) {
-        return callback(
-          1,
-          "invalid_user_phone_verified",
-          400,
-          "phone verified number should be alphanumeric and length 4-12 or phone matches verified phone",
-          null
-        );
+      if (parseInt(userData.project_id) <= 0
+            || Number.isNaN(parseInt(userData.project_id))) {
+            return callback(1, 'invalid_project_id', 400, 'project id is incorrect format', null);
+        }
+
+      if(Pieces.VariableBaseTypeChecking(userData.social_id, "string")){
+       queryObj.social_id = userData.social_id;
       }
+
 
       let queryObj = {};
 
-
-      queryObj.login_name = userData.login_name;
       queryObj.email = userData.email;
       queryObj.phone = userData.phone;
       queryObj.first_name = userData.first_name;
       queryObj.last_name = userData.last_name;
-      queryObj.phone_verified = userData.phone_verified;
-      queryObj.email_verified = userData.email_verified;
-      queryObj.password = BCrypt.hashSync(userData.password, 10);
+      queryObj.project_id = userData.project_id;
 
       if (
         userData.activated === Constant.ACTIVATED.YES ||
@@ -751,43 +465,35 @@ module.exports = {
         queryObj.deleted = Constant.DELETED.NO;
       }
 
-      if (Pieces.ValidObjectEnum(userData.type, Constant.USER_TYPE)) {
-        if (
-          Constant.USER_TYPE.indexOf(accessUserType) <=
-          Constant.USER_TYPE.indexOf(userData.type)
-        ) {
-          return callback(
-            1,
-            "invalid_user_right",
-            403,
-            "you have no right to do this",
-            null
-          );
-        }
-        queryObj.type = userData.type;
-      } else {
-        return callback(
-          1,
-          "invalid_user_type",
-          400,
-          "user type should be string enum {super_admin, admin, normal_user, anonymous}",
-          null
-        );
-      }
+      if (
+       userData.contacted === Constant.CONTACTED.YES ||
+       userData.contacted === Constant.CONTACTED.NO
+     ) {
+       queryObj.contacted = userData.contacted;
+     } else {
+       queryObj.contacted = Constant.CONTACTED.NO;
+     }
 
+     if (
+      userData.potential === Constant.POTENTIAL.YES ||
+      userData.potential === Constant.POTENTIAL.NO
+    ) {
+      queryObj.potential = userData.potential;
+    } else {
+      queryObj.potential = Constant.POTENTIAL.YES;
+    }
 
       if (Pieces.VariableBaseTypeChecking(userData.display_name, "string")) {
         queryObj.display_name = userData.display_name;
       } else {
-        queryObj.display_name = userData.login_name;
+        queryObj.display_name = userData.last_name;
       }
 
       queryObj.created_by = accessUserId;
       queryObj.updated_by = accessUserId;
+      
 
-      console.log("queryObj", queryObj);
-
-      Account.create(queryObj)
+      Customer.create(queryObj)
         .then((result) => {
           "use strict";
           return callback(null, null, 200, null, result);

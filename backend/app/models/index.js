@@ -1,6 +1,5 @@
-// exports.User = require('./User');
-// exports.Device = require('./Device');
 exports.Account = require('./Account');
+exports.Customer = require('./Customer');
 exports.Block = require('./Block');
 exports.Floor = require('./Floor')
 exports.HighArea = require('./HighArea');
