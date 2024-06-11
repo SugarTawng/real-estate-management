@@ -294,6 +294,7 @@ module.exports = {
         where.deleted = Constant.DELETED.NO;
       } else {
         // where.type = accessUserType; accessUserType phải lớn hơn type.
+      }
         if (
           Pieces.VariableBaseTypeChecking(updateData.login_name, "string") &&
           Validator.isAlphanumeric(updateData.login_name) &&
@@ -324,7 +325,7 @@ module.exports = {
         if (Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)) {
           queryObj.type = updateData.type;
         }
-      }
+      
 
       if (
         Pieces.VariableBaseTypeChecking(updateData.first_name, "string") &&

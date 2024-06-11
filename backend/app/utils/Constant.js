@@ -47,7 +47,7 @@ const SYSTEM = {
     YES: 1
 };
 
-const USER_TYPE = ['anonymous', 'normal_user', 'admin', 'super_admin']
+const USER_TYPE = ['anonymous', 'sale', 'sale_manager', 'admin', 'super_admin']
 
 const BUY_STATUS = {
     BLOCK: 'block',
