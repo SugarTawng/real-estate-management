@@ -91,7 +91,7 @@ module.exports = function (app) {
    *     }
    */
   app.get("/v1/auth/account", AccountCtrl.getAll);
-  app.get("/v1/auth/customer/:id", AccountCtrl.getCustomer);
+  // app.get("/v1/auth/customer/:id", AccountCtrl.getCustomer);
   /**
    * @api {GET} /v1/auth/users/:id Get One
    * @apiVersion 1.0.0

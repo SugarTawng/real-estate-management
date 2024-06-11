@@ -37,9 +37,16 @@ module.exports = {
       let where = {};
       let attributes = [
         "id",
-        "login_name",
+        "social_id",
+        "phone",
+        "first_name",
+        "last_name",
+        "contacted",
+        "potential",
+        "activated",
+        "deleted",
         "email",
-        "type",
+        "project_id",
         "display_name",
         "created_at",
         "updated_at",
@@ -48,6 +55,8 @@ module.exports = {
       ];
 
       where = { id: id };
+
+      console.log('where: ', where);
 
       // if(accessUserId !== parseInt(id)) {
       //     where = {id: id, type: { $lt: accessUserType} };
@@ -196,12 +205,30 @@ module.exports = {
         );
       }
 
+      if (
+        !(
+          Pieces.VariableBaseTypeChecking(updateData.project_id, "string") &&
+          Validator.isInt(updateData.project_id)
+        ) &&
+        !Pieces.VariableBaseTypeChecking(updateData.project_id, "number")
+      ) {
+        return callback(
+          1,
+          "invalid_project_id",
+          400,
+          "project id is incorrect",
+          null
+        );
+      }
+
+
       // nếu mà người dùng không phải là chủ tài khoảng và người dùng cũng không phải là admin thì không cho vào
       // if ( accessUserId !== parseInt(userId) && accessUserType < Constant.USER_TYPE.MODERATOR ) {
       //     return callback(1, 'invalid_user_right', 403, null, null);
       // }
 
       queryObj.updater = accessUserId;
+      queryObj.project_id = updateData.project_id;
 
       where.id = userId;
 
@@ -210,15 +237,7 @@ module.exports = {
         where.deleted = Constant.DELETED.NO;
       } else {
         // where.type = accessUserType; accessUserType phải lớn hơn type.
-        if (
-          Pieces.VariableBaseTypeChecking(updateData.login_name, "string") &&
-          Validator.isAlphanumeric(updateData.login_name) &&
-          Validator.isLowercase(updateData.login_name) &&
-          Validator.isLength(updateData.login_name, { min: 4, max: 128 })
-        ) {
-          queryObj.login_name = updateData.login_name;
-        }
-
+      }
         if (
           Pieces.VariableBaseTypeChecking(updateData.email, "string") &&
           Validator.isEmail(updateData.email)
@@ -237,10 +256,16 @@ module.exports = {
           queryObj.activated = updateData.activated;
         }
 
-        if (Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)) {
-          queryObj.type = updateData.type;
+        if (Pieces.ValidObjectEnum(updateData.potential, Constant.POTENTIAL)) {
+          queryObj.potential = updateData.potential;
         }
-      }
+
+        if (Pieces.ValidObjectEnum(updateData.contacted, Constant.CONTACTED)) {
+          queryObj.contacted = updateData.contacted;
+        }
+
+        // console.log("query Object update", queryObj.)
+      
 
       if (
         Pieces.VariableBaseTypeChecking(updateData.first_name, "string") &&
@@ -258,21 +283,7 @@ module.exports = {
         queryObj.last_name = updateData.last_name;
       }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.email_verified, "string") &&
-        Validator.isEmail(updateData.email_verified) &&
-        updateData.email === updateData.email_verified
-      ) {
-        queryObj.email_verified = updateData.email_verified;
-      }
-
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.phone_verified, "string") &&
-        Validator.isLength(updateData.phone_verified, { min: 4, max: 12 }) &&
-        updateData.phone === updateData.phone_verified
-      ) {
-        queryObj.phone_verified = updateData.phone_verified;
-      }
+      
 
       if (
         Pieces.VariableBaseTypeChecking(updateData.display_name, "string") &&

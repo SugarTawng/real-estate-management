@@ -224,12 +224,29 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, messag
             return callback(1, 'invalid_user_id', 400, 'user id is incorrect', null);
         }
 
+        if (
+            !(
+              Pieces.VariableBaseTypeChecking(updateData.project_id, "string") &&
+              Validator.isInt(updateData.project_id)
+            ) &&
+            !Pieces.VariableBaseTypeChecking(updateData.project_id, "number")
+          ) {
+            return callback(
+              1,
+              "invalid_project_id",
+              400,
+              "project id is incorrect",
+              null
+            );
+          }
+
         // nếu mà người dùng không phải là chủ tài khoảng và người dùng cũng không phải là admin thì không cho vào
         // if ( accessUserId !== parseInt(userId) && accessUserType < Constant.USER_TYPE.MODERATOR ) {
         //     return callback(1, 'invalid_user_right', 403, null, null);
         // }
 
         queryObj.updater = accessUserId;
+        queryObj.project_id = updateData.project_id;
 
         where.id = messageId;
 
