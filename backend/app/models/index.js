@@ -22,20 +22,19 @@ exports.PaymentMethodProcess = require('./PaymentMethodProcess');
 // exports.Profile = require('./Profile');
 // exports.ProjectProfile = require('./ProjectProfile');
 const Project = require('./Project');
-const Profile = require('./Profile');
-const ProfileProject = require('./ProfileProject');
+const Account = require('./Account');
+const ProjectAccount = require('./ProjectAccount');
 // Thiết lập mối quan hệ nhiều-nhiều giữa Project và Profile thông qua bảng ProfileProject
-Project.belongsToMany(Profile, {
- through: ProfileProject,
+Project.belongsToMany(Account, {
+ through: ProjectAccount,
  foreignKey: "project_id", // Đặt tên foreignKey chính xác
 });
-Profile.belongsToMany(Project, {
- through: ProfileProject,
- foreignKey: "profile_id", // Đặt tên foreignKey chính xác
+Account.belongsToMany(Project, {
+ through: ProjectAccount,
+ foreignKey: "account_id", // Đặt tên foreignKey chính xác
 });
 
 exports.Project = Project;
-exports.Profile = Profile;
-exports.ProfileProject = ProfileProject;
+exports.ProjectAccount = ProjectAccount;
 exports.WhiteBoard = require('./WhiteBoard');
 exports.Zone = require('./Zone');

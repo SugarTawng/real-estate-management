@@ -1,4 +1,4 @@
-const ProfileProjectCtrl = require('../controllers/ProfileProjectCtrl');
+const ProjectAccountCtrl = require('../controllers/ProjectAccountCtrl');
 module.exports = function (app) {
     /**
      * @api {POST} /v1/auth/project Create One
@@ -38,7 +38,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
-    app.post('/v1/auth/profileProject', ProfileProjectCtrl.create);
+    app.post('/v1/auth/projectAccount', ProjectAccountCtrl.create);
     /**
      * @api {GET} /v1/auth/project Get List
      * @apiVersion 1.0.0
@@ -82,7 +82,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/profileProject', ProfileProjectCtrl.getAll);
+    app.get('/v1/auth/projectAccount', ProjectAccountCtrl.getAll);
     /**
      * @api {GET} /v1/auth/project/:id Get One
      * @apiVersion 1.0.0
@@ -123,7 +123,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.get('/v1/auth/profileProject/:id', ProfileProjectCtrl.getOne);
+    app.get('/v1/auth/projectAccount/:id', ProjectAccountCtrl.getOne);
     /**
      * @api {PUT} /v1/auth/project/:id Update One
      * @apiVersion 1.0.0
@@ -162,7 +162,7 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    // app.put('/v1/auth/project/:id', ProfileProjectCtrl.update);
+    // app.put('/v1/auth/project/:id', ProjectAccountCtrl.update);
     /**
      * @api {DELETE} /v1/auth/project/:id Delete One
      * @apiVersion 1.0.0
@@ -198,5 +198,5 @@ module.exports = function (app) {
      *       "message": "invalid input"
      *     }
      */
-    app.delete('/v1/auth/profileProject/:id', ProfileProjectCtrl.delete);
+    app.delete('/v1/auth/projectAccount/:id', ProjectAccountCtrl.delete);
 }

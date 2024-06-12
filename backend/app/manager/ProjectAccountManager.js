@@ -9,7 +9,7 @@ const JsonWebToken = require('jsonwebtoken');
 const Constant = require('../utils/Constant');
 const Pieces = require('../utils/Pieces');
 const Models = require('../models');
-const ProfileProject = Models.ProfileProject;
+const ProjectAccount = Models.ProjectAccount;
 
 
 exports.create = function (accessUserId, accessUserRight, accessUserName, data, callback) {
@@ -19,18 +19,18 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(1, 'invalid_project_id', 400, 'project id is incorrect format', null);
         }
 
-        if (parseInt(data.profile_id) <= 0
-            || Number.isNaN(parseInt(data.profile_id))) {
-            return callback(1, 'invalid_profile_id', 400, 'profile id is incorrect format', null);
+        if (parseInt(data.account_id) <= 0
+            || Number.isNaN(parseInt(data.account_id))) {
+            return callback(1, 'invalid_account_id', 400, 'profile id is incorrect format', null);
         }
 
         let queryObj = {};
         queryObj.project_id = data.project_id;
-        queryObj.profile_id = data.profile_id;
+        queryObj.account_id = data.account_id;
         queryObj.created_by = accessUserId;
         queryObj.updated_by = accessUserId;
 
-        ProfileProject.create(queryObj).then(Project=>{
+        ProjectAccount.create(queryObj).then(Project=>{
             "use strict";
             return callback(null, null, 200, null, Project);
         }).catch(function(error){
@@ -57,7 +57,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
 
         let where = {};
-        let attributes = ['project_id', 'profile_id','created_by','updated_by', 'created_at', 'updated_at'];
+        let attributes = ['project_id', 'account_id','created_by','updated_by', 'created_at', 'updated_at'];
 
         where = {project_id: id};
 
@@ -69,7 +69,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
         console.log('where is this ', where);
 
-        ProfileProject.findOne({
+        ProjectAccount.findOne({
             where: where,
             attributes: attributes
         }).then(result=>{
@@ -126,7 +126,7 @@ exports.getAll = function (accessUserId, accessUserType, accessUserName, queryCo
         }
 
         let offset = perPage * (page - 1);
-        ProfileProject.findAndCountAll({
+        ProjectAccount.findAndCountAll({
             where: where,
             //attributes: ['id', 'first_name', 'last_name', 'date_of_birth'],
             limit: perPage,
@@ -286,16 +286,16 @@ exports.delete = function(accessUserId, accessUserType, id, callback) {
         where = { id: id}; // , type:{$lt: accessUserType}, system: Constant.SYSTEM.NO
         queryObj = { deleted: Constant.DELETED.YES };
 
-        ProfileProject.findOne({where:where}).then(account=>{
+        ProjectAccount.findOne({where:where}).then(account=>{
             "use strict";
             if ( account && account.deleted === Constant.DELETED.YES ){
-                ProfileProject.destroy({where: where}).then(result => {
+                ProjectAccount.destroy({where: where}).then(result => {
                     return callback(null, null, 200, null);
                 }).catch(function(error){
                     return callback(1, 'remove_account_fail', 420, error);
                 });
             }else {
-                ProfileProject.update(queryObj, {where: where}).then(result=>{
+                ProjectAccount.update(queryObj, {where: where}).then(result=>{
                     "use strict";
                     return callback(null, null, 200, null);
                 }).catch(function(error){

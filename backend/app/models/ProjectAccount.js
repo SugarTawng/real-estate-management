@@ -2,9 +2,8 @@ const Sequelize = require('sequelize');
 const MySequelize = require('../utils/Sequelize');
 const Account = require('./Account');
 const Project = require('./Project');
-const Profile = require('./Profile');
 
-let ProfileProject = MySequelize.define('profileProject', {
+let ProjectAccount = MySequelize.define('profileProject', {
     project_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
@@ -14,11 +13,11 @@ let ProfileProject = MySequelize.define('profileProject', {
         },
         primaryKey: true
     },
-    profile_id: {
+    account_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
         references: {
-            model: Profile,
+            model: Account,
             key: 'id'
         },
         primaryKey: true
@@ -62,7 +61,7 @@ let ProfileProject = MySequelize.define('profileProject', {
     createdAt: false,
     includeDeleted: true,
     freezeTableName: true,
-    tableName: 'tbl_profile_project'
+    tableName: 'tbl_project_account'
 });
 
-module.exports = ProfileProject;
+module.exports = ProjectAccount;
