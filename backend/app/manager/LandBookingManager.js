@@ -42,7 +42,9 @@ module.exports = {
         "booking_fee",
         "sale_id",
         "buyer_id",
+        "payment_method_id",
         "status",
+        "begin_payment",
         "created_at",
         "updated_at",
         "created_by",
@@ -417,6 +419,10 @@ module.exports = {
       queryObj.sale_id = updateData.sale_id;
       queryObj.buyer_id = updateData.buyer_id;
       queryObj.status = updateData.status;
+      
+      queryObj.payment_method_id = updateData.payment_method_id;
+      queryObj.begin_payment = updateData.begin_payment;
+      console.log('queryObj.begin_payment', queryObj.begin_payment);
       queryObj.updated_at = new Date();
 
       LandBooking.update(queryObj, { where: where })
@@ -604,6 +610,8 @@ module.exports = {
       // }
 
       let queryObj = {};
+      
+      console.log('hihihi12072024');
 
       queryObj.land_area_id = userData.land_area_id;
       queryObj.zone_id = userData.zone_id;
@@ -611,6 +619,10 @@ module.exports = {
       queryObj.sale_id = userData.sale_id;
       queryObj.buyer_id = userData.buyer_id;
       queryObj.status = userData.status;
+      queryObj.payment_method_id = userData.payment_method_id;
+      queryObj.begin_payment = userData.begin_payment;
+
+      console.log('payment_method_id', queryObj.payment_method_id);
 
       // if (
       //   userData.activated === Constant.ACTIVATED.YES ||

@@ -29,9 +29,17 @@ let LandBooking = MySequelize.define('landBooking', {
         type: Sequelize.BIGINT(20),
         allowNull: false
     },
+    payment_method_id: {
+        type: Sequelize.BIGINT(20),
+        allowNull: true
+    },
     status: {
         type: Sequelize.ENUM('enable', 'disable', 'canceled'),
         allowNull: false
+    },
+    begin_payment: {
+        type: Sequelize.DATE,
+        allowNull: false,
     },
     created_by: {
         type: Sequelize.BIGINT(20),

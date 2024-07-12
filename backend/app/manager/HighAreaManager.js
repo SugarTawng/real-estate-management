@@ -20,11 +20,6 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
             return callback(1, 'invalid_floor_id', 400, 'floor id is incorrect format', null);
         }
 
-        if (parseInt(data.payment_method_id) <= 0
-            || Number.isNaN(parseInt(data.payment_method_id))) {
-            return callback(1, 'invalid_payment_method_id', 400, 'payment method id is incorrect format', null);
-        }
-
         if ( !Pieces.VariableBaseTypeChecking(data.high_area_direction,'string')
             || !Validator.isLength(data.high_area_direction, {min: 1, max: 128})) {
             return callback(2, 'invalid_high_area_direction', 400, 'high area direction is not alphanumeric and 4 - 128 characters', null);
@@ -67,7 +62,6 @@ exports.create = function (accessUserId, accessUserRight, accessUserName, data, 
         }
 
         let queryObj = {};
-        queryObj.payment_method_id = data.payment_method_id;
         queryObj.floor_id = data.floor_id;
         queryObj.high_area_direction = data.high_area_direction;
         queryObj.lat = data.lat;
@@ -120,7 +114,7 @@ exports.getOne = function(accessUserId, accessUserType, id, callback) {
 
 
         let where = {};
-        let attributes = ['id', 'floor_id','lat','long', 'high_area_direction', 'total_area', 'progress', 'number_of_wc', 'number_of_room', 'price', 'owner', 'buy_status', 'desc', 'created_by', 'updated_by', 'created_at', 'updated_at', 'payment_method_id'];
+        let attributes = ['id', 'floor_id','lat','long', 'high_area_direction', 'total_area', 'progress', 'number_of_wc', 'number_of_room', 'price', 'owner', 'buy_status', 'desc', 'created_by', 'updated_by', 'created_at', 'updated_at'];
 
         where = {id: id};
 

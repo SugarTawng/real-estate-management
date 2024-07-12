@@ -17,8 +17,9 @@ module.exports = {
         let accessLoginName = req.body.accessLoginName || '';
 
         let data = req.body || '';
-
+        console.log('hihihi');
         LandBookingManager.createByAdmin(accessUserId, accessUserType, accessLoginName, data, function (errorCode, errorMessage, httpCode, errorDescription, user) {
+
             if (errorCode) {
                 return Rest.sendError(res, errorCode, errorMessage, httpCode, errorDescription);
             }
@@ -56,6 +57,8 @@ module.exports = {
         let accessUserType = req.query.accessUserType || '';
         let accessLoginName = req.query.accessLoginName || '';
         let query = req.query || '';
+
+        console.log('hihi');
 
         LandBookingManager.getAll(accessUserId, accessUserType, accessLoginName, query, function (errorCode, errorMessage, httpCode, errorDescription, results) {
             if (errorCode) {

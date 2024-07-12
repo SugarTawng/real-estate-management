@@ -98,10 +98,6 @@ let HighArea = MySequelize.define('highArea', {
         allowNull: false,
         defaultValue: Sequelize.NOW
     },
-    payment_method_id: {
-        type: Sequelize.BIGINT(20),
-        allowNull: false
-    },
 }, {
     underscored: true,
     paranoid: false,

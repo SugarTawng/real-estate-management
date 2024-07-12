@@ -47,6 +47,7 @@ module.exports = function (app) {
      *       "message": "",
      *     }
      */
+    console.log('hihi');
     app.post('/v1/auth/landBooking', LandBookingCtrl.createByAdmin);
     /**
      * @api {GET} /v1/auth/account Get List

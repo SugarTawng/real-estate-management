@@ -79,9 +79,7 @@ App.all("/v1/auth/*", [require("./app/middlewares/ValidateRequest")]);
 require("./app/routes")(App); // configure our routes
 
 // Start App: http://IP_Address:port
-const Port =
-  parseInt(Config.port) +
-  (process.env.NODE_APP_INSTANCE ? parseInt(process.env.NODE_APP_INSTANCE) : 0);
+const Port = process.env.PORT || 3003;
 
 server.listen(Port, function () {
   console.log("API started to listening on port %d", Port);

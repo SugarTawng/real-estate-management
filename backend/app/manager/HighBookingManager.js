@@ -42,11 +42,13 @@ module.exports = {
         "booking_fee",
         "sale_id",
         "buyer_id",
+        "payment_method_id",
         "status",
+        "begin_payment",
         "created_at",
         "updated_at",
         "created_by",
-        "updated_by",
+        "updated_by"
       ];
 
       console.log(attributes);
@@ -417,6 +419,8 @@ module.exports = {
       queryObj.sale_id = updateData.sale_id;
       queryObj.buyer_id = updateData.buyer_id;
       queryObj.status = updateData.status;
+      queryObj.payment_method_id = updateData.payment_method_id;
+      queryObj.begin_payment = updateData.begin_payment;
 
       queryObj.updated_at = new Date();
 
@@ -612,6 +616,8 @@ module.exports = {
       queryObj.sale_id = userData.sale_id;
       queryObj.buyer_id = userData.buyer_id;
       queryObj.status = userData.status;
+      queryObj.payment_method_id = userData.payment_method_id;
+      queryObj.begin_payment = userData.begin_payment;
 
       // if (
       //   userData.activated === Constant.ACTIVATED.YES ||
