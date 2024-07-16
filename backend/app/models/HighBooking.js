@@ -53,6 +53,10 @@ let HighBooking = MySequelize.define('highBooking', {
         type: Sequelize.ENUM('enable', 'disable', 'canceled'),
         allowNull: false
     },
+    type: {
+        type: Sequelize.ENUM('booking', 'deposit'),
+        allowNull: false
+    },
     begin_payment: {
         type: Sequelize.DATE,
         allowNull: false,

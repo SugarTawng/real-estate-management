@@ -45,6 +45,7 @@ module.exports = {
         "payment_method_id",
         "project_id",
         "status",
+        "type",
         "begin_payment",
         "created_at",
         "updated_at",
@@ -424,6 +425,7 @@ module.exports = {
       queryObj.payment_method_id = updateData.payment_method_id;
       queryObj.begin_payment = updateData.begin_payment;
       queryObj.project_id = updateData.project_id;
+      queryObj.type = updateData.type;
 
       queryObj.updated_at = new Date();
 
@@ -622,8 +624,7 @@ module.exports = {
       queryObj.payment_method_id = userData.payment_method_id;
       queryObj.begin_payment = userData.begin_payment;
       queryObj.project_id = userData.project_id;
-
-      console.log('project_id: ', userData);
+      queryObj.type = userData.type;
 
       // if (
       //   userData.activated === Constant.ACTIVATED.YES ||
