@@ -3,6 +3,12 @@ const MySequelize = require('../utils/Sequelize');
 const Account = require('./Account');
 
 let HighListOwner = MySequelize.define('highListOwner', {
+    id: {
+        type: Sequelize.BIGINT(20),
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
     owner_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
@@ -47,7 +53,12 @@ let HighListOwner = MySequelize.define('highListOwner', {
         type: Sequelize.DATE,
         allowNull: true,
         defaultValue: Sequelize.NOW
-    }
+    },
+    project_id: {
+        type: Sequelize.BIGINT(20),
+        allowNull: false
+    },
+
 }, {
     underscored: true,
     timestamps: false,

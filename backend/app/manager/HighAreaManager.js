@@ -297,10 +297,7 @@ exports.update = function (accessUserId, accessUserType, accessLoginName, highAr
             queryObj.number_of_room = updateData.number_of_room;
         }
 
-        if ( Pieces.VariableBaseTypeChecking(updateData.price,'string')
-            && Validator.isAlphanumeric(updateData.price)
-            && Validator.isLength(updateData.price, {min: 1, max: 128})
-            && !parseFloat(updateData.price) < 0 && !Number.isNaN(parseInt(updateData.price))) {
+        if (!Number.isNaN(parseInt(updateData.price))) {
             queryObj.price = updateData.price;
         }
 

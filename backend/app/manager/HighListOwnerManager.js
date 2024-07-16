@@ -301,21 +301,21 @@ module.exports = {
       let queryObj = {};
       let where = {};
 
-      if (
-        !(
-          Pieces.VariableBaseTypeChecking(userId, "string") &&
-          Validator.isInt(userId)
-        ) &&
-        !Pieces.VariableBaseTypeChecking(userId, "number")
-      ) {
-        return callback(
-          1,
-          "invalid_user_id",
-          400,
-          "user id is incorrect",
-          null
-        );
-      }
+      // if (
+      //   !(
+      //     Pieces.VariableBaseTypeChecking(userId, "string") &&
+      //     Validator.isInt(userId)
+      //   ) &&
+      //   !Pieces.VariableBaseTypeChecking(userId, "number")
+      // ) {
+      //   return callback(
+      //     1,
+      //     "invalid_user_id",
+      //     400,
+      //     "user id is incorrect",
+      //     null
+      //   );
+      // }
 
       // nếu mà người dùng không phải là chủ tài khoảng và người dùng cũng không phải là admin thì không cho vào
       // if ( accessUserId !== parseInt(userId) && accessUserType < Constant.USER_TYPE.MODERATOR ) {
@@ -326,88 +326,94 @@ module.exports = {
 
       where.id = userId;
 
-      if (accessUserId === parseInt(userId)) {
-        where.activated = Constant.ACTIVATED.YES;
-        where.deleted = Constant.DELETED.NO;
-      } else {
-        // where.type = accessUserType; accessUserType phải lớn hơn type.
-        if (
-          Pieces.VariableBaseTypeChecking(updateData.login_name, "string") &&
-          Validator.isAlphanumeric(updateData.login_name) &&
-          Validator.isLowercase(updateData.login_name) &&
-          Validator.isLength(updateData.login_name, { min: 4, max: 128 })
-        ) {
-          queryObj.login_name = updateData.login_name;
-        }
+      // if (accessUserId === parseInt(userId)) {
+      //   where.activated = Constant.ACTIVATED.YES;
+      //   where.deleted = Constant.DELETED.NO;
+      // } else {
+      //   // where.type = accessUserType; accessUserType phải lớn hơn type.
+      //   if (
+      //     Pieces.VariableBaseTypeChecking(updateData.login_name, "string") &&
+      //     Validator.isAlphanumeric(updateData.login_name) &&
+      //     Validator.isLowercase(updateData.login_name) &&
+      //     Validator.isLength(updateData.login_name, { min: 4, max: 128 })
+      //   ) {
+      //     queryObj.login_name = updateData.login_name;
+      //   }
 
-        if (
-          Pieces.VariableBaseTypeChecking(updateData.email, "string") &&
-          !Validator.isEmail(updateData.email)
-        ) {
-          queryObj.email = updateData.email;
-        }
+      //   if (
+      //     Pieces.VariableBaseTypeChecking(updateData.email, "string") &&
+      //     !Validator.isEmail(updateData.email)
+      //   ) {
+      //     queryObj.email = updateData.email;
+      //   }
 
-        if (
-          Pieces.VariableBaseTypeChecking(updateData.phone, "string") &&
-          Validator.isLength(updateData.phone, { min: 4, max: 12 })
-        ) {
-          queryObj.phone = updateData.phone;
-        }
+      //   if (
+      //     Pieces.VariableBaseTypeChecking(updateData.phone, "string") &&
+      //     Validator.isLength(updateData.phone, { min: 4, max: 12 })
+      //   ) {
+      //     queryObj.phone = updateData.phone;
+      //   }
 
-        if (Pieces.ValidObjectEnum(updateData.activated, Constant.ACTIVATED)) {
-          queryObj.activated = updateData.activated;
-        }
+      //   if (Pieces.ValidObjectEnum(updateData.activated, Constant.ACTIVATED)) {
+      //     queryObj.activated = updateData.activated;
+      //   }
 
-        if (Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)) {
-          queryObj.type = updateData.type;
-        }
-      }
+      //   if (Pieces.ValidObjectEnum(updateData.type, Constant.USER_TYPE)) {
+      //     queryObj.type = updateData.type;
+      //   }
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.first_name, "string") &&
-        Validator.isAlphanumeric(updateData.first_name) &&
-        Validator.isLength(updateData.first_name, { min: 2, max: 64 })
-      ) {
-        queryObj.first_name = updateData.first_name;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.first_name, "string") &&
+      //   Validator.isAlphanumeric(updateData.first_name) &&
+      //   Validator.isLength(updateData.first_name, { min: 2, max: 64 })
+      // ) {
+      //   queryObj.first_name = updateData.first_name;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.last_name, "string") &&
-        Validator.isAlphanumeric(updateData.last_name) &&
-        Validator.isLength(updateData.last_name, { min: 2, max: 64 })
-      ) {
-        queryObj.last_name = updateData.last_name;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.last_name, "string") &&
+      //   Validator.isAlphanumeric(updateData.last_name) &&
+      //   Validator.isLength(updateData.last_name, { min: 2, max: 64 })
+      // ) {
+      //   queryObj.last_name = updateData.last_name;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.email_verified, "string") &&
-        Validator.isEmail(updateData.email_verified) &&
-        updateData.email === updateData.email_verified
-      ) {
-        queryObj.email_verified = updateData.email_verified;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.email_verified, "string") &&
+      //   Validator.isEmail(updateData.email_verified) &&
+      //   updateData.email === updateData.email_verified
+      // ) {
+      //   queryObj.email_verified = updateData.email_verified;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.phone_verified, "string") &&
-        Validator.isLength(updateData.phone_verified, { min: 4, max: 12 }) &&
-        updateData.phone === updateData.phone_verified
-      ) {
-        queryObj.phone_verified = updateData.phone_verified;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.phone_verified, "string") &&
+      //   Validator.isLength(updateData.phone_verified, { min: 4, max: 12 }) &&
+      //   updateData.phone === updateData.phone_verified
+      // ) {
+      //   queryObj.phone_verified = updateData.phone_verified;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.display_name, "string") &&
-        Validator.isLength(updateData.display_name, { min: 1, max: 128 })
-      ) {
-        queryObj.display_name = updateData.display_name;
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.display_name, "string") &&
+      //   Validator.isLength(updateData.display_name, { min: 1, max: 128 })
+      // ) {
+      //   queryObj.display_name = updateData.display_name;
+      // }
 
-      if (
-        Pieces.VariableBaseTypeChecking(updateData.password, "string") &&
-        Validator.isLength(updateData.password, { min: 4, max: 64 })
-      ) {
-        queryObj.password = BCrypt.hashSync(updateData.password, 10);
-      }
+      // if (
+      //   Pieces.VariableBaseTypeChecking(updateData.password, "string") &&
+      //   Validator.isLength(updateData.password, { min: 4, max: 64 })
+      // ) {
+      //   queryObj.password = BCrypt.hashSync(updateData.password, 10);
+      // }
+
+      queryObj.owner_id = updateData.owner_id;
+      queryObj.high_area_id = updateData.high_area_id;
+      queryObj.desc = updateData.desc;
+      queryObj.owned_at = updateData.owned_at;
+      queryObj.project_id = updateData.project_id;
 
       queryObj.updated_at = new Date();
 
@@ -601,6 +607,8 @@ module.exports = {
       queryObj.high_area_id = userData.high_area_id;
       queryObj.desc = userData.desc;
       queryObj.owned_at = userData.owned_at;
+      queryObj.project_id = userData.project_id;
+
 
       // if (
       //   userData.activated === Constant.ACTIVATED.YES ||
@@ -652,6 +660,7 @@ module.exports = {
 
       queryObj.created_by = accessUserId;
       queryObj.updated_by = accessUserId;
+      
 
       HighListOwner.create(queryObj)
         .then((result) => {
