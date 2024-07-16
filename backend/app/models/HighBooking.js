@@ -33,6 +33,10 @@ let HighBooking = MySequelize.define('highBooking', {
         type: Sequelize.BIGINT(20),
         allowNull: true
     },
+    project_id: {
+        type: Sequelize.BIGINT(20),
+        allowNull: false
+    },
     status: {
         type: Sequelize.ENUM('enable', 'disable', 'canceled'),
         allowNull: false
