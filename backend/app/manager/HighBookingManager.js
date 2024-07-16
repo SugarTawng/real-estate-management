@@ -114,6 +114,7 @@ module.exports = {
       return callback(1, "statistic_user_fail", 400, error, null);
     }
   },
+  
   getAll: function (
     accessUserId,
     accessUserType,

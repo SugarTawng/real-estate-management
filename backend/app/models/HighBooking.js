@@ -5,6 +5,12 @@ const HighArea = require('./HighArea');
 const Zone = require('./Zone');
 
 let HighBooking = MySequelize.define('highBooking', {
+    id: {
+        type: Sequelize.BIGINT(20),
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
     high_area_id: {
         type: Sequelize.BIGINT(20),
         allowNull: true,
@@ -29,17 +35,15 @@ let HighBooking = MySequelize.define('highBooking', {
     sale_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
-        primaryKey: true,
     },
     buyer_id: {
         type: Sequelize.BIGINT(20),
         allowNull: false,
-        primaryKey: true,
     },
     payment_method_id: {
         type: Sequelize.BIGINT(20),
         allowNull: true,
-        primaryKey: true,
+        
     },
     project_id: {
         type: Sequelize.BIGINT(20),
